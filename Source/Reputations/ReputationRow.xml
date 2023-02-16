@@ -1,0 +1,44 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+  <Frame name="DragonflightHelperReputationRowFrame" mixin="DragonflightHelperReputationRowMixin" virtual="true" enableMouse="true">
+    <Scripts>
+      <OnLoad method="OnLoad" />
+      <OnEnter method="OnEnter" />
+      <OnLeave method="OnLeave" />
+    </Scripts>
+
+    <Size y="25" />
+
+    <Anchors>
+      <Anchor point="LEFT" relativeKey="$parent" relativePoint="LEFT" x="5" />
+      <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />
+    </Anchors>
+
+    <Frames>
+      <Frame parentKey="Container">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeKey="$parent" relativePoint="TOPLEFT" />
+          <Anchor point="BOTTOMRIGHT" relativeKey="$parent" relativePoint="BOTTOMRIGHT" />
+        </Anchors>
+
+        <Layers>
+          <Layer level="OVERLAY">
+            <FontString parentKey="Name" inherits="GameFontHighlightSmall" justifyH="LEFT">
+              <Anchors>
+                <Anchor point="TOPLEFT" relativeKey="$parent" relativePoint="TOPLEFT" x="5" />
+                <Anchor point="BOTTOMRIGHT" relativeKey="$parent" relativePoint="BOTTOMRIGHT" />
+              </Anchors>
+            </FontString>
+            <FontString parentKey="Detail" inherits="GameFontHighlightSmall" justifyH="RIGHT">
+              <Anchors>
+                <Anchor point="TOPLEFT" relativeKey="$parent" relativePoint="TOPLEFT" />
+                <Anchor point="BOTTOMRIGHT" relativeKey="$parent" relativePoint="BOTTOMRIGHT" x="-10" />
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+      </Frame>
+    </Frames>
+  </Frame>
+</Ui>

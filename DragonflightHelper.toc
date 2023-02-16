@@ -1,0 +1,19 @@
+## Interface: 100005
+## Version: 1.0.0
+## Title: Dragonflight Helper
+## Author: Borjamacare
+## SavedVariables: DRAGONFLIGHT_HELPER_CONFIG
+## OptionalDeps: LibSharedMedia-3.0
+
+Libs\lib.xml
+
+Source\Objects.lua
+Source\Utilities\TablePrint.lua
+Source\Components\Manifest.xml
+
+Source\Reputations\Manifest.xml
+Source\Timers\Manifest.xml
+Source\Todos\Manifest.xml
+
+Source\Main.lua
+Source\Main.xml

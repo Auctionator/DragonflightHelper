@@ -1,0 +1,7 @@
+<!-- Source/ReputationBar directory manifest -->
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <!-- <Script file="TimerInfo.lua"/> -->
+
+  <Script file="Timers.lua"/>
+  <Include file="Timers.xml"/>
+</Ui>

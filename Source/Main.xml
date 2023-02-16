@@ -1,0 +1,40 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+  <Frame name="DragonflightHelperFrame" mixin="DragonflightHelperMixin_2" setAllPoints="true" movable="true" enableMouse="true" inherits="SimplePanelTemplate" useParentLevel="true" parent="UIParent">
+    <Size x="300" y="500" />
+
+    <Anchors>
+      <Anchor point="CENTER" />
+    </Anchors>
+
+    <Frames>
+      <Frame parentKey="Reputations" inherits="DragonflightHelperReputationsFrame">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeKey="$parent.Inset" x="4" y="-4" />
+          <Anchor point="RIGHT" relativeKey="$parent.Inset" relativePoint="RIGHT" />
+        </Anchors>
+      </Frame>
+      <Frame parentKey="Timers" inherits="DragonflightHelperTimersFrame">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeKey="$parent.Reputations" relativePoint="BOTTOMLEFT" />
+          <Anchor point="RIGHT" relativeKey="$parent.Inset" relativePoint="RIGHT" />
+        </Anchors>
+      </Frame>
+      <Frame parentKey="Todos" inherits="DragonflightHelperTodosFrame">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeKey="$parent.Timers" relativePoint="BOTTOMLEFT" />
+          <Anchor point="RIGHT" relativeKey="$parent.Inset" relativePoint="RIGHT" />
+        </Anchors>
+      </Frame>
+    </Frames>
+
+    <Scripts>
+      <OnLoad method="OnLoad" />
+      <OnShow method="OnShow" />
+      <OnDragStart method="OnDragStart" />
+      <OnDragStop method="OnDragStop" />
+    </Scripts>
+  </Frame>
+</Ui>

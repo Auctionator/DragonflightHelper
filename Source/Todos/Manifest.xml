@@ -1,0 +1,10 @@
+<!-- Source/ReputationBar directory manifest -->
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Script file="TodoEntries.lua"/>
+
+  <Script file="TodoRow.lua"/>
+  <Include file="TodoRow.xml"/>
+
+  <Script file="Todos.lua"/>
+  <Include file="Todos.xml"/>
+</Ui>
