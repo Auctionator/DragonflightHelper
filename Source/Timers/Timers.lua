@@ -59,6 +59,10 @@ function DragonflightHelperTimerMixin:Update()
   local hour, minute = GetGameTime()
   local currentTime = hour * 60 + minute
 
+  if self.nextTime > currentTime then
+    self:FindNextTime()
+  end
+
   local thresholdTime = math.abs(self.nextTime - currentTime - (self.frequency * 60))
   if thresholdTime < self.activeThreshold then
     self:SetForegroundColor(self.thresholdColor.r, self.thresholdColor.g, self.thresholdColor.b)

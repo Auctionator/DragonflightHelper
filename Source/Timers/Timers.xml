@@ -46,7 +46,7 @@
               <KeyValue key="endTime" value="23" type="number" />
               <KeyValue key="frequency" value="2" type="number" />
               <KeyValue key="colorIndex" value="4" type="number" />
-              <KeyValue key="activeThreshold" value="0" type="number" />
+              <KeyValue key="activeThreshold" value="15" type="number" />
             </KeyValues>
             <Anchors>
               <Anchor point="TOPLEFT" relativeKey="$parent.FeastTimer" relativePoint="BOTTOMLEFT" y="-2" />

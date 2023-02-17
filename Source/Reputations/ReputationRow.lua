@@ -33,7 +33,13 @@ function DragonflightHelperReputationRowMixin:InitFactionSettings()
   self.factionInfo = DragonflightHelper.FactionInfo:new()
   self.factionInfo:init(self.factionSettings.factionIndex)
 
-  self:SetTitle(self.factionInfo.title)
+  -- Artisan's Consortium name too long:
+  local dashIndex = self.factionInfo.title:find("-")
+  if dashIndex == nil then
+    self:SetTitle(self.factionInfo.title)
+  else
+    self:SetTitle(self.factionInfo.title:sub(0, dashIndex - 1))
+  end
   self:SetDescription(self.factionInfo.detail)
 
   if self.factionInfo:isMajorFaction() then
@@ -43,6 +49,7 @@ function DragonflightHelperReputationRowMixin:InitFactionSettings()
   self:SetMinMaxValues(self.factionInfo.barMin, self.factionInfo.barMax)
   self:SetValue(self.factionInfo.barValue)
   self:SetForegroundColor(self.factionSettings.color.r, self.factionSettings.color.g, self.factionSettings.color.b, 1)
+  self:SetBackgroundColor(220, 220, 220, 0.3)
 
   self.enterCallback = function()
     if self.factionInfo:isFriendFaction() then
