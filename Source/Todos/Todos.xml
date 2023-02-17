@@ -12,6 +12,18 @@
           <Anchor point="TOPLEFT" relativeKey="$parent" relativePoint="TOPLEFT" />
           <Anchor point="BOTTOMRIGHT" relativeKey="$parent" relativePoint="BOTTOMRIGHT" />
         </Anchors>
+
+        <Layers>
+          <Layer level="ARTWORK">
+            <FontString parentKey="Title" inherits="GameFontHighlightSmall" justifyH="CENTER">
+              <Size y="25" />
+              <Anchors>
+                <Anchor point="TOPLEFT" relativeKey="$parent" relativePoint="TOPLEFT" />
+                <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
       </Frame>
     </Frames>
   </Frame>

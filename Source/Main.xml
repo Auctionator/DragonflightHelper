@@ -1,18 +1,9 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
 
-  <Frame name="DragonflightHelperFrame"
-    mixin="DragonflightHelperMixin_2"
-    setAllPoints="true"
-    movable="true"
-    enableMouse="true"
-    inherits="SimplePanelTemplate"
-    useParentLevel="true"
-    parent="UIParent">
-    <Size x="300"
-      y="500" />
+  <Frame name="DragonflightHelperFrame" mixin="DragonflightHelperMixin" setAllPoints="true" movable="true" enableMouse="true" useParentLevel="true" parent="UIParent">
+    <Size x="200" y="500" />
 
     <Anchors>
       <Anchor point="CENTER" />
@@ -20,56 +11,32 @@
 
     <Layers>
       <Layer level="ARTWORK">
-        <FontString parentKey="Title"
-          inherits="GameFontHighlightMedium"
-          justifyH="CENTER"
-          text="Dragonflight Helper">
+        <FontString parentKey="Title" inherits="GameFontHighlightMedium" justifyH="CENTER" text="Dragonflight Helper">
           <Size y="25" />
           <Anchors>
-            <Anchor point="TOPLEFT"
-              relativeKey="$parent"
-              relativePoint="TOPLEFT"
-              y="-5" />
-            <Anchor point="RIGHT"
-              relativeKey="$parent"
-              relativePoint="RIGHT" />
+            <Anchor point="TOPLEFT" relativeKey="$parent" relativePoint="TOPLEFT" />
+            <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />
           </Anchors>
         </FontString>
       </Layer>
     </Layers>
     <Frames>
-      <Frame parentKey="Reputations"
-        inherits="DragonflightHelperReputationsFrame">
+      <Frame parentKey="Reputations" inherits="DragonflightHelperReputationsFrame">
         <Anchors>
-          <Anchor point="TOPLEFT"
-            relativeKey="$parent.Inset"
-            x="4"
-            y="-4" />
-          <Anchor point="RIGHT"
-            relativeKey="$parent.Inset"
-            relativePoint="RIGHT" />
+          <Anchor point="TOPLEFT" relativeKey="$parent.Title" relativePoint="BOTTOMLEFT" x="5" />
+          <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />
         </Anchors>
       </Frame>
-      <Frame parentKey="Timers"
-        inherits="DragonflightHelperTimersFrame">
+      <Frame parentKey="Timers" inherits="DragonflightHelperTimersFrame">
         <Anchors>
-          <Anchor point="TOPLEFT"
-            relativeKey="$parent.Reputations"
-            relativePoint="BOTTOMLEFT" />
-          <Anchor point="RIGHT"
-            relativeKey="$parent.Inset"
-            relativePoint="RIGHT" />
+          <Anchor point="TOPLEFT" relativeKey="$parent.Reputations" relativePoint="BOTTOMLEFT" />
+          <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />
         </Anchors>
       </Frame>
-      <Frame parentKey="Todos"
-        inherits="DragonflightHelperTodosFrame">
+      <Frame parentKey="Todos" inherits="DragonflightHelperTodosFrame">
         <Anchors>
-          <Anchor point="TOPLEFT"
-            relativeKey="$parent.Timers"
-            relativePoint="BOTTOMLEFT" />
-          <Anchor point="RIGHT"
-            relativeKey="$parent.Inset"
-            relativePoint="RIGHT" />
+          <Anchor point="TOPLEFT" relativeKey="$parent.Timers" relativePoint="BOTTOMLEFT" />
+          <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />
         </Anchors>
       </Frame>
     </Frames>
@@ -77,8 +44,10 @@
     <Scripts>
       <OnLoad method="OnLoad" />
       <OnShow method="OnShow" />
+      <OnHide method="OnHide" />
       <OnDragStart method="OnDragStart" />
       <OnDragStop method="OnDragStop" />
+      <OnEvent method="OnEvent" />
     </Scripts>
   </Frame>
 </Ui>

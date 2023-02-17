@@ -4,9 +4,34 @@ function DragonflightHelperReputationRowMixin:OnLoad()
   -- print("DragonflightHelperReputationRowMixin:OnLoad()")
 end
 
+function DragonflightHelperReputationRowMixin:OnShow()
+  self:RegisterEvent("UPDATE_FACTION")
+  self:RegisterEvent("MAJOR_FACTION_RENOWN_LEVEL_CHANGED")
+  self:RegisterEvent("MAJOR_FACTION_UNLOCKED")
+end
+
+function DragonflightHelperReputationRowMixin:OnHide()
+  self:UnregisterEvent("UPDATE_FACTION")
+  self:UnregisterEvent("MAJOR_FACTION_RENOWN_LEVEL_CHANGED")
+  self:UnregisterEvent("MAJOR_FACTION_UNLOCKED")
+end
+
+function DragonflightHelperReputationRowMixin:OnEvent(event, ...)
+  if event == "UPDATE_FACTION" or event == "MAJOR_FACTION_RENOWN_LEVEL_CHANGED" or event == "MAJOR_FACTION_UNLOCKED" then
+    -- there may be the potential for a bug here if the current faction isn't
+    -- updated yet, but that information doesn't seem to come through on the
+    -- UPDATE_FACTION event
+    self:InitFactionSettings()
+  end
+end
+
 function DragonflightHelperReputationRowMixin:Init(factionSettings)
+  self.factionSettings = factionSettings
+end
+
+function DragonflightHelperReputationRowMixin:InitFactionSettings()
   self.factionInfo = DragonflightHelper.FactionInfo:new()
-  self.factionInfo:init(factionSettings.factionIndex)
+  self.factionInfo:init(self.factionSettings.factionIndex)
 
   self:SetTitle(self.factionInfo.title)
   self:SetDescription(self.factionInfo.detail)
@@ -17,7 +42,7 @@ function DragonflightHelperReputationRowMixin:Init(factionSettings)
 
   self:SetMinMaxValues(self.factionInfo.barMin, self.factionInfo.barMax)
   self:SetValue(self.factionInfo.barValue)
-  self:SetForegroundColor(factionSettings.color.r, factionSettings.color.g, factionSettings.color.b, 1)
+  self:SetForegroundColor(self.factionSettings.color.r, self.factionSettings.color.g, self.factionSettings.color.b, 1)
 
   self.enterCallback = function()
     if self.factionInfo:isFriendFaction() then
@@ -34,6 +59,10 @@ end
 
 -- Copied from ReputationFrame.xml and ReputationFrame.lua (Mixing in was a problem because data)
 function DragonflightHelperReputationRowMixin:ShowFriendshipReputationTooltip()
+  if not self.factionInfo then
+    return
+  end
+
   if (
       self.factionInfo.friendshipFactionData and
       self.factionInfo.friendshipFactionData.friendshipFactionID and
@@ -72,6 +101,10 @@ function DragonflightHelperReputationRowMixin:ShowFriendshipReputationTooltip()
 end
 
 function DragonflightHelperReputationRowMixin:ShowMajorFactionRenownTooltip()
+  if not self.factionInfo then
+    return
+  end
+
   local function AddRenownRewardsToTooltip(renownRewards)
     GameTooltip_AddHighlightLine(GameTooltip, MAJOR_FACTION_BUTTON_TOOLTIP_NEXT_REWARDS);
 

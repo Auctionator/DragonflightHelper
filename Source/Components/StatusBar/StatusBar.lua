@@ -18,6 +18,12 @@ function DragonflightHelperStatusBarMixin:OnLoad()
   self:SetForegroundColor(color.r, color.g, color.b, 1)
 end
 
+function DragonflightHelperStatusBarMixin:OnShow()
+end
+
+function DragonflightHelperStatusBarMixin:OnHide()
+end
+
 function DragonflightHelperStatusBarMixin:SetTitle(title)
   self.Container.Title:SetText(title)
 end
