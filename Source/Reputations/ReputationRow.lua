@@ -8,36 +8,28 @@ function DragonflightHelperReputationRowMixin:Init(factionSettings)
   self.factionInfo = DragonflightHelper.FactionInfo:new()
   self.factionInfo:init(factionSettings.factionIndex)
 
-  self.Container.Name:SetText(self.factionInfo.title)
-  self.Container.Detail:SetText(self.factionInfo.detail)
+  self:SetTitle(self.factionInfo.title)
+  self:SetDescription(self.factionInfo.detail)
 
-  self.reputationBar = CreateFrame("StatusBar", nil, self)
-  self.reputationBar:SetStatusBarTexture("Interface\\AddOns\\Details\\images\\BantoBar")
-  self.reputationBar:SetStatusBarColor(factionSettings.color.r, factionSettings.color.g, factionSettings.color.b)
-  self.reputationBar:SetPoint("TOPLEFT", 0, -5)
-  self.reputationBar:SetPoint("BOTTOMRIGHT", -5, 5)
-  self.reputationBar:SetMinMaxValues(self.factionInfo.barMin, self.factionInfo.barMax)
-  self.reputationBar:SetValue(self.factionInfo.barValue)
-
-  -- Probably a smarter way to do this with background layer but :shrug: this works
-  self.reputationBarBackground = CreateFrame("StatusBar", nil, self)
-  self.reputationBarBackground:SetStatusBarTexture("Interface\\AddOns\\Details\\images\\BantoBar")
-  self.reputationBarBackground:SetStatusBarColor(220, 220, 220, 0.2)
-  self.reputationBarBackground:SetPoint("TOPLEFT", 0, -5)
-  self.reputationBarBackground:SetPoint("BOTTOMRIGHT", -5, 5)
-  self.reputationBarBackground:SetMinMaxValues(self.factionInfo.barMin, self.factionInfo.barMax)
-end
-
-function DragonflightHelperReputationRowMixin:OnEnter()
-  if self.factionInfo:isFriendFaction() then
-    self:ShowFriendshipReputationTooltip()
-  else
-    self:ShowMajorFactionRenownTooltip()
+  if self.factionInfo:isMajorFaction() then
+    self:SetRolloverDescription(("%d / %d"):format(self.factionInfo.barValue, self.factionInfo.barMax))
   end
-end
 
-function DragonflightHelperReputationRowMixin:OnLeave()
-  GameTooltip:Hide()
+  self:SetMinMaxValues(self.factionInfo.barMin, self.factionInfo.barMax)
+  self:SetValue(self.factionInfo.barValue)
+  self:SetForegroundColor(factionSettings.color.r, factionSettings.color.g, factionSettings.color.b, 1)
+
+  self.enterCallback = function()
+    if self.factionInfo:isFriendFaction() then
+      self:ShowFriendshipReputationTooltip()
+    else
+      self:ShowMajorFactionRenownTooltip()
+    end
+  end
+
+  self.leaveCallback = function()
+    GameTooltip:Hide()
+  end
 end
 
 -- Copied from ReputationFrame.xml and ReputationFrame.lua (Mixing in was a problem because data)

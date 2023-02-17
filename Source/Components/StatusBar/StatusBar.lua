@@ -1,8 +1,10 @@
 DragonflightHelperStatusBarMixin = {}
 
 function DragonflightHelperStatusBarMixin:OnLoad()
+  -- print("DragonflightHelperStatusBarMixin:OnLoad()")
+
   self.description = ""
-  self.rolloverDescription = ""
+  self.rolloverDescription = nil
 
   self.enterCallback = function()
     -- no op by default
@@ -12,8 +14,8 @@ function DragonflightHelperStatusBarMixin:OnLoad()
   end
 
   local color = ITEM_QUALITY_COLORS[3]
-  self:SetForegroundColor(color.r, color.g, color.b)
-  self:SetBackgroundColor(220, 220, 220, 0.2)
+  self.StatusBarBackground:SetStatusBarColor(220, 220, 220, 0.2)
+  self:SetForegroundColor(color.r, color.g, color.b, 1)
 end
 
 function DragonflightHelperStatusBarMixin:SetTitle(title)
@@ -31,7 +33,10 @@ function DragonflightHelperStatusBarMixin:SetRolloverDescription(rolloverDescrip
 end
 
 function DragonflightHelperStatusBarMixin:OnEnter()
-  self.Container.Description:SetText(self.rolloverDescription)
+  if self.rolloverDescription ~= nil then
+    self.Container.Description:SetText(self.rolloverDescription)
+  end
+
   self.enterCallback()
 end
 
@@ -55,4 +60,8 @@ end
 
 function DragonflightHelperStatusBarMixin:SetBackgroundColor(r, g, b, a)
   self.StatusBarBackground:SetStatusBarColor(r, g, b, a)
+end
+
+function DragonflightHelperStatusBarMixin:SetReverseFill()
+  self.StatusBarForeground:SetReverseFill(true)
 end

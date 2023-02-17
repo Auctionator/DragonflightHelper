@@ -1,7 +1,7 @@
 DragonflightHelperTodosMixin = {}
 
 function DragonflightHelperTodosMixin:OnLoad()
-  print("DragonflightHelperTodosMixin:OnLoad()")
+  -- print("DragonflightHelperTodosMixin:OnLoad()")
 
   local lastChild = nil
 

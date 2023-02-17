@@ -1,7 +1,7 @@
 DragonflightHelperTodoRowMixin = {}
 
 function DragonflightHelperTodoRowMixin:OnLoad()
-  print("DragonflightHelperTodoRowMixin:OnLoad()")
+  -- print("DragonflightHelperTodoRowMixin:OnLoad()")
 end
 
 function DragonflightHelperTodoRowMixin:Init(todoEntry)
@@ -12,7 +12,7 @@ function DragonflightHelperTodoRowMixin:Init(todoEntry)
     local title = C_QuestLog.GetTitleForQuestID(quest.id)
     local isWQ = C_QuestLog.IsWorldQuest(quest.id)
 
-    print(quest.id .. " " .. (isWQ and "true" or "false") .. " " .. (title and title or ""))
+    -- print(quest.id .. " " .. (isWQ and "true" or "false") .. " " .. (title and title or ""))
 
     if title ~= nil then
       self.title = title

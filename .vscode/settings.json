@@ -49,6 +49,8 @@
     "random",
     "ReputationBarMixin",
     "TIME_REMAINING",
-    "ITEM_QUALITY_COLORS"
+    "ITEM_QUALITY_COLORS",
+    "GetGameTime",
+    "SecondsToTime"
   ]
 }

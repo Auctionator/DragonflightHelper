@@ -1,7 +1,6 @@
 DragonflightHelperReputationMixin = {}
 
 function DragonflightHelperReputationMixin:OnLoad()
-    print(self.factionId)
 end
 
 DragonflightHelperMixin_2 = {};
@@ -81,7 +80,7 @@ function DragonflightHelperMixin:InitEntry(factionRow, elementData)
         paragonFrame.factionID = factionID;
         local currentValue, threshold, rewardQuestID, hasRewardPending,
         tooLowLevelForParagon = C_Reputation.GetFactionParagonInfo(
-                factionID);
+            factionID);
         C_Reputation.RequestFactionParagonPreloadRewardData(factionID);
         paragonFrame.Glow:SetShown(not tooLowLevelForParagon and
         hasRewardPending);
@@ -125,7 +124,7 @@ function DragonflightHelperMixin:InitEntry(factionRow, elementData)
     else
         local gender = UnitSex("player");
         factionStandingtext = GetText("FACTION_STANDING_LABEL" .. standingID,
-                gender);
+            gender);
         factionRow.friendshipID = nil;
     end
 

@@ -1,39 +1,66 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
-  <Frame name="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperStatusBarMixin" virtual="true" enableMouse="true">
+  <Frame name="DragonflightHelperStatusBarFrame"
+    mixin="DragonflightHelperStatusBarMixin"
+    virtual="true"
+    enableMouse="true">
     <Scripts>
       <OnLoad method="OnLoad" />
       <OnEnter method="OnEnter" />
       <OnLeave method="OnLeave" />
     </Scripts>
 
-    <Size y="25" />
+    <Size y="15" />
 
     <Anchors>
-      <Anchor point="LEFT" relativeKey="$parent" relativePoint="LEFT" />
-      <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" x="-5" />
+      <Anchor point="LEFT"
+        relativeKey="$parent"
+        relativePoint="LEFT" />
+      <Anchor point="RIGHT"
+        relativeKey="$parent"
+        relativePoint="RIGHT"
+        x="-5" />
     </Anchors>
 
     <Frames>
       <Frame parentKey="Container">
         <Anchors>
-          <Anchor point="TOPLEFT" relativeKey="$parent" relativePoint="TOPLEFT" />
-          <Anchor point="BOTTOMRIGHT" relativeKey="$parent" relativePoint="BOTTOMRIGHT" />
+          <Anchor point="TOPLEFT"
+            relativeKey="$parent"
+            relativePoint="TOPLEFT" />
+          <Anchor point="BOTTOMRIGHT"
+            relativeKey="$parent"
+            relativePoint="BOTTOMRIGHT" />
         </Anchors>
 
         <Layers>
           <Layer level="OVERLAY">
-            <FontString parentKey="Title" inherits="GameFontHighlightSmall" justifyH="LEFT">
+            <FontString parentKey="Title"
+              inherits="GameFontHighlightSmall"
+              justifyH="LEFT">
               <Anchors>
-                <Anchor point="TOPLEFT" relativeKey="$parent" relativePoint="TOPLEFT" x="5" />
-                <Anchor point="BOTTOMRIGHT" relativeKey="$parent" relativePoint="BOTTOMRIGHT" />
+                <Anchor point="TOPLEFT"
+                  relativeKey="$parent"
+                  relativePoint="TOPLEFT"
+                  x="5" />
+                <Anchor point="BOTTOMRIGHT"
+                  relativeKey="$parent"
+                  relativePoint="BOTTOMRIGHT" />
               </Anchors>
             </FontString>
-            <FontString parentKey="Description" inherits="GameFontHighlightSmall" justifyH="RIGHT">
+            <FontString parentKey="Description"
+              inherits="GameFontHighlightSmall"
+              justifyH="RIGHT">
               <Anchors>
-                <Anchor point="TOPLEFT" relativeKey="$parent" relativePoint="TOPLEFT" />
-                <Anchor point="BOTTOMRIGHT" relativeKey="$parent" relativePoint="BOTTOMRIGHT" x="-10" />
+                <Anchor point="TOPLEFT"
+                  relativeKey="$parent"
+                  relativePoint="TOPLEFT" />
+                <Anchor point="BOTTOMRIGHT"
+                  relativeKey="$parent"
+                  relativePoint="BOTTOMRIGHT"
+                  x="-10" />
               </Anchors>
             </FontString>
           </Layer>
@@ -43,7 +70,8 @@
       <StatusBar parentKey="StatusBarForeground">
         <BarTexture file="Interface\AddOns\Details\images\BantoBar" />
         <Anchors>
-          <Anchor point="TOPLEFT" x="1" />
+          <Anchor point="TOPLEFT"
+            x="1" />
           <Anchor point="BOTTOMRIGHT" />
         </Anchors>
       </StatusBar>
@@ -51,7 +79,8 @@
       <StatusBar parentKey="StatusBarBackground">
         <BarTexture file="Interface\AddOns\Details\images\BantoBar" />
         <Anchors>
-          <Anchor point="TOPLEFT" x="1" />
+          <Anchor point="TOPLEFT"
+            x="1" />
           <Anchor point="BOTTOMRIGHT" />
         </Anchors>
       </StatusBar>
