@@ -33,13 +33,13 @@
           <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />
         </Anchors>
       </Frame>
-      <Frame parentKey="Todos" inherits="DragonflightHelperTodosFrame" hidden="true">
+      <Frame parentKey="Todos" inherits="DragonflightHelperTodosFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.Timers" relativePoint="BOTTOMLEFT" />
           <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />
         </Anchors>
       </Frame>
-      <Frame parentKey="ProfessionTodos" inherits="DragonflightHelperProfessionTodosFrame" hidden="true">
+      <Frame parentKey="ProfessionTodos" inherits="DragonflightHelperProfessionTodosFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.Todos" relativePoint="BOTTOMLEFT" />
           <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />
@@ -53,7 +53,6 @@
       <OnHide method="OnHide" />
       <OnDragStart method="OnDragStart" />
       <OnDragStop method="OnDragStop" />
-      <OnEvent method="OnEvent" />
     </Scripts>
   </Frame>
 </Ui>
