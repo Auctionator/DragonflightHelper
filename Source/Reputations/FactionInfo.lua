@@ -28,7 +28,8 @@ function DragonflightHelper.FactionInfo:new(o)
 end
 
 function DragonflightHelper.FactionInfo:init(factionId)
-  print("Faction Info init called", factionId)
+  print("DragonflightHelper.FactionInfo:init(" .. factionId .. ")")
+
   local name, description, standingID, barMin, barMax, barValue, atWarWith, canToggleAtWar, isHeader, isCollapsed,
   hasRep, isWatched, isChild, factionID, hasBonusRepGain, canSetInactive = GetFactionInfoByID(factionId)
 
@@ -50,33 +51,7 @@ function DragonflightHelper.FactionInfo:init(factionId)
   self.hasBonusRepGain = hasBonusRepGain
   self.canSetInactive = canSetInactive
 
-  print(self.name, self.factionId)
-
-  if self:isFriendFaction() then
-    self.detail = self.friendshipFactionData.reaction
-
-    if self.friendshipFactionData.nextThreshold then
-      self.barMin = self.friendshipFactionData.reactionThreshold
-      self.barMax = self.friendshipFactionData.nextThreshold
-      self.barValue = self.friendshipFactionData.standing
-    else
-      self.barMin = 0
-      self.barMax = 1
-      self.barValue = 1
-    end
-  elseif self:isMajorFaction() then
-    self.majorFactionData = C_MajorFactions.GetMajorFactionData(factionID)
-
-    self.barMin = 0
-    self.barMax = self.majorFactionData.renownLevelThreshold
-
-    local isCapped = C_MajorFactions.HasMaximumRenown(self.factionId)
-
-    self.barValue = isCapped and self.majorFactionData.renownLevelThreshold or
-        self.majorFactionData.renownReputationEarned or 0
-
-    self.detail = RENOWN_LEVEL_LABEL .. self.majorFactionData.renownLevel
-  end
+  self:update()
 end
 
 function DragonflightHelper.FactionInfo:isMajorFaction()
@@ -98,5 +73,33 @@ function DragonflightHelper.FactionInfo:getFactionColor()
     return FACTION_BAR_COLORS[self.standingId]
   else
     return BLUE_FONT_COLOR
+  end
+end
+
+function DragonflightHelper.FactionInfo:update()
+  if self:isFriendFaction() then
+    self.detail = self.friendshipFactionData.reaction
+
+    if self.friendshipFactionData.nextThreshold then
+      self.barMin = self.friendshipFactionData.reactionThreshold
+      self.barMax = self.friendshipFactionData.nextThreshold
+      self.barValue = self.friendshipFactionData.standing
+    else
+      self.barMin = 0
+      self.barMax = 1
+      self.barValue = 1
+    end
+  elseif self:isMajorFaction() then
+    self.majorFactionData = C_MajorFactions.GetMajorFactionData(self.factionId)
+
+    self.barMin = 0
+    self.barMax = self.majorFactionData.renownLevelThreshold
+
+    local isCapped = C_MajorFactions.HasMaximumRenown(self.factionId)
+
+    self.barValue = isCapped and self.majorFactionData.renownLevelThreshold or
+        self.majorFactionData.renownReputationEarned or 0
+
+    self.detail = RENOWN_LEVEL_LABEL .. self.majorFactionData.renownLevel
   end
 end

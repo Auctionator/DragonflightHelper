@@ -55,6 +55,7 @@
     "CreateFromMixins",
     "GetProfessions",
     "GetProfessionInfo",
-    "GetFactionInfoByID"
+    "GetFactionInfoByID",
+    "FrameUtil"
   ]
 }

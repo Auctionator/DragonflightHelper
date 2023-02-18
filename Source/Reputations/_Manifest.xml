@@ -1,0 +1,9 @@
+<!-- Source/ReputationBar directory manifest -->
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Script file="FactionInfo.lua" />
+
+  <Script file="Reputation.lua" />
+  <Script file="Renown.lua" />
+  <Script file="Friend.lua" />
+  <Include file="Reputations.xml" />
+</Ui>
