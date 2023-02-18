@@ -28,7 +28,6 @@ function DragonflightHelperMixin:OnEvent(event, ...)
   if event == "PLAYER_ALIVE" then
     self:UnregisterEvent("PLAYER_ALIVE")
 
-    self.Timers:Show()
     self.Todos:Show()
     self.ProfessionTodos:Show()
   end

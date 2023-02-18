@@ -51,7 +51,7 @@ function DragonflightHelperStatusBarMixin:OnLeave()
   self.leaveCallback()
 end
 
-function DragonflightHelperStatusBarMixin:OnEvent()
+function DragonflightHelperStatusBarMixin:OnEvent(event, ...)
 end
 
 function DragonflightHelperStatusBarMixin:SetValue(value)

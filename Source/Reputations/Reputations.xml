@@ -2,6 +2,8 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
   <Frame name="DragonflightHelperReputationsFrame" virtual="true">
+    <!-- Section Title = 25, StatusBar = 15 (each with an offset of 2) => 25 + (8 * (15 + 2)) -->
+    <Size y="161" />
     <Frames>
       <Frame parentKey="Title" inherits="DragonflightHelperSectionTitleFrame">
         <KeyValues>
