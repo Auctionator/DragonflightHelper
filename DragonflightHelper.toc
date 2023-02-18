@@ -12,7 +12,7 @@ Source\Utilities\TablePrint.lua
 Source\Components\Manifest.xml
 
 Source\Reputations\_Manifest.xml
-Source\Timers\Manifest.xml
+Source\Timers\_Manifest.xml
 Source\Todos\Manifest.xml
 
 Source\Main.lua
