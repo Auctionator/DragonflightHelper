@@ -31,7 +31,7 @@ end
 
 function DragonflightHelperReputationRowMixin:InitFactionSettings()
   self.factionInfo = DragonflightHelper.FactionInfo:new()
-  self.factionInfo:init(self.factionSettings.factionIndex)
+  self.factionInfo:init(self.factionSettings.id)
 
   -- Artisan's Consortium name too long:
   local dashIndex = self.factionInfo.title:find("-")
@@ -108,7 +108,7 @@ function DragonflightHelperReputationRowMixin:ShowFriendshipReputationTooltip()
 end
 
 function DragonflightHelperReputationRowMixin:ShowMajorFactionRenownTooltip()
-  if not self.factionInfo then
+  if self.factionInfo == nil or self.factionInfo.majorFactionData == nil then
     return
   end
 

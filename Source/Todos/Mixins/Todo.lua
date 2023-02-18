@@ -71,6 +71,8 @@ ProfessionLookupMixin = {}
 function ProfessionLookupMixin:OnLoad()
   local firstProfession, secondProfession = GetProfessions()
 
+  DragonflightHelper.Utilities.dump(firstProfession, "First Profession")
+
   self.professionInfo = {
     { name = "None", skillId = 0 },
     { name = "None", skillId = 0 }

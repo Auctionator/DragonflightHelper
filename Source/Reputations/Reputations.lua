@@ -2,34 +2,47 @@ DragonflightHelperReputationsMixin = {}
 
 local MAJOR_FACTIONS = {
   -- Dragonscale Expedition
-  { factionIndex = 4,  color = BLUE_FONT_COLOR },
+  { id = 2507, color = BLUE_FONT_COLOR },
   -- Iskaara Tuskarr
-  { factionIndex = 5,  color = BLUE_FONT_COLOR },
+  { id = 2511, color = BLUE_FONT_COLOR },
   -- Maruuk Centaur
-  { factionIndex = 6,  color = BLUE_FONT_COLOR },
+  { id = 2503, color = BLUE_FONT_COLOR },
   -- Winterpelt Furbolg
-  -- [7] = { factionIndex = 7, color = BLUE_FONT_COLOR },
+  -- [7] = { id = ?, color = BLUE_FONT_COLOR },
   -- Valdrakken Accord
-  { factionIndex = 8,  color = BLUE_FONT_COLOR },
+  { id = 2510, color = BLUE_FONT_COLOR },
   -- Artisan's Consortium
-  { factionIndex = 9,  color = FACTION_BAR_COLORS[5] },
+  { id = 2544, color = FACTION_BAR_COLORS[5] },
   -- Cobalt Assembly
-  { factionIndex = 10, color = FACTION_BAR_COLORS[5] },
+  { id = 2550, color = FACTION_BAR_COLORS[5] },
   -- Sabellian
-  { factionIndex = 11, color = FACTION_BAR_COLORS[5] },
+  { id = 2518, color = FACTION_BAR_COLORS[5] },
   -- Wrathion
-  { factionIndex = 12, color = FACTION_BAR_COLORS[5] },
+  { id = 2517, color = FACTION_BAR_COLORS[5] },
 }
 
 function DragonflightHelperReputationsMixin:OnLoad()
+  self:RegisterEvent("UPDATE_FACTION")
+end
+
+function DragonflightHelperReputationsMixin:OnEvent(event, ...)
+  if event == "UPDATE_FACTION" then
+    self:UnregisterEvent("UPDATE_FACTION")
+    self:Init()
+  end
+end
+
+function DragonflightHelperReputationsMixin:Init()
   -- print("DragonflightHelperReputationsMixin:OnLoad()")
 
   self.lastChild = self.Title
   self.adjustedHeight = self.Title:GetHeight()
 
   for _, factionSettings in ipairs(MAJOR_FACTIONS) do
-    local child = CreateFrame("FRAME", "DFH_Rep_" .. factionSettings.factionIndex, self,
+    local child = CreateFrame("FRAME", "DFH_Rep_" .. factionSettings.id, self,
       "DragonflightHelperReputationRowFrame")
+
+    DragonflightHelper.Utilities.dump(factionSettings, "Init faction")
     child:Init(factionSettings)
     child:SetBackgroundColor(220, 220, 200, 0.1)
 

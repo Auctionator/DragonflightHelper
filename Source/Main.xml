@@ -27,19 +27,19 @@
           <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />
         </Anchors>
       </Frame>
-      <Frame parentKey="Timers" inherits="DragonflightHelperTimersFrame">
+      <Frame parentKey="Timers" inherits="DragonflightHelperTimersFrame" hidden="true">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.Reputations" relativePoint="BOTTOMLEFT" />
           <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />
         </Anchors>
       </Frame>
-      <Frame parentKey="Todos" inherits="DragonflightHelperTodosFrame">
+      <Frame parentKey="Todos" inherits="DragonflightHelperTodosFrame" hidden="true">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.Timers" relativePoint="BOTTOMLEFT" />
           <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />
         </Anchors>
       </Frame>
-      <Frame parentKey="ProfessionTodos" inherits="DragonflightHelperProfessionTodosFrame">
+      <Frame parentKey="ProfessionTodos" inherits="DragonflightHelperProfessionTodosFrame" hidden="true">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.Todos" relativePoint="BOTTOMLEFT" />
           <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />

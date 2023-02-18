@@ -54,6 +54,7 @@
     "SecondsToTime",
     "CreateFromMixins",
     "GetProfessions",
-    "GetProfessionInfo"
+    "GetProfessionInfo",
+    "GetFactionInfoByID"
   ]
 }

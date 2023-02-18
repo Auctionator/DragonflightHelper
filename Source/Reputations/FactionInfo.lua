@@ -27,9 +27,10 @@ function DragonflightHelper.FactionInfo:new(o)
   return o
 end
 
-function DragonflightHelper.FactionInfo:init(factionIndex)
+function DragonflightHelper.FactionInfo:init(factionId)
+  print("Faction Info init called", factionId)
   local name, description, standingID, barMin, barMax, barValue, atWarWith, canToggleAtWar, isHeader, isCollapsed,
-  hasRep, isWatched, isChild, factionID, hasBonusRepGain, canSetInactive = GetFactionInfo(factionIndex)
+  hasRep, isWatched, isChild, factionID, hasBonusRepGain, canSetInactive = GetFactionInfoByID(factionId)
 
   self.name = name
   self.title = name
@@ -48,6 +49,8 @@ function DragonflightHelper.FactionInfo:init(factionIndex)
   self.factionId = factionID
   self.hasBonusRepGain = hasBonusRepGain
   self.canSetInactive = canSetInactive
+
+  print(self.name, self.factionId)
 
   if self:isFriendFaction() then
     self.detail = self.friendshipFactionData.reaction
