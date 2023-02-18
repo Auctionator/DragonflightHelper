@@ -13,7 +13,7 @@ Source\Components\Manifest.xml
 
 Source\Reputations\_Manifest.xml
 Source\Timers\_Manifest.xml
-Source\Todos\Manifest.xml
+Source\Todos\_Manifest.xml
 
 Source\Main.lua
 Source\Main.xml
