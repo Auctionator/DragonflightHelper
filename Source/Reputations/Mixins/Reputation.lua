@@ -6,8 +6,6 @@ function DragonflightHelperReputationItemMixin:OnLoad()
 end
 
 function DragonflightHelperReputationItemMixin:OnShow()
-  DragonflightHelperStatusBarMixin.OnShow(self)
-
   FrameUtil.RegisterFrameForEvents(self, {
     "UPDATE_FACTION",
     "MAJOR_FACTION_RENOWN_LEVEL_CHANGED",
@@ -16,8 +14,6 @@ function DragonflightHelperReputationItemMixin:OnShow()
 end
 
 function DragonflightHelperReputationItemMixin:OnHide()
-  DragonflightHelperStatusBarMixin.OnHide(self)
-
   FrameUtil.UnregisterFrameForEvents(self, {
     "UPDATE_FACTION",
     "MAJOR_FACTION_RENOWN_LEVEL_CHANGED",

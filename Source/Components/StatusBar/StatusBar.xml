@@ -8,7 +8,6 @@
       <OnHide method="OnHide" />
       <OnEnter method="OnEnter" />
       <OnLeave method="OnLeave" />
-      <OnEvent method="OnEvent" />
     </Scripts>
 
     <Size y="15" />

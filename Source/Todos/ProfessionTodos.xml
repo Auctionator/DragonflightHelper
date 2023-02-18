@@ -1,7 +1,13 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
-  <Frame name="DragonflightHelperProfessionTodosFrame" inherits="DragonflightHelperProfessionBaseFrame" mixin="DragonflightHelperProfessionTodosMixin" virtual="true">
+  <Frame name="DFH_ProfessionTodoItemFrame" inherits="DragonflightHelperStatusBarFrame" mixin="DFH_ProfessionStatusBar" virtual="true">
+    <Scripts>
+      <OnEvent method="OnEvent" />
+    </Scripts>
+  </Frame>
+
+  <Frame name="DFH_ProfessionTodosFrame" mixin="DFH_ProfessionTodosMixin" virtual="true">
     <Size y="162" />
 
     <Scripts>
@@ -19,25 +25,41 @@
           <Anchor point="TOPLEFT" relativeKey="$parent.Title" relativePoint="BOTTOMLEFT" y="4" />
         </Anchors>
       </Frame>
-      <Frame parentKey="TreatiseOne" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperTreatiseOneMixin">
+      <Frame parentKey="TreatiseOne" inherits="DFH_ProfessionTodoItemFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.ProfessionOneTitle" relativePoint="BOTTOMLEFT" />
         </Anchors>
+        <KeyValues>
+          <KeyValue key="professionIndex" value="1" type="number" />
+          <KeyValue key="questTypeKey" value="Treatise" type="string" />
+        </KeyValues>
       </Frame>
-      <Frame parentKey="ServicesOne" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperServicesOneMixin">
+      <Frame parentKey="ServicesOne" inherits="DFH_ProfessionTodoItemFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.TreatiseOne" relativePoint="BOTTOMLEFT" y="-2" />
         </Anchors>
+        <KeyValues>
+          <KeyValue key="professionIndex" value="1" type="number" />
+          <KeyValue key="questTypeKey" value="Services" type="string" />
+        </KeyValues>
       </Frame>
-      <Frame parentKey="GatheringOne" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperGatheringOneMixin">
+      <Frame parentKey="GatheringOne" inherits="DFH_ProfessionTodoItemFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.ServicesOne" relativePoint="BOTTOMLEFT" y="-2" />
         </Anchors>
+        <KeyValues>
+          <KeyValue key="professionIndex" value="1" type="number" />
+          <KeyValue key="questTypeKey" value="Gathering" type="string" />
+        </KeyValues>
       </Frame>
-      <Frame parentKey="ValdrakkenOne" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperValdrakkenOneMixin">
+      <Frame parentKey="ValdrakkenOne" inherits="DFH_ProfessionTodoItemFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.GatheringOne" relativePoint="BOTTOMLEFT" y="-2" />
         </Anchors>
+        <KeyValues>
+          <KeyValue key="professionIndex" value="1" type="number" />
+          <KeyValue key="questTypeKey" value="Valdrakken" type="string" />
+        </KeyValues>
       </Frame>
 
       <Frame parentKey="ProfessionTwoTitle" inherits="DragonflightHelperSectionTitleFrame">
@@ -45,25 +67,41 @@
           <Anchor point="TOPLEFT" relativeKey="$parent.ValdrakkenOne" relativePoint="BOTTOMLEFT" y="-3" />
         </Anchors>
       </Frame>
-      <Frame parentKey="TreatiseTwo" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperTreatiseTwoMixin">
+      <Frame parentKey="TreatiseTwo" inherits="DFH_ProfessionTodoItemFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.ProfessionTwoTitle" relativePoint="BOTTOMLEFT" y="-2" />
         </Anchors>
+        <KeyValues>
+          <KeyValue key="professionIndex" value="2" type="number" />
+          <KeyValue key="questTypeKey" value="Treatise" type="string" />
+        </KeyValues>
       </Frame>
-      <Frame parentKey="ServicesTwo" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperServicesTwoMixin">
+      <Frame parentKey="ServicesTwo" inherits="DFH_ProfessionTodoItemFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.TreatiseTwo" relativePoint="BOTTOMLEFT" y="-2" />
         </Anchors>
+        <KeyValues>
+          <KeyValue key="professionIndex" value="2" type="number" />
+          <KeyValue key="questTypeKey" value="Services" type="string" />
+        </KeyValues>
       </Frame>
-      <Frame parentKey="GatheringTwo" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperGatheringTwoMixin">
+      <Frame parentKey="GatheringTwo" inherits="DFH_ProfessionTodoItemFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.ServicesTwo" relativePoint="BOTTOMLEFT" y="-2" />
         </Anchors>
+        <KeyValues>
+          <KeyValue key="professionIndex" value="2" type="number" />
+          <KeyValue key="questTypeKey" value="Gathering" type="string" />
+        </KeyValues>
       </Frame>
-      <Frame parentKey="ValdrakkenTwo" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperValdrakkenTwoMixin">
+      <Frame parentKey="ValdrakkenTwo" inherits="DFH_ProfessionTodoItemFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.GatheringTwo" relativePoint="BOTTOMLEFT" y="-2" />
         </Anchors>
+        <KeyValues>
+          <KeyValue key="professionIndex" value="2" type="number" />
+          <KeyValue key="questTypeKey" value="Valdrakken" type="string" />
+        </KeyValues>
       </Frame>
 
     </Frames>

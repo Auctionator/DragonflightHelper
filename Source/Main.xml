@@ -39,7 +39,7 @@
           <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />
         </Anchors>
       </Frame>
-      <Frame parentKey="ProfessionTodos" inherits="DragonflightHelperProfessionTodosFrame">
+      <Frame parentKey="ProfessionTodos" inherits="DFH_ProfessionTodosFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.Todos" relativePoint="BOTTOMLEFT" />
           <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />

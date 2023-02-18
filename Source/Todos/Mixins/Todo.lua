@@ -30,31 +30,25 @@ function DragonflightHelperTodoMixin:Init(questIds, title, completionCount)
 end
 
 function DragonflightHelperTodoMixin:OnShow()
-  DragonflightHelperStatusBarMixin.OnShow(self)
-
   self:RegisterEvent("QUEST_TURNED_IN")
 end
 
 function DragonflightHelperTodoMixin:OnHide()
-  DragonflightHelperStatusBarMixin.OnHide(self)
-
   self:UnregisterEvent("QUEST_TURNED_IN")
 end
 
 function DragonflightHelperTodoMixin:OnEvent(event, ...)
-  DragonflightHelperStatusBarMixin.OnEvent(self, event, ...)
-
-  -- print(event, ...)
-
   if event == "QUEST_TURNED_IN" then
     self:Update()
   end
 end
 
 function DragonflightHelperTodoMixin:Update()
-  if #self.questIds == 0 then
+  if self.questIds == nil or #self.questIds == 0 then
     return
   end
+
+  self.completed = 0
 
   for _, questId in ipairs(self.questIds) do
     if C_QuestLog.IsQuestFlaggedCompleted(questId) then
@@ -64,16 +58,4 @@ function DragonflightHelperTodoMixin:Update()
 
   self:SetDescription(self.completed .. " / " .. self.completionCount)
   self:SetValue(self.completed)
-end
-
-DragonflightHelperProfessionTodoItemMixin = CreateFromMixins(DragonflightHelperProfessionBaseMixin,
-  DragonflightHelperTodoMixin)
-
-function DragonflightHelperProfessionTodoItemMixin:OnLoad()
-  DragonflightHelperProfessionBaseMixin.OnLoad(self)
-  DragonflightHelperTodoMixin.OnLoad(self)
-end
-
-function DragonflightHelperProfessionTodoItemMixin:Init(...)
-  DragonflightHelperTodoMixin.Init(self, ...)
 end
