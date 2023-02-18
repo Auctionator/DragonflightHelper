@@ -16,11 +16,20 @@ DragonflightHelperValdrakkenOneMixin = CreateFromMixins(DragonflightHelperProfes
 
 function DragonflightHelperValdrakkenOneMixin:OnLoad()
   DragonflightHelperProfessionTodoItemMixin.OnLoad(self)
+end
+
+function DragonflightHelperValdrakkenOneMixin:Init()
+  DragonflightHelperProfessionBaseMixin.Init(self)
 
   if self.hasFirstProfession and Quests[self.professionInfo[1].skillId] ~= nil then
-    self:Init(Quests[self.professionInfo[1].skillId], self.professionInfo[1].name .. " Valdrakken weekly", 1)
+    DragonflightHelperProfessionTodoItemMixin.Init(
+      self,
+      Quests[self.professionInfo[1].skillId],
+      self.professionInfo[1].name .. " Valdrakken weekly",
+      1
+    )
   else
-    self:Init({}, "No Valdrakken weekly for " .. self.professionInfo[1].name)
+    DragonflightHelperProfessionTodoItemMixin.Init(self, {}, "No Valdrakken weekly for " .. self.professionInfo[1].name)
     self:SetBackgroundColor(220, 220, 220, 0.3)
     self:SetForegroundColor(220, 220, 220, 0)
   end
@@ -30,11 +39,20 @@ DragonflightHelperValdrakkenTwoMixin = CreateFromMixins(DragonflightHelperProfes
 
 function DragonflightHelperValdrakkenTwoMixin:OnLoad()
   DragonflightHelperProfessionTodoItemMixin.OnLoad(self)
+end
+
+function DragonflightHelperValdrakkenTwoMixin:Init()
+  DragonflightHelperProfessionBaseMixin.Init(self)
 
   if self.hasSecondProfession and Quests[self.professionInfo[2].skillId] ~= nil then
-    self:Init(Quests[self.professionInfo[2].skillId], self.professionInfo[2].name .. " Valdrakken weekly", 1)
+    DragonflightHelperProfessionTodoItemMixin.Init(
+      self,
+      Quests[self.professionInfo[2].skillId],
+      self.professionInfo[2].name .. " Valdrakken weekly",
+      1
+    )
   else
-    self:Init({}, "No Valdrakken weekly for " .. self.professionInfo[2].name)
+    DragonflightHelperProfessionTodoItemMixin.Init(self, {}, "No Valdrakken weekly for " .. self.professionInfo[2].name)
     self:SetBackgroundColor(220, 220, 220, 0.3)
     self:SetForegroundColor(0, 0, 0, 0)
   end

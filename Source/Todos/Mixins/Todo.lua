@@ -44,7 +44,7 @@ end
 function DragonflightHelperTodoMixin:OnEvent(event, ...)
   DragonflightHelperStatusBarMixin.OnEvent(self, event, ...)
 
-  print(event, ...)
+  -- print(event, ...)
 
   if event == "QUEST_TURNED_IN" then
     self:Update()
@@ -66,34 +66,14 @@ function DragonflightHelperTodoMixin:Update()
   self:SetValue(self.completed)
 end
 
-ProfessionLookupMixin = {}
-
-function ProfessionLookupMixin:OnLoad()
-  local firstProfession, secondProfession = GetProfessions()
-
-  DragonflightHelper.Utilities.dump(firstProfession, "First Profession")
-
-  self.professionInfo = {
-    { name = "None", skillId = 0 },
-    { name = "None", skillId = 0 }
-  }
-  self.hasFirstProfession = firstProfession ~= nil
-  self.hasSecondProfession = secondProfession ~= nil
-
-  if self.hasFirstProfession ~= nil then
-    local name, _, _, _, _, _, skillLine = GetProfessionInfo(firstProfession)
-    self.professionInfo[1] = { name = name, skillId = skillLine }
-  end
-
-  if self.hasSecondProfession ~= nil then
-    local name, _, _, _, _, _, skillLine = GetProfessionInfo(secondProfession)
-    self.professionInfo[2] = { name = name, skillId = skillLine }
-  end
-end
-
-DragonflightHelperProfessionTodoItemMixin = CreateFromMixins(ProfessionLookupMixin, DragonflightHelperTodoMixin)
+DragonflightHelperProfessionTodoItemMixin = CreateFromMixins(DragonflightHelperProfessionBaseMixin,
+  DragonflightHelperTodoMixin)
 
 function DragonflightHelperProfessionTodoItemMixin:OnLoad()
-  ProfessionLookupMixin.OnLoad(self)
+  DragonflightHelperProfessionBaseMixin.OnLoad(self)
   DragonflightHelperTodoMixin.OnLoad(self)
+end
+
+function DragonflightHelperProfessionTodoItemMixin:Init(...)
+  DragonflightHelperTodoMixin.Init(self, ...)
 end

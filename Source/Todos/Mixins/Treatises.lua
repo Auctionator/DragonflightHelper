@@ -16,11 +16,19 @@ DragonflightHelperTreatiseOneMixin = CreateFromMixins(DragonflightHelperProfessi
 
 function DragonflightHelperTreatiseOneMixin:OnLoad()
   DragonflightHelperProfessionTodoItemMixin.OnLoad(self)
+end
+
+function DragonflightHelperTreatiseOneMixin:Init()
+  DragonflightHelperProfessionBaseMixin.Init(self)
 
   if self.hasFirstProfession then
-    self:Init(Treatises[self.professionInfo[1].skillId], self.professionInfo[1].name .. " Treatise")
+    DragonflightHelperProfessionTodoItemMixin.Init(
+      self,
+      Treatises[self.professionInfo[1].skillId],
+      self.professionInfo[1].name .. " Treatise"
+    )
   else
-    self:Init({}, self.professionInfo[1].name .. " Treatise")
+    DragonflightHelperProfessionTodoItemMixin.Init(self, {}, self.professionInfo[1].name .. " Treatise")
   end
 end
 
@@ -28,10 +36,18 @@ DragonflightHelperTreatiseTwoMixin = CreateFromMixins(DragonflightHelperProfessi
 
 function DragonflightHelperTreatiseTwoMixin:OnLoad()
   DragonflightHelperProfessionTodoItemMixin.OnLoad(self)
+end
+
+function DragonflightHelperTreatiseTwoMixin:Init()
+  DragonflightHelperProfessionBaseMixin.Init(self)
 
   if self.hasSecondProfession then
-    self:Init(Treatises[self.professionInfo[2].skillId], self.professionInfo[2].name .. " Treatise")
+    DragonflightHelperProfessionTodoItemMixin.Init(
+      self,
+      Treatises[self.professionInfo[2].skillId],
+      self.professionInfo[2].name .. " Treatise"
+    )
   else
-    self:Init({}, self.professionInfo[2].name .. " Treatise")
+    DragonflightHelperProfessionTodoItemMixin.Init(self, {}, self.professionInfo[2].name .. " Treatise")
   end
 end

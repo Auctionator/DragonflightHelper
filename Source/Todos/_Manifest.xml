@@ -3,5 +3,6 @@
   <Include file="Mixins\_Manifest.xml" />
 
   <Include file="Todos.xml" />
+  <Include file="ProfessionBaseFrame.xml" />
   <Include file="ProfessionTodos.xml" />
 </Ui>

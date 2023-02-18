@@ -1,5 +1,6 @@
 <!-- Source/Todos/Mixins directory manifest -->
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Script file="ProfessionBase.lua" />
   <Script file="Todo.lua" />
   <Script file="Todos.lua" />
   <Script file="ProfessionTodos.lua" />

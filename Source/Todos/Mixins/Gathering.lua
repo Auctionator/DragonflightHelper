@@ -32,13 +32,19 @@ DragonflightHelperGatheringOneMixin = CreateFromMixins(DragonflightHelperProfess
 
 function DragonflightHelperGatheringOneMixin:OnLoad()
   DragonflightHelperProfessionTodoItemMixin.OnLoad(self)
+end
+
+function DragonflightHelperGatheringOneMixin:Init()
+  DragonflightHelperProfessionBaseMixin.Init(self)
 
   if self.hasFirstProfession and Gathering[self.professionInfo[1].skillId] ~= nil then
-    self:Init(Gathering[self.professionInfo[1].skillId], GatheringItemNames[self.professionInfo[1].skillId])
+    DragonflightHelperProfessionTodoItemMixin.Init(self, Gathering[self.professionInfo[1].skillId],
+      GatheringItemNames[self.professionInfo[1].skillId])
   elseif self.hasFirstProfession and DirtOrPack[self.professionInfo[1].skillId] ~= nil then
-    self:Init(DirtOrPack[self.professionInfo[1].skillId], GatheringItemNames[self.professionInfo[1].skillId])
+    DragonflightHelperProfessionTodoItemMixin.Init(self, DirtOrPack[self.professionInfo[1].skillId],
+      GatheringItemNames[self.professionInfo[1].skillId])
   else
-    self:Init({}, "No gathering items for " .. self.professionInfo[1].name)
+    DragonflightHelperProfessionTodoItemMixin.Init(self, {}, "No gathering items for " .. self.professionInfo[1].name)
     self:SetBackgroundColor(220, 220, 220, 0.3)
     self:SetForegroundColor(220, 220, 220, 0)
   end
@@ -48,13 +54,19 @@ DragonflightHelperGatheringTwoMixin = CreateFromMixins(DragonflightHelperProfess
 
 function DragonflightHelperGatheringTwoMixin:OnLoad()
   DragonflightHelperProfessionTodoItemMixin.OnLoad(self)
+end
+
+function DragonflightHelperGatheringTwoMixin:Init()
+  DragonflightHelperProfessionBaseMixin.Init(self)
 
   if self.hasSecondProfession and Gathering[self.professionInfo[2].skillId] ~= nil then
-    self:Init(Gathering[self.professionInfo[2].skillId], GatheringItemNames[self.professionInfo[2].skillId])
+    DragonflightHelperProfessionTodoItemMixin.Init(self, Gathering[self.professionInfo[2].skillId],
+      GatheringItemNames[self.professionInfo[2].skillId])
   elseif self.hasSecondProfession and DirtOrPack[self.professionInfo[2].skillId] ~= nil then
-    self:Init(DirtOrPack[self.professionInfo[2].skillId], GatheringItemNames[self.professionInfo[2].skillId])
+    DragonflightHelperProfessionTodoItemMixin.Init(self, DirtOrPack[self.professionInfo[2].skillId],
+      GatheringItemNames[self.professionInfo[2].skillId])
   else
-    self:Init({}, "No gathering items for " .. self.professionInfo[2].name)
+    DragonflightHelperProfessionTodoItemMixin.Init(self, {}, "No gathering items for " .. self.professionInfo[2].name)
     self:SetBackgroundColor(220, 220, 220, 0.3)
     self:SetForegroundColor(0, 0, 0, 0)
   end

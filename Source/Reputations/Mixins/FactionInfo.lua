@@ -28,8 +28,6 @@ function DragonflightHelper.FactionInfo:new(o)
 end
 
 function DragonflightHelper.FactionInfo:init(factionId)
-  print("DragonflightHelper.FactionInfo:init(" .. factionId .. ")")
-
   local name, description, standingID, barMin, barMax, barValue, atWarWith, canToggleAtWar, isHeader, isCollapsed,
   hasRep, isWatched, isChild, factionID, hasBonusRepGain, canSetInactive = GetFactionInfoByID(factionId)
 

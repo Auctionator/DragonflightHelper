@@ -11,11 +11,15 @@ DragonflightHelperServicesOneMixin = CreateFromMixins(DragonflightHelperProfessi
 
 function DragonflightHelperServicesOneMixin:OnLoad()
   DragonflightHelperProfessionTodoItemMixin.OnLoad(self)
+end
+
+function DragonflightHelperServicesOneMixin:Init()
+  DragonflightHelperProfessionBaseMixin.Init(self)
 
   if self.hasFirstProfession and ServicesRequested[self.professionInfo[1].skillId] ~= nil then
-    self:Init(ServicesRequested[self.professionInfo[1].skillId])
+    DragonflightHelperProfessionTodoItemMixin.Init(self, ServicesRequested[self.professionInfo[1].skillId])
   else
-    self:Init({}, "No weekly for " .. self.professionInfo[1].name)
+    DragonflightHelperProfessionTodoItemMixin.Init(self, {}, "No weekly for " .. self.professionInfo[1].name)
     self:SetBackgroundColor(220, 220, 220, 0.3)
     self:SetForegroundColor(220, 220, 220, 0)
   end
@@ -25,11 +29,15 @@ DragonflightHelperServicesTwoMixin = CreateFromMixins(DragonflightHelperProfessi
 
 function DragonflightHelperServicesTwoMixin:OnLoad()
   DragonflightHelperProfessionTodoItemMixin.OnLoad(self)
+end
+
+function DragonflightHelperServicesTwoMixin:Init()
+  DragonflightHelperProfessionBaseMixin.Init(self)
 
   if self.hasSecondProfession and ServicesRequested[self.professionInfo[2].skillId] ~= nil then
-    self:Init(ServicesRequested[self.professionInfo[2].skillId])
+    DragonflightHelperProfessionTodoItemMixin.Init(self, ServicesRequested[self.professionInfo[2].skillId])
   else
-    self:Init({}, "No weekly for " .. self.professionInfo[2].name)
+    DragonflightHelperProfessionTodoItemMixin.Init(self, {}, "No weekly for " .. self.professionInfo[2].name)
     self:SetBackgroundColor(220, 220, 220, 0.3)
     self:SetForegroundColor(0, 0, 0, 0)
   end
