@@ -1,0 +1,10 @@
+<!-- Source/Todos/Mixins directory manifest -->
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Script file="Todo.lua" />
+  <Script file="Todos.lua" />
+  <Script file="ProfessionTodos.lua" />
+  <Script file="Treatises.lua" />
+  <Script file="ServicesRequested.lua" />
+  <Script file="Gathering.lua" />
+  <Script file="ValdrakkenQuests.lua" />
+</Ui>

@@ -1,29 +1,54 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
-  <Frame name="DragonflightHelperTodosFrame" mixin="DragonflightHelperTodosMixin" virtual="true">
-    <Scripts>
-      <OnLoad method="OnLoad" />
-    </Scripts>
+  <Frame name="DragonflightHelperTodosFrame" virtual="true">
+    <Size y="162" />
 
     <Frames>
-      <Frame parentKey="Container">
+      <Frame parentKey="Title" inherits="DragonflightHelperSectionTitleFrame">
+        <KeyValues>
+          <KeyValue key="title" value="Todos" type="string" />
+        </KeyValues>
+      </Frame>
+      <Frame parentKey="AidingTheAccord" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperAidingTheAccordMixin">
         <Anchors>
-          <Anchor point="TOPLEFT" relativeKey="$parent" relativePoint="TOPLEFT" />
-          <Anchor point="BOTTOMRIGHT" relativeKey="$parent" relativePoint="BOTTOMRIGHT" />
+          <Anchor point="TOPLEFT" relativeKey="$parent.Title" relativePoint="BOTTOMLEFT" />
         </Anchors>
-
-        <Layers>
-          <Layer level="ARTWORK">
-            <FontString parentKey="Title" inherits="GameFontHighlightSmall" justifyH="CENTER">
-              <Size y="25" />
-              <Anchors>
-                <Anchor point="TOPLEFT" relativeKey="$parent" relativePoint="TOPLEFT" />
-                <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />
-              </Anchors>
-            </FontString>
-          </Layer>
-        </Layers>
+      </Frame>
+      <Frame parentKey="RevivalCatalyst" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperRevivalCatalystMixin">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeKey="$parent.AidingTheAccord" relativePoint="BOTTOMLEFT" y="-2" />
+        </Anchors>
+      </Frame>
+      <Frame parentKey="Feast" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperFeastTodoMixin">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeKey="$parent.RevivalCatalyst" relativePoint="BOTTOMLEFT" y="-2" />
+        </Anchors>
+      </Frame>
+      <Frame parentKey="Siege" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperSiegeTodoMixin">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeKey="$parent.Feast" relativePoint="BOTTOMLEFT" y="-2" />
+        </Anchors>
+      </Frame>
+      <Frame parentKey="Hunts" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperHuntTodoMixin">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeKey="$parent.Siege" relativePoint="BOTTOMLEFT" y="-2" />
+        </Anchors>
+      </Frame>
+      <Frame parentKey="Flood" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperTrialOfFloodMixin">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeKey="$parent.Hunts" relativePoint="BOTTOMLEFT" y="-2" />
+        </Anchors>
+      </Frame>
+      <Frame parentKey="Elements" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperTrialOfElementsMixin">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeKey="$parent.Flood" relativePoint="BOTTOMLEFT" y="-2" />
+        </Anchors>
+      </Frame>
+      <Frame parentKey="WorldBosses" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperWorldBossesMixin">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeKey="$parent.Elements" relativePoint="BOTTOMLEFT" y="-2" />
+        </Anchors>
       </Frame>
     </Frames>
   </Frame>

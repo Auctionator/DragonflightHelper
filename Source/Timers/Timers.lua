@@ -18,7 +18,6 @@ function DragonflightHelperTimerMixin:InitializeTimes()
   self.times = {}
 
   for i = self.startTime, self.endTime, self.frequency do
-    print(self.title, i)
     table.insert(self.times, i * 60)
   end
 end
@@ -64,7 +63,7 @@ function DragonflightHelperTimerMixin:Update()
   end
 
   local thresholdTime = math.abs(self.nextTime - currentTime - (self.frequency * 60))
-  if thresholdTime < self.activeThreshold then
+  if thresholdTime <= self.activeThreshold then
     self:SetForegroundColor(self.thresholdColor.r, self.thresholdColor.g, self.thresholdColor.b)
     self:SetValue(self.activeThreshold - thresholdTime)
     self:SetDescription("Active - " .. SecondsToTime((self.activeThreshold - thresholdTime) * 60))

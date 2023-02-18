@@ -5,54 +5,37 @@
     <Size y="55" />
 
     <Frames>
-      <Frame parentKey="Container">
-        <Size y="25" />
-
+      <Frame parentKey="Title" inherits="DragonflightHelperSectionTitleFrame">
+        <KeyValues>
+          <KeyValue key="title" value="Timers" type="string" />
+        </KeyValues>
+      </Frame>
+      <Frame parentKey="FeastTimer" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperFeastTimerMixin">
+        <KeyValues>
+          <KeyValue key="title" value="Feast Timer" type="string" />
+          <KeyValue key="startTime" value="1" type="number" />
+          <KeyValue key="endTime" value="24" type="number" />
+          <KeyValue key="frequency" value="1.5" type="number" />
+          <KeyValue key="duration" value="15" type="number" />
+          <KeyValue key="colorIndex" value="3" type="number" />
+          <KeyValue key="activeThreshold" value="15" type="number" />
+        </KeyValues>
         <Anchors>
-          <Anchor point="TOPLEFT" relativeKey="$parent" relativePoint="TOPLEFT" />
-          <Anchor point="BOTTOMRIGHT" relativeKey="$parent" relativePoint="BOTTOMRIGHT" />
+          <Anchor point="TOPLEFT" relativeKey="$parent.Title" relativePoint="BOTTOMLEFT" />
         </Anchors>
-        <Layers>
-          <Layer level="ARTWORK">
-            <FontString parentKey="Title" inherits="GameFontHighlightSmall" justifyH="CENTER" text="Timers">
-              <Size y="25" />
-              <Anchors>
-                <Anchor point="TOPLEFT" relativeKey="$parent" relativePoint="TOPLEFT" />
-                <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />
-              </Anchors>
-            </FontString>
-          </Layer>
-        </Layers>
-
-        <Frames>
-          <Frame parentKey="FeastTimer" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperFeastTimerMixin">
-            <KeyValues>
-              <KeyValue key="title" value="Feast Timer" type="string" />
-              <KeyValue key="startTime" value="1" type="number" />
-              <KeyValue key="endTime" value="24" type="number" />
-              <KeyValue key="frequency" value="1.5" type="number" />
-              <KeyValue key="duration" value="15" type="number" />
-              <KeyValue key="colorIndex" value="3" type="number" />
-              <KeyValue key="activeThreshold" value="15" type="number" />
-            </KeyValues>
-            <Anchors>
-              <Anchor point="TOPLEFT" relativeKey="$parent.Title" relativePoint="BOTTOMLEFT" />
-            </Anchors>
-          </Frame>
-          <Frame parentKey="SiegeTimer" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperSiegeTimerMixin">
-            <KeyValues>
-              <KeyValue key="title" value="Siege Timer" type="string" />
-              <KeyValue key="startTime" value="0" type="number" />
-              <KeyValue key="endTime" value="23" type="number" />
-              <KeyValue key="frequency" value="2" type="number" />
-              <KeyValue key="colorIndex" value="4" type="number" />
-              <KeyValue key="activeThreshold" value="15" type="number" />
-            </KeyValues>
-            <Anchors>
-              <Anchor point="TOPLEFT" relativeKey="$parent.FeastTimer" relativePoint="BOTTOMLEFT" y="-2" />
-            </Anchors>
-          </Frame>
-        </Frames>
+      </Frame>
+      <Frame parentKey="SiegeTimer" inherits="DragonflightHelperStatusBarFrame" mixin="DragonflightHelperSiegeTimerMixin">
+        <KeyValues>
+          <KeyValue key="title" value="Siege Timer" type="string" />
+          <KeyValue key="startTime" value="0" type="number" />
+          <KeyValue key="endTime" value="23" type="number" />
+          <KeyValue key="frequency" value="2" type="number" />
+          <KeyValue key="colorIndex" value="4" type="number" />
+          <KeyValue key="activeThreshold" value="15" type="number" />
+        </KeyValues>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeKey="$parent.FeastTimer" relativePoint="BOTTOMLEFT" y="-2" />
+        </Anchors>
       </Frame>
     </Frames>
   </Frame>

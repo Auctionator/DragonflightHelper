@@ -52,6 +52,8 @@
     "ITEM_QUALITY_COLORS",
     "GetGameTime",
     "SecondsToTime",
-    "CreateFromMixins"
+    "CreateFromMixins",
+    "GetProfessions",
+    "GetProfessionInfo"
   ]
 }

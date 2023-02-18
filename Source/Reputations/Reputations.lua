@@ -24,8 +24,8 @@ local MAJOR_FACTIONS = {
 function DragonflightHelperReputationsMixin:OnLoad()
   -- print("DragonflightHelperReputationsMixin:OnLoad()")
 
-  self.lastChild = self.Container.Title
-  self.adjustedHeight = self.Container.Title:GetHeight()
+  self.lastChild = self.Title
+  self.adjustedHeight = self.Title:GetHeight()
 
   for _, factionSettings in ipairs(MAJOR_FACTIONS) do
     local child = CreateFrame("FRAME", "DFH_Rep_" .. factionSettings.factionIndex, self,
@@ -33,8 +33,8 @@ function DragonflightHelperReputationsMixin:OnLoad()
     child:Init(factionSettings)
     child:SetBackgroundColor(220, 220, 200, 0.1)
 
-    if self.lastChild == nil then
-      child:SetPoint("TOPLEFT", self.Container, "TOPLEFT", 2)
+    if self.lastChild == self.Title then
+      child:SetPoint("TOPLEFT", self.Title, "BOTTOMLEFT")
     else
       child:SetPoint("TOPLEFT", self.lastChild, "BOTTOMLEFT", 0, -2)
     end
@@ -44,5 +44,4 @@ function DragonflightHelperReputationsMixin:OnLoad()
   end
 
   self:SetHeight(self.adjustedHeight + 16)
-  self.Container:SetHeight(self.adjustedHeight + 16)
 end
