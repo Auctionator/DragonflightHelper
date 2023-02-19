@@ -3,7 +3,7 @@
 ..\FrameXML\UI.xsd">
 
   <Frame name="DragonflightHelperFrame" mixin="DragonflightHelperMixin" setAllPoints="true" movable="true" enableMouse="true" useParentLevel="true" parent="UIParent">
-    <Size x="200" y="630" />
+    <Size x="200" y="635" />
 
     <Anchors>
       <Anchor point="CENTER" />
@@ -33,7 +33,7 @@
           <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />
         </Anchors>
       </Frame>
-      <Frame parentKey="Todos" inherits="DragonflightHelperTodosFrame">
+      <Frame parentKey="Todos" inherits="DFH_TodosFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.Timers" relativePoint="BOTTOMLEFT" />
           <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />

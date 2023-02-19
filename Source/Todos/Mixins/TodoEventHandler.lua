@@ -1,6 +1,6 @@
-DFH_ProfessionEventHandler = {}
+DFH_TodoEventHandler = {}
 
-function DFH_ProfessionEventHandler:OnShow()
+function DFH_TodoEventHandler:OnShow()
   FrameUtil.RegisterFrameForEvents(self, {
     "ENCOUNTER_LOOT_RECEIVED",
     "QUEST_TURNED_IN",
@@ -8,7 +8,7 @@ function DFH_ProfessionEventHandler:OnShow()
   })
 end
 
-function DFH_ProfessionEventHandler:OnHide()
+function DFH_TodoEventHandler:OnHide()
   FrameUtil.UnregisterFrameForEvents(self, {
     "ENCOUNTER_LOOT_RECEIVED",
     "QUEST_TURNED_IN",
@@ -16,11 +16,9 @@ function DFH_ProfessionEventHandler:OnHide()
   })
 end
 
-function DFH_ProfessionEventHandler:OnEvent(event, ...)
-  print("DFH_ProfessionEventHandler:OnEvent()", event, ...)
-
+function DFH_TodoEventHandler:OnEvent(event, ...)
   if self.Update == nil then
-    print("DFH_ProfessionEventHandler: No Update method found for this entry")
+    print("DFH_TodoEventHandler: No Update method found for this entry")
     return
   end
 

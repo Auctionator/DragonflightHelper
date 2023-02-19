@@ -31,24 +31,38 @@ function DFH_ProfessionLoader:InitializeProfessions()
 
   local firstProfession, secondProfession = GetProfessions()
 
-  self.professionInfo = {
-    { name = "None", skillId = 0, professionId = firstProfession,  initialized = firstProfession ~= nil },
-    { name = "None", skillId = 0, professionId = secondProfession, initialized = secondProfession ~= nil }
-  }
-
-  if self:hasProfession(1) then
-    local name, _, _, _, _, _, skillLine = GetProfessionInfo(firstProfession)
-    self.professionInfo[1].name = name
-    self.professionInfo[1].skillId = skillLine
-  end
-
-  if self:hasProfession(2) then
-    local name, _, _, _, _, _, skillLine = GetProfessionInfo(secondProfession)
-    self.professionInfo[2].name = name
-    self.professionInfo[2].skillId = skillLine
-  end
+  self.professionInfo = {}
+  self:initializeProfession(firstProfession, 1)
+  self:initializeProfession(secondProfession, 2)
 
   self:Update()
+end
+
+function DFH_ProfessionLoader:initializeProfession(professionIdentifier, index)
+  if professionIdentifier == nil then
+    self.professionInfo[index] = {
+      name = "No profession " .. index,
+      initialized = true,
+      skillId = 0,
+      rank = 0
+    }
+
+    return
+  end
+
+  local name, texture, rank, maxRank, numSpells, spellOffset, skillLine, rankModifier, specializationIndex, specializationOffset, skillLineName =
+      GetProfessionInfo(professionIdentifier);
+
+  print(name)
+
+  self.professionInfo[index] = {
+    name = name,
+    skillLineName = skillLineName,
+    initialized = true,
+    skillId = skillLine,
+    rank = rank,
+    texture = texture
+  }
 end
 
 function DFH_ProfessionLoader:hasProfession(professionIndex)

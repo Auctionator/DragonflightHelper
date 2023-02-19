@@ -1,4 +1,4 @@
-DFH_ProfessionUpdate = {}
+DFH_ProfessionUpdate = CreateFromMixins(DFH_GenericUpdate)
 
 local ProfessionQuests = {
   Treatise = {
@@ -28,8 +28,21 @@ local ProfessionQuests = {
     [165] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66384, 66385 } }, -- Leatherworking
     [197] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66386, 66387 } }, -- Tailoring
   },
-  Services = {
-    title = "Profession Services",
+  ValdrakkenRabul = {
+    -- Like treatises; figure out quest ID
+  },
+  -- Crafting professions get: (minimum profession level requirement is 25)
+  -- * 1 weekly “fulfill x craft orders” quest from the NPC near crafting order placing area (Azley)
+  -- * 1 weekly “loot x items from y mobs” quest also from NPCs near crafting order placing area and (Dhurrel/Temnaayu)
+  -- * 1 weekly “craft x low level items and turn in” quest from that crafting profession’s trainer.
+
+  -- Gathering professions get:
+  -- * 6 profession knowledge items as random drops while gathering, as well as 1 epic gathering drop.
+  -- * 1 weekly “gather x items at y quality” quest near the crafting order area and
+  -- * 1 weekly “gather x items” quest from that gathering profession’s trainer.
+  ValdrakkenServicesAzley = {
+    title = "Azley <Artisan's Consortium>",
+    description = "Weekly Services Requested'",
     [165] = { quests = { 70594 } }, -- Leatherworking
     [197] = { quests = { 70595 } }, -- Tailoring
     [755] = { quests = { 70593 } }, -- Jewelcrafting
@@ -37,21 +50,97 @@ local ProfessionQuests = {
     [202] = { quests = { 70591 } }, -- Engineering
     [773] = { quests = { 70592 } }, -- Inscription
   },
+  ValdrakkenTrainers = {
+    [171] = { title = "Conflago <Trainer>", quests = { 70532, 70533, 70530, 70531 }, completionCount = 1 },
+    [164] = { title = "Metalshaper Kuroko <Trainer>", quests = { 70234, 70233, 70235, 70211 }, completionCount = 1 },
+    [333] = { title = "Soragosa <Trainer>", quests = { 72175, 72173, 72172, 72155 }, completionCount = 1 },
+    [202] = { title = "Clinkyclick Shatterboom <Trainer>", quests = { 70540, 70539, 70545, 70557 }, completionCount = 1 },
+    [182] = { title = "Agrikus <Trainer>", quests = { 70614, 70613, 70616 }, completionCount = 1 },
+    [773] = { title = "Talendara <Trainer>", quests = { 70561, 70558, 70559, 70560 }, completionCount = 1 },
+    [755] = { title = "Tuluradormi <Trainer>", quests = { 70565, 70564, 70563, 70562 }, completionCount = 1 },
+    [165] = { title = "Hideshaper Koruz <Trainer>", quests = { 70571, 70569, 70568, 70567 }, completionCount = 1 },
+    [186] = { title = "Sekita the Burrower <Trainer>", quests = { 72156, 70617, 70618, 72157 }, completionCount = 1 },
+    [393] = { title = "Ralathor the Rugged <Trainer>", quests = { 72158, 70619, 72159, 70620 }, completionCount = 1 },
+    [197] = { title = "Threadfinder Fulafong <Trainer>", quests = { 70587, 70586, 70572, 70582 }, completionCount = 1 },
+  },
   Valdrakken = {
-    title = "Valdrakken Quests",
-    [171] = { completionCount = 1, quests = { 70530, 66940, 66938, 72427, 70532, 70531, 70533, 66937 } }, -- Alchemy
-    [164] = { completionCount = 1, quests = { 66941, 70233, 66517, 66897, 70235, 72398, 70234, 70211 } }, -- Blacksmithing
-    [333] = { completionCount = 1, quests = { 66884, 66900, 66935, 72155, 72172, 72173, 72175, 72423 } }, -- Enchanting
-    [202] = { completionCount = 1, quests = { 72396, 70545, 66891, 70540, 66890, 66942, 70557, 70539 } }, -- Engineering
-    [182] = { completionCount = 1, quests = { 70614, 70613, 70616 } }, -- Herbalism
-    [773] = { completionCount = 1, quests = { 66943, 66944, 70559, 70561, 70558, 70560, 66945, 72438 } }, -- Inscription
-    [755] = { completionCount = 1, quests = { 66516, 70565, 66950, 66949, 72428, 70564, 70563, 70562 } }, -- Jewelcrafting
-    [165] = { completionCount = 1, quests = { 66364, 66951, 70569, 70568, 70567, 70571, 72407, 66363 } }, -- Leatherworking
-    [186] = { completionCount = 1, quests = { 70617, 70618, 72157, 72156 } }, -- Mining
-    [393] = { completionCount = 1, quests = { 70620, 72159, 70619 } }, -- Skinning
-    [197] = { completionCount = 1, quests = { 72410, 70587, 66952, 70586, 70572, 70582, 66953, 66899 } }, -- Tailoring
+    title = "Valdrakken Weekly Profession",
+    -- Alchemy
+    [171] = { completionCount = 1, quests = {
+      -- Dhurrel <Trade Liaison>
+      72427, 66940, 66938,
+      -- Dothenos <Trade Coordinator>
+      66937
+    } },
+    -- Leatherworking
+    [165] = { completionCount = 1, quests = {
+      -- Dhurrel <Trade Liaison>
+      66363,
+      -- Temnaayu <Trade Negotiator>
+      66951, 72407, 66364
+    } },
+    -- Blacksmithing
+    [164] = { completionCount = 1, quests = {
+      -- Dhurrel <Trade Liaison>
+      66517, 66897, 66941
+    } },
+    -- Jewelcrafting
+    [755] = { completionCount = 1, quests = {
+      -- Temnaayu <Trade Negotiator>
+      66950, 66949,
+      -- Gnoklin Quirkcoil <Requisitions Officer>
+      72428, 66516
+    } },
+    -- Enchanting
+    [333] = { completionCount = 1, quests = {
+      -- Temnaayu <Trade Negotiator>
+      66900, 66884, 72423,
+      -- Gnoklin Quirkcoil <Requisitions Officer>
+      66935
+    } },
+    -- Tailoring
+    [197] = { completionCount = 1, quests = {
+      -- Dothenos <Trade Coordinator>
+      66952,
+      -- Gnoklin Quirkcoil <Requisitions Officer>
+      72410
+    } },
+    -- Engineering
+    [202] = { completionCount = 1, quests = {
+      -- Dothenos <Trade Coordinator>
+      72396, 66890,
+      -- Gnoklin Quirkcoil <Requisitions Officer>
+      66942, 66891
+    } },
+    -- Inscription
+    [773] = { completionCount = 1, quests = {
+      -- Dothenos <Trade Coordinator>
+      66945, 72438, 66943,
+      -- Gnoklin Quirkcoil <Requisitions Officer>
+      66944
+    } },
+  },
+  WeeklyDrops = {
+    title = "Weekly Mob Drops",
+    [171] = { quests = { 70511, 70504 } }, -- Alchemy
+    [165] = { quests = { 70523, 70522 } }, -- Leatherworking
+    [197] = { quests = { 70524, 70525 } }, -- Tailoring
+    [755] = { quests = { 70521, 70520 } }, -- Jewelcrafting
+    [164] = { quests = { 70513, 70512 } }, -- Blacksmithing
+    [202] = { quests = { 70516, 70517 } }, -- Engineering
+    [773] = { quests = { 70518, 70519 } }, -- Inscription
+    [333] = { quests = { 70514, 70515 } }, -- Enchanting
   }
 }
+
+function DFH_ProfessionUpdate:CollapseFrame()
+  self:Hide()
+  self:SetHeight(1)
+
+  -- This should be "TOPLEFT"
+  local point, relativeTo, relativePoint = self:GetPoint()
+  self:SetPoint(point, relativeTo, relativePoint, 0, 1)
+end
 
 function DFH_ProfessionUpdate:Update()
   print("DFH_ProfessionUpdate:Update()")
@@ -69,49 +158,20 @@ function DFH_ProfessionUpdate:Update()
 
   if self.questTypeKey == nil then
     print("[INCORRECT USAGE] DFH_ProfessionUpdate: A questTypeKey object must be initialized")
+    self:SetForegroundColor(0, 0, 0, 0)
     return
   end
 
   if ProfessionQuests[self.questTypeKey] == nil then
-    self:SetTitle("No " .. self:getName(self.professionIndex) .. " " .. self.questTypeKey .. " quests")
-    self:SetBackgroundColor(220, 220, 220, 0.3)
-    self:SetForegroundColor(0, 0, 0, 0)
+    self:CollapseFrame()
     return
   end
 
   if ProfessionQuests[self.questTypeKey][self:getId(self.professionIndex)] == nil then
-    self:SetTitle(
-      "No " .. self:getName(self.professionIndex) .. " " .. ProfessionQuests[self.questTypeKey].title
-    )
-    self:SetBackgroundColor(220, 220, 220, 0.3)
-    self:SetForegroundColor(0, 0, 0, 0)
+    self:CollapseFrame()
     return
   end
 
-  local completed = 0
-  local entry = ProfessionQuests[self.questTypeKey][self:getId(self.professionIndex)]
-  local completionCount = entry.completionCount
-
-  if completionCount == nil then
-    completionCount = #entry.quests
-  end
-
-  for _, questId in ipairs(entry.quests) do
-    if C_QuestLog.IsQuestFlaggedCompleted(questId) then
-      completed = completed + 1
-    end
-  end
-
-  self:SetMinMaxValues(0, completionCount)
-
-  if ProfessionQuests[self.questTypeKey][self:getId(self.professionIndex)].title ~= nil then
-    self:SetTitle(ProfessionQuests[self.questTypeKey][self:getId(self.professionIndex)].title)
-  elseif ProfessionQuests[self.questTypeKey].title ~= nil then
-    self:SetTitle(ProfessionQuests[self.questTypeKey].title .. " (" .. self:getName(self.professionIndex) .. ")")
-  else
-    self:SetTitle(C_QuestLog.GetTitleForQuestID(entry.quests[1]))
-  end
-
-  self:SetDescription(completed .. " / " .. completionCount)
-  self:SetValue(completed)
+  local entry = ProfessionQuests[self.questTypeKey]
+  DFH_GenericUpdate.update(self, entry[self:getId(self.professionIndex)], entry.title)
 end

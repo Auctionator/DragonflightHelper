@@ -36,6 +36,7 @@ function DragonflightHelperTimerMixin:OnHide()
 end
 
 function DragonflightHelperTimerMixin:FindNextTime()
+  -- print("DragonflightHelperTimerMixin:FindNextTime()")
   local hour, minute = GetGameTime()
   local compareValue = hour * 60 + minute
 
@@ -46,10 +47,13 @@ function DragonflightHelperTimerMixin:FindNextTime()
       self.nextTime = self.times[i]
     end
   end
+  -- print("After loop, ", self.nextTime)
 
-  if self.nextTime > self.times[#self.times] then
+  if self.nextTime >= self.times[#self.times] then
     self.nextTime = self.times[1]
   end
+
+  -- print("After check", self.nextTime)
 end
 
 function DragonflightHelperTimerMixin:Update()
@@ -61,6 +65,10 @@ function DragonflightHelperTimerMixin:Update()
   end
 
   local thresholdTime = math.abs(self.nextTime - currentTime - (self.frequency * 60))
+  if thresholdTime >= 1440 then
+    thresholdTime = thresholdTime - 1440
+  end
+
   if thresholdTime <= self.activeThreshold then
     self:SetForegroundColor(self.thresholdColor.r, self.thresholdColor.g, self.thresholdColor.b)
     self:SetMinMaxValues(0, self.activeThreshold)

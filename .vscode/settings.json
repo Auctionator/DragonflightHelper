@@ -57,6 +57,8 @@
     "GetProfessionInfo",
     "GetFactionInfoByID",
     "FrameUtil",
-    "C_CurrencyInfo"
+    "C_CurrencyInfo",
+    "pack",
+    "C_TradeSkillUI"
   ]
 }
