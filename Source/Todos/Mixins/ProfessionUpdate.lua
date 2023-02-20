@@ -1,36 +1,52 @@
 DFH_ProfessionUpdate = CreateFromMixins(DFH_GenericUpdate)
 
+local SkillIds = {
+  Alchemy = 171,
+  Blacksmithing = 164,
+  Enchanting = 333,
+  Engineering = 202,
+  Herbalism = 182,
+  Inscription = 773,
+  Jewelcrafting = 755,
+  Leatherworking = 165,
+  Mining = 186,
+  Skinning = 393,
+  Tailoring = 197
+}
+
 local ProfessionQuests = {
   Treatise = {
     title = "Draconic Treatise",
-    [171] = { quests = { 74108 } }, -- Alchemy
-    [164] = { quests = { 74109 } }, -- Blacksmithing
-    [333] = { quests = { 74110 } }, -- Enchanting
-    [202] = { quests = { 74111 } }, -- Engineering
-    [182] = { quests = { 74107 } }, -- Herbalism
-    [773] = { quests = { 74105 } }, -- Inscription
-    [755] = { quests = { 74112 } }, -- Jewelcrafting
-    [165] = { quests = { 74113 } }, -- Leatherworking
-    [186] = { quests = { 74106 } }, -- Mining
-    [393] = { quests = { 74114 } }, -- Skinning
-    [197] = { quests = { 74115 } }, -- Tailoring
+    [SkillIds.Alchemy] = { quests = { 74108 } },
+    [SkillIds.Blacksmithing] = { quests = { 74109 } },
+    [SkillIds.Enchanting] = { quests = { 74110 } },
+    [SkillIds.Engineering] = { quests = { 74111 } },
+    [SkillIds.Herbalism] = { quests = { 74107 } },
+    [SkillIds.Inscription] = { quests = { 74105 } },
+    [SkillIds.Jewelcrafting] = { quests = { 74112 } },
+    [SkillIds.Leatherworking] = { quests = { 74113 } },
+    [SkillIds.Mining] = { quests = { 74106 } },
+    [SkillIds.Skinning] = { quests = { 74114 } },
+    [SkillIds.Tailoring] = { quests = { 74115 } },
   },
   Gathering = {
-    [182] = { title = "Dreambloom", quests = { 71857, 71858, 71859, 71860, 71861, 71864 } }, -- Herbalism
-    [186] = { title = "Iridescent Ore", quests = { 72160, 72161, 72162, 72163, 72164, 72165 } }, -- Mining
-    [393] = { title = "Curious Hide", quests = { 70381, 70383, 70384, 70385, 70386, 70389 } }, -- Skinning
-    [171] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66373, 66374 }, items = { 193891, 193897 } }, -- Alchemy
-    [164] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66381, 66382 } }, -- Blacksmithing
-    -- TODO Enchanting items may be in wrong order; wasnt paying attention to drop this week
-    [333] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66377, 66378 }, items = { 193900, 193901 } }, -- Enchanting
-    [202] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66379, 66380 } }, -- Engineering
-    [773] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66375, 66376 } }, -- Inscription
-    [755] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66388, 66389 } }, -- Jewelcrafting
-    [165] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66384, 66385 } }, -- Leatherworking
-    [197] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66386, 66387 }, items = { 193899, 193898 } }, -- Tailoring
+    -- TODO Guessed on order of these relative to quests... (I assume they match in increasing order)
+    [SkillIds.Herbalism] = { title = "Dreambloom", quests = { 71857, 71858, 71859, 71860, 71861, 71864 } },
+    [SkillIds.Mining] = { title = "Iridescent Ore", quests = { 72160, 72161, 72162, 72163, 72164, 72165 } },
+    [SkillIds.Skinning] = { title = "Curious Hide", quests = { 70381, 70383, 70384, 70385, 70386, 70389 } },
+    [SkillIds.Alchemy] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66373, 66374 }, items = { 193891, 193897 } },
+    [SkillIds.Blacksmithing] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66381, 66382 }, items = { 192131, 192132 } },
+    [SkillIds.Enchanting] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66377, 66378 }, items = { 193900, 193901 } },
+    [SkillIds.Engineering] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66379, 66380 }, items = { 193902, 193903 } },
+    [SkillIds.Inscription] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66375, 66376 }, items = { 193904, 193905 } },
+    [SkillIds.Jewelcrafting] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66388, 66389 }, items = { 193907, 193909 } },
+    [SkillIds.Leatherworking] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66384, 66385 }, items = { 193910, 193913 } },
+    [SkillIds.Tailoring] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66386, 66387 }, items = { 193899, 193898 } },
   },
   ValdrakkenRabul = {
-    -- Like treatises; figure out quest ID
+    title = "Rabul <Artisan's Consortium Quartermaster>",
+    -- Like treatises only single use (i.e. not weekly for future me!); figure out quest ID
+    [SkillIds.Herbalism] = { quests = { 71897 }, items = { 200980 } }
   },
   -- Crafting professions get: (minimum profession level requirement is 25)
   -- * 1 weekly “fulfill x craft orders” quest from the NPC near crafting order placing area (Azley)
@@ -44,77 +60,77 @@ local ProfessionQuests = {
   ValdrakkenServicesAzley = {
     title = "Azley <Artisan's Consortium>",
     description = "Weekly Services Requested'",
-    [165] = { quests = { 70594 } }, -- Leatherworking
-    [197] = { quests = { 70595 } }, -- Tailoring
-    [755] = { quests = { 70593 } }, -- Jewelcrafting
-    [164] = { quests = { 70589 } }, -- Blacksmithing
-    [202] = { quests = { 70591 } }, -- Engineering
-    [773] = { quests = { 70592 } }, -- Inscription
+    [SkillIds.Leatherworking] = { quests = { 70594 } },
+    [SkillIds.Tailoring] = { quests = { 70595 } },
+    [SkillIds.Jewelcrafting] = { quests = { 70593 } },
+    [SkillIds.Blacksmithing] = { quests = { 70589 } },
+    [SkillIds.Engineering] = { quests = { 70591 } },
+    [SkillIds.Inscription] = { quests = { 70592 } },
   },
   ValdrakkenTrainers = {
-    [171] = { title = "Conflago <Trainer>", quests = { 70532, 70533, 70530, 70531 }, completionCount = 1 },
-    [164] = { title = "Metalshaper Kuroko <Trainer>", quests = { 70234, 70233, 70235, 70211 }, completionCount = 1 },
-    [333] = { title = "Soragosa <Trainer>", quests = { 72175, 72173, 72172, 72155 }, completionCount = 1 },
-    [202] = { title = "Clinkyclick Shatterboom <Trainer>", quests = { 70540, 70539, 70545, 70557 }, completionCount = 1 },
-    [182] = { title = "Agrikus <Trainer>", quests = { 70614, 70613, 70616 }, completionCount = 1 },
-    [773] = { title = "Talendara <Trainer>", quests = { 70561, 70558, 70559, 70560 }, completionCount = 1 },
-    [755] = { title = "Tuluradormi <Trainer>", quests = { 70565, 70564, 70563, 70562 }, completionCount = 1 },
-    [165] = { title = "Hideshaper Koruz <Trainer>", quests = { 70571, 70569, 70568, 70567 }, completionCount = 1 },
-    [186] = { title = "Sekita the Burrower <Trainer>", quests = { 72156, 70617, 70618, 72157 }, completionCount = 1 },
-    [393] = { title = "Ralathor the Rugged <Trainer>", quests = { 72158, 70619, 72159, 70620 }, completionCount = 1 },
-    [197] = { title = "Threadfinder Fulafong <Trainer>", quests = { 70587, 70586, 70572, 70582 }, completionCount = 1 },
+    [SkillIds.Alchemy] = { title = "Conflago <Trainer>", quests = { 70532, 70533, 70530, 70531 }, completionCount = 1 },
+    [SkillIds.Blacksmithing] = { title = "Metalshaper Kuroko <Trainer>", quests = { 70234, 70233, 70235, 70211 }, completionCount = 1 },
+    [SkillIds.Enchanting] = { title = "Soragosa <Trainer>", quests = { 72175, 72173, 72172, 72155 }, completionCount = 1 },
+    [SkillIds.Engineering] = { title = "Clinkyclick Shatterboom <Trainer>", quests = { 70540, 70539, 70545, 70557 }, completionCount = 1 },
+    [SkillIds.Herbalism] = { title = "Agrikus <Trainer>", quests = { 70614, 70613, 70616 }, completionCount = 1 },
+    [SkillIds.Inscription] = { title = "Talendara <Trainer>", quests = { 70561, 70558, 70559, 70560 }, completionCount = 1 },
+    [SkillIds.Jewelcrafting] = { title = "Tuluradormi <Trainer>", quests = { 70565, 70564, 70563, 70562 }, completionCount = 1 },
+    [SkillIds.Leatherworking] = { title = "Hideshaper Koruz <Trainer>", quests = { 70571, 70569, 70568, 70567 }, completionCount = 1 },
+    [SkillIds.Mining] = { title = "Sekita the Burrower <Trainer>", quests = { 72156, 70617, 70618, 72157 }, completionCount = 1 },
+    [SkillIds.Skinning] = { title = "Ralathor the Rugged <Trainer>", quests = { 72158, 70619, 72159, 70620 }, completionCount = 1 },
+    [SkillIds.Tailoring] = { title = "Threadfinder Fulafong <Trainer>", quests = { 70587, 70586, 70572, 70582 }, completionCount = 1 },
   },
   Valdrakken = {
     title = "Valdrakken Weekly Profession",
-    -- Alchemy
-    [171] = { completionCount = 1, quests = {
+
+    [SkillIds.Alchemy] = { completionCount = 1, quests = {
       -- Dhurrel <Trade Liaison>
       72427, 66940, 66938,
       -- Dothenos <Trade Coordinator>
       66937
     } },
-    -- Leatherworking
-    [165] = { completionCount = 1, quests = {
+
+    [SkillIds.Leatherworking] = { completionCount = 1, quests = {
       -- Dhurrel <Trade Liaison>
       66363,
       -- Temnaayu <Trade Negotiator>
       66951, 72407, 66364
     } },
-    -- Blacksmithing
-    [164] = { completionCount = 1, quests = {
+
+    [SkillIds.Blacksmithing] = { completionCount = 1, quests = {
       -- Dhurrel <Trade Liaison>
       66517, 66897, 66941
     } },
-    -- Jewelcrafting
-    [755] = { completionCount = 1, quests = {
+
+    [SkillIds.Jewelcrafting] = { completionCount = 1, quests = {
       -- Temnaayu <Trade Negotiator>
       66950, 66949,
       -- Gnoklin Quirkcoil <Requisitions Officer>
       72428, 66516
     } },
-    -- Enchanting
-    [333] = { completionCount = 1, quests = {
+
+    [SkillIds.Enchanting] = { completionCount = 1, quests = {
       -- Temnaayu <Trade Negotiator>
       66900, 66884, 72423,
       -- Gnoklin Quirkcoil <Requisitions Officer>
       66935
     } },
-    -- Tailoring
-    [197] = { completionCount = 1, quests = {
+
+    [SkillIds.Tailoring] = { completionCount = 1, quests = {
       -- Dothenos <Trade Coordinator>
       66952,
       -- Gnoklin Quirkcoil <Requisitions Officer>
       72410
     } },
-    -- Engineering
-    [202] = { completionCount = 1, quests = {
+
+    [SkillIds.Engineering] = { completionCount = 1, quests = {
       -- Dothenos <Trade Coordinator>
       72396, 66890,
       -- Gnoklin Quirkcoil <Requisitions Officer>
       66942, 66891
     } },
-    -- Inscription
-    [773] = { completionCount = 1, quests = {
+
+    [SkillIds.Inscription] = { completionCount = 1, quests = {
       -- Dothenos <Trade Coordinator>
       66945, 72438, 66943,
       -- Gnoklin Quirkcoil <Requisitions Officer>
@@ -123,34 +139,21 @@ local ProfessionQuests = {
   },
   WeeklyDrops = {
     title = "Weekly Mob Drops",
-    -- Alchemy
-    [171] = {
+
+    [SkillIds.Alchemy] = {
       quests = { 70511, 70504 },
       items = { 198964, 198963 },
       descriptions = { "/way #2022 52.2 56.2 Encroaching Downpour", "/way #2024 17.78 39.22 Brakenhide Rotflinger" }
     },
-    [165] = { quests = { 70523, 70522 }, items = {} }, -- Leatherworking
-    [197] = { quests = { 70524, 70525 }, items = { 198977, 198978 }, descriptions = { "/way Ohn'ahran Plains 84 56", "/way The Azure Span:Dragon Isles 33.84 47.22" } }, -- Tailoring
-    [755] = { quests = { 70521, 70520 }, items = {} }, -- Jewelcrafting
-    [164] = { quests = { 70513, 70512 }, items = {} }, -- Blacksmithing
-    [202] = { quests = { 70516, 70517 }, items = {} }, -- Engineering
-    [773] = { quests = { 70518, 70519 }, items = {} }, -- Inscription
-    [333] = { quests = { 70514, 70515 }, items = { 198967, 198968 }, descriptions = { " /way #2024 39.2 64.0 Mana Wyrmling, Stabilized Elementals", "/way #2025 53.2 65.6 Earthshaker Marauder" } }, -- Enchanting
+    [SkillIds.Leatherworking] = { quests = { 70523, 70522 }, items = { 198975, 198976 }, descriptions = { "/way 80 24 Primal Proto-Drakes", "/way The Azure Span:Dragon Isles 38 31 Vorquin Farm Spot" } },
+    [SkillIds.Tailoring] = { quests = { 70524, 70525 }, items = { 198977, 198978 }, descriptions = { "/way Ohn'ahran Plains 84 56", "/way The Azure Span:Dragon Isles 33.84 47.22" } },
+    [SkillIds.Jewelcrafting] = { quests = { 70521, 70520 }, items = { 198974, 198973 }, descriptions = { "/way #2025 45.0 55.4 Rebel Bruiser", "/way The Waking Shores 52.5 32.5 Crushing Elementals" } },
+    [SkillIds.Blacksmithing] = { quests = { 70513, 70512 }, items = { 198966, 198965 }, descriptions = { "/way #2022 37.8 73.0 Blazing Manifestation", "/way #2022 46.35 37.26 Crushing Elementals" } },
+    [SkillIds.Engineering] = { quests = { 70516, 70517 }, items = { 198969, 198970 }, descriptions = { "/way #2025 57.0 59.2 Titan Defense Matrix", "/way #2025 45.8 58.2 Rebel Bruiser" } },
+    [SkillIds.Inscription] = { quests = { 70518, 70519 }, items = { 198971, 198972 }, descriptions = { "/way #2022 37.2 63.4 Qalashi Necksnapper", "/way #2024 66.4 59.4 Arcane Manipulators" } },
+    [SkillIds.Enchanting] = { quests = { 70514, 70515 }, items = { 198967, 198968 }, descriptions = { " /way #2024 39.2 64.0 Mana Wyrmling, Stabilized Elementals", "/way #2025 53.2 65.6 Earthshaker Marauder" } },
   }
 }
-
--- {name="Molten Globule - Rousing Fire Enemies (Blacksmithing)", quests={70513}, optionKey="blacksmithing", skillID=164},
--- {name="Primeval Earth Fragment - Rousing Earth Enemies (Blacksmithing)", quests={70512}, optionKey="blacksmithing", skillID=164},
--- {name="Primalist Charm - Humanoid Primalist Enemies (Enchanting)", quests={70515}, optionKey="enchanting", skillID=333},
--- {name="Primordial Aether - Arcane Enemies (Enchanting)", quests={70514}, optionKey="enchanting", skillID=333},
--- {name="Infinitely Attachable Pair o' Docks - Dragonkin Enemies (Engineering)", quests={70517}, optionKey="engineering", skillID=202},
--- {name="Keeper's Mark - Titan Enemies (Engineering)", quests={70516}, optionKey="engineering", skillID=202},
--- {name="Draconic Glamour - Dragonkin Enemies (Inscription)", quests={70519}, optionKey="inscription", skillID=773},
--- {name="Curious Djaradin Rune - Djaradin Enemies (Inscription)", quests={70518}, optionKey="inscription", skillID=773},
--- {name="Elegantly Engraved Embellishment - Nokhud/Sundered Flame Enemies (Jewelcrafting)", quests={70521}, optionKey="jewelcrafting", skillID=755},
--- {name="Incandescent Curio - Elemental Enemies (Jewelcrafting)", quests={70520}, optionKey="jewelcrafting", skillID=755},
--- {name="Exceedingly Soft Skin - Slyvern/Vorquin Enemies (Leatherworking)", quests={70523}, optionKey="leatherworking", skillID=165},
--- {name="Ossified Hide - Proto-drake or Proto-dragon Enemies (Leatherworking)", quests={70522}, optionKey="leatherworking", skillID=165},
 
 function DFH_ProfessionUpdate:CollapseFrame()
   self:Hide()

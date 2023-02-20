@@ -2,6 +2,7 @@
 
 - TODO Is there a way to detect recipes that would be First Time Crafted?
 - TODO Is there a way to detect First Time Gathers?
+- TODO Check zone or character level to maximize?
 
 #### Profession Masters
 
