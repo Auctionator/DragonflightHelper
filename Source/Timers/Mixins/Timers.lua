@@ -36,9 +36,12 @@ function DragonflightHelperTimerMixin:OnHide()
 end
 
 function DragonflightHelperTimerMixin:FindNextTime()
-  -- print("DragonflightHelperTimerMixin:FindNextTime()")
   local hour, minute = GetGameTime()
   local compareValue = hour * 60 + minute
+
+  if self.nextTime ~= nil and compareValue > self.nextTime and self.nextTime == self.times[#self.times] then
+    self.nextTime = self.times[1]
+  end
 
   self.nextTime = self.times[1]
 
@@ -47,20 +50,17 @@ function DragonflightHelperTimerMixin:FindNextTime()
       self.nextTime = self.times[i]
     end
   end
-  -- print("After loop, ", self.nextTime)
 
-  if self.nextTime >= self.times[#self.times] then
-    self.nextTime = self.times[1]
-  end
-
-  -- print("After check", self.nextTime)
+  -- if self.nextTime >= self.times[#self.times] then
+  --   self.nextTime = self.times[1]
+  -- end
 end
 
 function DragonflightHelperTimerMixin:Update()
   local hour, minute = GetGameTime()
   local currentTime = hour * 60 + minute
 
-  if currentTime > self.nextTime then
+  if currentTime > self.nextTime and self.nextTime ~= self.times[1] then
     self:FindNextTime()
   end
 
@@ -81,7 +81,13 @@ function DragonflightHelperTimerMixin:Update()
     self:SetDescription(SecondsToTime((self.nextTime - currentTime) * 60))
   end
 
-  print(self.title, self.activeThreshold, currentTime, self.nextTime, thresholdTime)
+  DragonflightHelper.Utilities.dump({
+    title = self.title,
+    activeThreshold = self.activeThreshold,
+    currentTime = currentTime,
+    nextTime = self.nextTime,
+    thresholdTime = thresholdTime
+  }, "Siege Timer Debugging")
 end
 
 DragonflightHelperFeastTimerMixin = CreateFromMixins(DragonflightHelperTimerMixin)

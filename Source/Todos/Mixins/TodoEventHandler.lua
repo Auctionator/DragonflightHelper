@@ -22,6 +22,8 @@ function DFH_TodoEventHandler:OnEvent(event, ...)
     return
   end
 
+  print(event, ...)
+
   if event == "ENCOUNTER_LOOT_RECEIVED" or event == "QUEST_TURNED_IN" or event == "CURRENCY_DISPLAY_UPDATE" then
     self:Update()
   end

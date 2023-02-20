@@ -6,13 +6,15 @@
       <OnEvent method="OnEvent" />
       <OnShow method="OnShow" />
       <OnHide method="OnHide" />
+      <OnEnter method="OnEnter" />
+      <OnLeave method="OnLeave" />
     </Scripts>
   </Frame>
 
   <Frame name="DFH_ProfessionContainerFrame" mixin="DFH_ProfessionContainerMixin" virtual="true">
     <!-- Max height = title height + 5 line items w/ offset = (25 + 5 * (15 + 2) ) -->
     <!-- Min height = title height + 3 line items w/ offset = (25 + 3 * (15 + 2) ) -->
-    <Size y="76" />
+    <Size y="126" />
 
     <Scripts>
       <OnLoad method="OnLoad" />

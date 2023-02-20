@@ -5,6 +5,9 @@
   <Frame name="DFH_TodoItemFrame" inherits="DragonflightHelperStatusBarFrame" mixin="DFH_TodoStatusBar" virtual="true">
     <Scripts>
       <OnEvent method="OnEvent" />
+      <OnShow method="OnShow" />
+      <OnHide method="OnHide" />
+
     </Scripts>
   </Frame>
 

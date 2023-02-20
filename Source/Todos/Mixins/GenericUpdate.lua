@@ -1,8 +1,6 @@
 DFH_GenericUpdate = {}
 
 function DFH_GenericUpdate:update(entry, optionalTitle)
-  -- DragonflightHelper.Utilities.dump(entry, "DFH_GenericUpdate:update(" .. (optionalTitle and optionalTitle or "") .. ")")
-
   local completed = 0
   local completionCount = entry.completionCount
 
@@ -11,9 +9,8 @@ function DFH_GenericUpdate:update(entry, optionalTitle)
   end
 
   for _, questId in ipairs(entry.quests) do
-    -- print("Looking for ", questId)
     if C_QuestLog.IsQuestFlaggedCompleted(questId) then
-      -- print("Completed ", questId)
+      print(questId .. " completed ")
       completed = completed + 1
     end
   end

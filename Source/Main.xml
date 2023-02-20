@@ -3,7 +3,7 @@
 ..\FrameXML\UI.xsd">
 
   <Frame name="DragonflightHelperFrame" mixin="DragonflightHelperMixin" setAllPoints="true" movable="true" enableMouse="true" useParentLevel="true" parent="UIParent">
-    <Size x="200" y="635" />
+    <Size x="200" y="667" />
 
     <Anchors>
       <Anchor point="CENTER" />

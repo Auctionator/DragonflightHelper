@@ -59,6 +59,7 @@
     "FrameUtil",
     "C_CurrencyInfo",
     "pack",
-    "C_TradeSkillUI"
+    "C_TradeSkillUI",
+    "Item"
   ]
 }

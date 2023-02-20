@@ -53,8 +53,6 @@ function DFH_ProfessionLoader:initializeProfession(professionIdentifier, index)
   local name, texture, rank, maxRank, numSpells, spellOffset, skillLine, rankModifier, specializationIndex, specializationOffset, skillLineName =
       GetProfessionInfo(professionIdentifier);
 
-  print(name)
-
   self.professionInfo[index] = {
     name = name,
     skillLineName = skillLineName,

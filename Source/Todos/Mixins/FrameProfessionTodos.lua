@@ -37,20 +37,6 @@ function DFH_ProfessionContainerMixin:Update()
   self.profession = self.professionInfo[self.professionIndex]
 
   self.Title:SetTitle(self:getTitle())
-  self:AdjustHeight()
-end
-
-function DFH_ProfessionContainerMixin:AdjustHeight()
-  local adjustedHeight = self.Title:GetHeight()
-
-  for i, child in ipairs(self.professionChildren) do
-    if child:IsVisible() then
-      print(i, self.professionIndex, child:GetName(), child:GetHeight())
-      adjustedHeight = adjustedHeight + child:GetHeight() + 2
-    end
-  end
-
-  self:SetHeight(adjustedHeight)
 end
 
 function DFH_ProfessionContainerMixin:skillIsLevel25()

@@ -71,3 +71,11 @@ end
 function DragonflightHelperStatusBarMixin:SetReverseFill()
   self.StatusBarForeground:SetReverseFill(true)
 end
+
+function DragonflightHelperStatusBarMixin:SetEnterCallback(fn)
+  self.enterCallback = fn
+end
+
+function DragonflightHelperStatusBarMixin:SetLeaveCallback(fn)
+  self.leaveCallback = fn
+end

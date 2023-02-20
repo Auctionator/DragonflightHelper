@@ -19,14 +19,15 @@ local ProfessionQuests = {
     [182] = { title = "Dreambloom", quests = { 71857, 71858, 71859, 71860, 71861, 71864 } }, -- Herbalism
     [186] = { title = "Iridescent Ore", quests = { 72160, 72161, 72162, 72163, 72164, 72165 } }, -- Mining
     [393] = { title = "Curious Hide", quests = { 70381, 70383, 70384, 70385, 70386, 70389 } }, -- Skinning
-    [171] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66373, 66374 } }, -- Alchemy
+    [171] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66373, 66374 }, items = { 193891, 193897 } }, -- Alchemy
     [164] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66381, 66382 } }, -- Blacksmithing
-    [333] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66377, 66378 } }, -- Enchanting
+    -- TODO Enchanting items may be in wrong order; wasnt paying attention to drop this week
+    [333] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66377, 66378 }, items = { 193900, 193901 } }, -- Enchanting
     [202] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66379, 66380 } }, -- Engineering
     [773] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66375, 66376 } }, -- Inscription
     [755] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66388, 66389 } }, -- Jewelcrafting
     [165] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66384, 66385 } }, -- Leatherworking
-    [197] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66386, 66387 } }, -- Tailoring
+    [197] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66386, 66387 }, items = { 193899, 193898 } }, -- Tailoring
   },
   ValdrakkenRabul = {
     -- Like treatises; figure out quest ID
@@ -122,16 +123,34 @@ local ProfessionQuests = {
   },
   WeeklyDrops = {
     title = "Weekly Mob Drops",
-    [171] = { quests = { 70511, 70504 } }, -- Alchemy
-    [165] = { quests = { 70523, 70522 } }, -- Leatherworking
-    [197] = { quests = { 70524, 70525 } }, -- Tailoring
-    [755] = { quests = { 70521, 70520 } }, -- Jewelcrafting
-    [164] = { quests = { 70513, 70512 } }, -- Blacksmithing
-    [202] = { quests = { 70516, 70517 } }, -- Engineering
-    [773] = { quests = { 70518, 70519 } }, -- Inscription
-    [333] = { quests = { 70514, 70515 } }, -- Enchanting
+    -- Alchemy
+    [171] = {
+      quests = { 70511, 70504 },
+      items = { 198964, 198963 },
+      descriptions = { "/way #2022 52.2 56.2 Encroaching Downpour", "/way #2024 17.78 39.22 Brakenhide Rotflinger" }
+    },
+    [165] = { quests = { 70523, 70522 }, items = {} }, -- Leatherworking
+    [197] = { quests = { 70524, 70525 }, items = { 198977, 198978 } }, -- Tailoring
+    [755] = { quests = { 70521, 70520 }, items = {} }, -- Jewelcrafting
+    [164] = { quests = { 70513, 70512 }, items = {} }, -- Blacksmithing
+    [202] = { quests = { 70516, 70517 }, items = {} }, -- Engineering
+    [773] = { quests = { 70518, 70519 }, items = {} }, -- Inscription
+    [333] = { quests = { 70514, 70515 }, items = { 198967, 198968 } }, -- Enchanting
   }
 }
+
+-- {name="Molten Globule - Rousing Fire Enemies (Blacksmithing)", quests={70513}, optionKey="blacksmithing", skillID=164},
+-- {name="Primeval Earth Fragment - Rousing Earth Enemies (Blacksmithing)", quests={70512}, optionKey="blacksmithing", skillID=164},
+-- {name="Primalist Charm - Humanoid Primalist Enemies (Enchanting)", quests={70515}, optionKey="enchanting", skillID=333},
+-- {name="Primordial Aether - Arcane Enemies (Enchanting)", quests={70514}, optionKey="enchanting", skillID=333},
+-- {name="Infinitely Attachable Pair o' Docks - Dragonkin Enemies (Engineering)", quests={70517}, optionKey="engineering", skillID=202},
+-- {name="Keeper's Mark - Titan Enemies (Engineering)", quests={70516}, optionKey="engineering", skillID=202},
+-- {name="Draconic Glamour - Dragonkin Enemies (Inscription)", quests={70519}, optionKey="inscription", skillID=773},
+-- {name="Curious Djaradin Rune - Djaradin Enemies (Inscription)", quests={70518}, optionKey="inscription", skillID=773},
+-- {name="Elegantly Engraved Embellishment - Nokhud/Sundered Flame Enemies (Jewelcrafting)", quests={70521}, optionKey="jewelcrafting", skillID=755},
+-- {name="Incandescent Curio - Elemental Enemies (Jewelcrafting)", quests={70520}, optionKey="jewelcrafting", skillID=755},
+-- {name="Exceedingly Soft Skin - Slyvern/Vorquin Enemies (Leatherworking)", quests={70523}, optionKey="leatherworking", skillID=165},
+-- {name="Ossified Hide - Proto-drake or Proto-dragon Enemies (Leatherworking)", quests={70522}, optionKey="leatherworking", skillID=165},
 
 function DFH_ProfessionUpdate:CollapseFrame()
   self:Hide()
@@ -140,10 +159,12 @@ function DFH_ProfessionUpdate:CollapseFrame()
   -- This should be "TOPLEFT"
   local point, relativeTo, relativePoint = self:GetPoint()
   self:SetPoint(point, relativeTo, relativePoint, 0, 1)
+  self.collapsed = true
 end
 
 function DFH_ProfessionUpdate:Update()
-  print("DFH_ProfessionUpdate:Update()")
+  -- print("DFH_ProfessionUpdate:Update()")
+  self.collapsed = false
 
   if self.professionIndex == nil then
     print("[INCORRECT USAGE] DFH_ProfessionUpdate: A professionIndex must be provided")
@@ -173,5 +194,69 @@ function DFH_ProfessionUpdate:Update()
   end
 
   local entry = ProfessionQuests[self.questTypeKey]
+
+  if ProfessionQuests[self.questTypeKey][self:getId(self.professionIndex)].items ~= nil then
+    self.items = ProfessionQuests[self.questTypeKey][self:getId(self.professionIndex)].items
+
+    self:SetEnterCallback(function()
+      self:ShowItemsTooltip(entry[self:getId(self.professionIndex)], entry.title)
+    end)
+
+    self:SetLeaveCallback(function()
+      GameTooltip:Hide()
+    end)
+  end
+
   DFH_GenericUpdate.update(self, entry[self:getId(self.professionIndex)], entry.title)
+end
+
+function DFH_ProfessionUpdate:ShowItemsTooltip(entry, optionalTitle)
+  GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+
+  GameTooltip_SetTitle(GameTooltip,
+    (optionalTitle or entry.title or "") .. " (" .. self:getName(self.professionIndex) .. ")",
+    NORMAL_FONT_COLOR)
+
+  GameTooltip_AddBlankLineToTooltip(GameTooltip)
+
+  if entry.description ~= nil then
+    GameTooltip_AddHighlightLine(
+      GameTooltip,
+      entry.description
+    )
+    GameTooltip_AddBlankLineToTooltip(GameTooltip)
+  end
+
+  local completed = 0
+
+  for index, itemId in ipairs(entry.items) do
+    if not C_QuestLog.IsQuestFlaggedCompleted(entry.quests[index]) then
+      local item = Item:CreateFromItemID(itemId)
+
+      item:ContinueOnItemLoad(function()
+        local itemName = item:GetItemName();
+
+        local textureSettings = {
+          width = 20,
+          height = 20,
+          verticalOffset = 4,
+        };
+        local color = item:GetItemQualityColor();
+        GameTooltip:AddLine(itemName, color.r, color.g, color.b, true)
+        GameTooltip:AddTexture(item:GetItemIcon(), textureSettings)
+
+        if entry.descriptions and entry.descriptions[index] ~= nil then
+          GameTooltip:AddLine(entry.descriptions[index], 255, 255, 255)
+        end
+      end)
+    else
+      completed = completed + 1
+    end
+  end
+
+  if completed == #entry.quests then
+    GameTooltip_AddHighlightLine(GameTooltip, "All items found this week")
+  end
+
+  GameTooltip:Show()
 end
