@@ -21,6 +21,15 @@
       </Layer>
     </Layers>
     <Frames>
+      <Button inherits="UIPanelButtonTemplate" text="-" mixin="DragonflightHelperButtonMixin">
+        <Size x="15" y="15" />
+        <Anchors>
+          <Anchor point="TOPLEFT" x="4" y="-6" />
+        </Anchors>
+        <Scripts>
+          <OnClick method="OnClick" />
+        </Scripts>
+      </Button>
       <Frame parentKey="Reputations" inherits="DragonflightHelperReputationsFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.Title" relativePoint="BOTTOMLEFT" x="5" />

@@ -18,11 +18,11 @@ end
 
 function DFH_TodoEventHandler:OnEvent(event, ...)
   if self.Update == nil then
-    print("DFH_TodoEventHandler: No Update method found for this entry")
+    DragonflightHelper.Utilities.error("[DEBUG]", "DFH_TodoEventHandler: No Update method found for this entry")
     return
   end
 
-  print(event, ...)
+  DragonflightHelper.Utilities.info(event, ...)
 
   if event == "ENCOUNTER_LOOT_RECEIVED" or event == "QUEST_TURNED_IN" or event == "CURRENCY_DISPLAY_UPDATE" then
     self:Update()

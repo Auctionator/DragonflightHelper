@@ -1,7 +1,7 @@
 DFH_TodoUpdate = CreateFromMixins(DFH_GenericUpdate)
 
 local WeeklyQuests = {
-  ["Aiding the Accord"] = { quests = { 70750 } },
+  ["Aiding the Accord"] = { quests = { 70750, 72068, 72374, 72373, 72375 }, completionCount = 1 },
   ["Revival Catalyst"] = { quests = { 72528 } },
   ["Iskaara Tuskarr Feast"] = { quests = { 70893 } },
   ["Siege on Dragonbane Keep"] = { quests = { 70866 }, title = "Siege on Dragonbane Keep" },
@@ -13,7 +13,7 @@ local WeeklyQuests = {
 
 function DFH_TodoUpdate:Update()
   if self.weeklyIndex == nil then
-    print("[INCORRECT USAGE] DFH_TodoUpdate: A weeklyIndex must be provided")
+    DragonflightHelper.Utilities.error("[INCORRECT USAGE]", "DFH_TodoUpdate: A weeklyIndex must be provided")
     self:SetTitle("Unknown weekly")
     self:SetForegroundColor(0, 0, 0, 0)
     return

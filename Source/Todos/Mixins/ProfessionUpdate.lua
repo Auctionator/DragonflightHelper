@@ -130,12 +130,12 @@ local ProfessionQuests = {
       descriptions = { "/way #2022 52.2 56.2 Encroaching Downpour", "/way #2024 17.78 39.22 Brakenhide Rotflinger" }
     },
     [165] = { quests = { 70523, 70522 }, items = {} }, -- Leatherworking
-    [197] = { quests = { 70524, 70525 }, items = { 198977, 198978 } }, -- Tailoring
+    [197] = { quests = { 70524, 70525 }, items = { 198977, 198978 }, descriptions = { "/way Ohn'ahran Plains 84 56", "/way The Azure Span:Dragon Isles 33.84 47.22" } }, -- Tailoring
     [755] = { quests = { 70521, 70520 }, items = {} }, -- Jewelcrafting
     [164] = { quests = { 70513, 70512 }, items = {} }, -- Blacksmithing
     [202] = { quests = { 70516, 70517 }, items = {} }, -- Engineering
     [773] = { quests = { 70518, 70519 }, items = {} }, -- Inscription
-    [333] = { quests = { 70514, 70515 }, items = { 198967, 198968 } }, -- Enchanting
+    [333] = { quests = { 70514, 70515 }, items = { 198967, 198968 }, descriptions = { " /way #2024 39.2 64.0 Mana Wyrmling, Stabilized Elementals", "/way #2025 53.2 65.6 Earthshaker Marauder" } }, -- Enchanting
   }
 }
 
@@ -163,11 +163,10 @@ function DFH_ProfessionUpdate:CollapseFrame()
 end
 
 function DFH_ProfessionUpdate:Update()
-  -- print("DFH_ProfessionUpdate:Update()")
   self.collapsed = false
 
   if self.professionIndex == nil then
-    print("[INCORRECT USAGE] DFH_ProfessionUpdate: A professionIndex must be provided")
+    DragonflightHelper.Utilities.error("[INCORRECT USAGE]", "DFH_ProfessionUpdate: A professionIndex must be provided")
     self:SetTitle("Unknown profession")
     return
   end
@@ -178,7 +177,8 @@ function DFH_ProfessionUpdate:Update()
   end
 
   if self.questTypeKey == nil then
-    print("[INCORRECT USAGE] DFH_ProfessionUpdate: A questTypeKey object must be initialized")
+    DragonflightHelper.Utilities.error("[INCORRECT USAGE]",
+      "DFH_ProfessionUpdate: A questTypeKey object must be initialized")
     self:SetForegroundColor(0, 0, 0, 0)
     return
   end

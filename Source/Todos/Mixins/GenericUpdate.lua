@@ -10,9 +10,14 @@ function DFH_GenericUpdate:update(entry, optionalTitle)
 
   for _, questId in ipairs(entry.quests) do
     if C_QuestLog.IsQuestFlaggedCompleted(questId) then
-      print(questId .. " completed ")
+      DragonflightHelper.Utilities.info(questId, " completed ")
       completed = completed + 1
     end
+  end
+
+  -- it seems like completing and Aiding the Accord quest marks all Aiding the Accord quests as completed?
+  if completed > (entry.completionCount or #entry.quests) then
+    completed = entry.completionCount
   end
 
   self:SetMinMaxValues(0, completionCount)

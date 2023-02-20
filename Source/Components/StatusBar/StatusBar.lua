@@ -1,8 +1,6 @@
 DragonflightHelperStatusBarMixin = {}
 
 function DragonflightHelperStatusBarMixin:OnLoad()
-  -- print("DragonflightHelperStatusBarMixin:OnLoad()")
-
   self.description = ""
   self.rolloverDescription = nil
 

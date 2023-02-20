@@ -60,6 +60,9 @@
     "C_CurrencyInfo",
     "pack",
     "C_TradeSkillUI",
-    "Item"
+    "Item",
+    "RED_FONT_COLOR_CODE",
+    "GREEN_FONT_COLOR_CODE",
+    "SlashCmdList"
   ]
 }

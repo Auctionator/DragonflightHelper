@@ -16,7 +16,7 @@ DFH_ProfessionContainerMixin = CreateFromMixins(DFH_TodoEventHandler, DFH_Profes
 
 function DFH_ProfessionContainerMixin:OnLoad()
   if self.professionIndex == nil then
-    print("[DEBUG] Unable to create profession container; no profession index provided")
+    DragonflightHelper.Utilities.error("[DEBUG]", "Unable to create profession container; no profession index provided")
   end
 
   self.professionChildren = { self.Treatise, self.Gathering, self.WeeklyDrops, self.ServicesRequested, self.Trainer,

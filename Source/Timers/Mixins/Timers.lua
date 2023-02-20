@@ -40,7 +40,9 @@ function DragonflightHelperTimerMixin:FindNextTime()
   local compareValue = hour * 60 + minute
 
   if self.nextTime ~= nil and compareValue > self.nextTime and self.nextTime == self.times[#self.times] then
+    DragonflightHelper.Utilities.info("in loop", "setting to first")
     self.nextTime = self.times[1]
+    return
   end
 
   self.nextTime = self.times[1]
@@ -64,12 +66,15 @@ function DragonflightHelperTimerMixin:Update()
     self:FindNextTime()
   end
 
-  local thresholdTime = math.abs(self.nextTime - currentTime - (self.frequency * 60))
-  if thresholdTime >= 1440 then
-    thresholdTime = thresholdTime - 1440
+  -- if currentTime is still greater than nextTime here, it means we wrapped around
+  if currentTime > self.nextTime then
+    -- set it to be relative to tomorrow
+    currentTime = currentTime - (24 * 60)
   end
 
-  if thresholdTime <= self.activeThreshold then
+  local thresholdTime = math.abs(self.nextTime - currentTime - (self.frequency * 60))
+
+  if thresholdTime <= self.activeThreshold or self.nextTime - currentTime == 0 then
     self:SetForegroundColor(self.thresholdColor.r, self.thresholdColor.g, self.thresholdColor.b)
     self:SetMinMaxValues(0, self.activeThreshold)
     self:SetValue(self.activeThreshold - thresholdTime)
@@ -81,13 +86,14 @@ function DragonflightHelperTimerMixin:Update()
     self:SetDescription(SecondsToTime((self.nextTime - currentTime) * 60))
   end
 
-  DragonflightHelper.Utilities.dump({
-    title = self.title,
-    activeThreshold = self.activeThreshold,
-    currentTime = currentTime,
-    nextTime = self.nextTime,
-    thresholdTime = thresholdTime
-  }, "Siege Timer Debugging")
+  DragonflightHelper.Utilities.info(
+    "Siege Timer Debugging",
+    self.title,
+    self.activeThreshold,
+    currentTime,
+    self.nextTime,
+    thresholdTime
+  )
 end
 
 DragonflightHelperFeastTimerMixin = CreateFromMixins(DragonflightHelperTimerMixin)

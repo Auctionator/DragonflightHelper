@@ -40,3 +40,11 @@ function DragonflightHelper.Utilities.dump(t, name)
 
   print()
 end
+
+function DragonflightHelper.Utilities.error(title, ...)
+  print(RED_FONT_COLOR_CODE .. "DragonflightHelper " .. title .. ": " .. FONT_COLOR_CODE_CLOSE, ...);
+end
+
+function DragonflightHelper.Utilities.info(title, ...)
+  print(GREEN_FONT_COLOR_CODE .. "DragonflightHelper " .. title .. ": " .. FONT_COLOR_CODE_CLOSE, ...);
+end
