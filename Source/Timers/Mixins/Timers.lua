@@ -40,7 +40,6 @@ function DragonflightHelperTimerMixin:FindNextTime()
   local compareValue = hour * 60 + minute
 
   if self.nextTime ~= nil and compareValue > self.nextTime and self.nextTime == self.times[#self.times] then
-    DragonflightHelper.Utilities.info("in loop", "setting to first")
     self.nextTime = self.times[1]
     return
   end
@@ -52,10 +51,6 @@ function DragonflightHelperTimerMixin:FindNextTime()
       self.nextTime = self.times[i]
     end
   end
-
-  -- if self.nextTime >= self.times[#self.times] then
-  --   self.nextTime = self.times[1]
-  -- end
 end
 
 function DragonflightHelperTimerMixin:Update()

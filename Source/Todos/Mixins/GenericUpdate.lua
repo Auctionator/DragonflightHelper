@@ -10,7 +10,6 @@ function DFH_GenericUpdate:update(entry, optionalTitle)
 
   for _, questId in ipairs(entry.quests) do
     if C_QuestLog.IsQuestFlaggedCompleted(questId) then
-      DragonflightHelper.Utilities.info(questId, " completed ")
       completed = completed + 1
     end
   end
