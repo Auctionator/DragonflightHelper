@@ -105,7 +105,7 @@
 
       <Frame parentKey="ProfessionSlot2" inherits="DFH_ProfessionContainerFrame">
         <Anchors>
-          <Anchor point="TOPLEFT" relativeKey="$parent.ProfessionSlot1" relativePoint="BOTTOMLEFT" y="-2" />
+          <Anchor point="TOPLEFT" relativeKey="$parent.ProfessionSlot1" relativePoint="BOTTOMLEFT" />
         </Anchors>
 
         <KeyValues>
