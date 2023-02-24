@@ -28,10 +28,10 @@
     </Anchors>
 
     <Frames>
-      <Frame parentKey="Title" inherits="DragonflightHelperSectionTitleFrame">
+      <Frame name="$parent_Title" parentKey="Title" inherits="DragonflightHelperSectionTitleFrame">
       </Frame>
 
-      <Frame parentKey="Treatise" inherits="DFH_ProfessionTodoItemFrame">
+      <Frame name="$parent_Treatise" parentKey="Treatise" inherits="DFH_ProfessionTodoItemFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.Title" relativePoint="BOTTOMLEFT" />
         </Anchors>
@@ -39,7 +39,7 @@
           <KeyValue key="questTypeKey" value="Treatise" type="string" />
         </KeyValues>
       </Frame>
-      <Frame parentKey="Gathering" inherits="DFH_ProfessionTodoItemFrame">
+      <Frame name="$parent_Gathering" parentKey="Gathering" inherits="DFH_ProfessionTodoItemFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.Treatise" relativePoint="BOTTOMLEFT" y="-2" />
         </Anchors>
@@ -47,7 +47,7 @@
           <KeyValue key="questTypeKey" value="Gathering" type="string" />
         </KeyValues>
       </Frame>
-      <Frame parentKey="WeeklyDrops" inherits="DFH_ProfessionTodoItemFrame">
+      <Frame name="$parent_WeeklyDrops" parentKey="WeeklyDrops" inherits="DFH_ProfessionTodoItemFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.Gathering" relativePoint="BOTTOMLEFT" y="-2" />
         </Anchors>
@@ -55,7 +55,7 @@
           <KeyValue key="questTypeKey" value="WeeklyDrops" type="string" />
         </KeyValues>
       </Frame>
-      <Frame parentKey="ServicesRequested" inherits="DFH_ProfessionTodoItemFrame">
+      <Frame name="$parent_ServicesRequested" parentKey="ServicesRequested" inherits="DFH_ProfessionTodoItemFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.WeeklyDrops" relativePoint="BOTTOMLEFT" y="-2" />
         </Anchors>
@@ -63,7 +63,7 @@
           <KeyValue key="questTypeKey" value="ValdrakkenServicesAzley" type="string" />
         </KeyValues>
       </Frame>
-      <Frame parentKey="Trainer" inherits="DFH_ProfessionTodoItemFrame">
+      <Frame name="$parent_Trainer" parentKey="Trainer" inherits="DFH_ProfessionTodoItemFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.ServicesRequested" relativePoint="BOTTOMLEFT" y="-2" />
         </Anchors>
@@ -71,7 +71,7 @@
           <KeyValue key="questTypeKey" value="ValdrakkenTrainers" type="string" />
         </KeyValues>
       </Frame>
-      <Frame parentKey="Valdrakken" inherits="DFH_ProfessionTodoItemFrame">
+      <Frame name="$parent_Valdrakken" parentKey="Valdrakken" inherits="DFH_ProfessionTodoItemFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.Trainer" relativePoint="BOTTOMLEFT" y="-2" />
         </Anchors>

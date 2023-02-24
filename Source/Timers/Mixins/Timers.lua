@@ -81,14 +81,14 @@ function DragonflightHelperTimerMixin:Update()
     self:SetDescription(SecondsToTime((self.nextTime - currentTime) * 60))
   end
 
-  -- DragonflightHelper.Utilities.info(
-  --   "Siege Timer Debugging",
-  --   self.title,
-  --   self.activeThreshold,
-  --   currentTime,
-  --   self.nextTime,
-  --   thresholdTime
-  -- )
+  DragonflightHelper.Utilities.info(
+    "Siege Timer Debugging",
+    self.title,
+    self.activeThreshold,
+    currentTime,
+    self.nextTime,
+    thresholdTime
+  )
 end
 
 DragonflightHelperFeastTimerMixin = CreateFromMixins(DragonflightHelperTimerMixin)

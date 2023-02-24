@@ -36,7 +36,16 @@ function DFH_ProfessionContainerMixin:Update()
 
   self.profession = self.professionInfo[self.professionIndex]
 
+  local frameHeight = self.Title:GetHeight()
+
+  for _, child in ipairs(self.professionChildren) do
+    if not child.collapsed then
+      frameHeight = frameHeight + child:GetHeight() - 2 -- y offset -2
+    end
+  end
+
   self.Title:SetTitle(self:getTitle())
+  self:SetHeight(frameHeight)
 end
 
 function DFH_ProfessionContainerMixin:skillIsLevel25()

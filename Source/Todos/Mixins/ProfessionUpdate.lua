@@ -46,7 +46,10 @@ local ProfessionQuests = {
   ValdrakkenRabul = {
     title = "Rabul <Artisan's Consortium Quartermaster>",
     -- Like treatises only single use (i.e. not weekly for future me!); figure out quest ID
-    [SkillIds.Herbalism] = { quests = { 71897 }, items = { 200980 } }
+    -- also need to attach a renown level requirement to each
+    [SkillIds.Herbalism] = { quests = { 71897 }, items = { 200980 } },
+    [SkillIds.Mining] = { quests = { 71901 }, items = { 200981 } },
+    [SkillIds.Jewelcrafting] = { quests = { 71899 }, items = { 200978 } }
   },
   -- Crafting professions get: (minimum profession level requirement is 25)
   -- * 1 weekly “fulfill x craft orders” quest from the NPC near crafting order placing area (Azley)
@@ -72,7 +75,7 @@ local ProfessionQuests = {
     [SkillIds.Blacksmithing] = { title = "Metalshaper Kuroko <Trainer>", quests = { 70234, 70233, 70235, 70211 }, completionCount = 1 },
     [SkillIds.Enchanting] = { title = "Soragosa <Trainer>", quests = { 72175, 72173, 72172, 72155 }, completionCount = 1 },
     [SkillIds.Engineering] = { title = "Clinkyclick Shatterboom <Trainer>", quests = { 70540, 70539, 70545, 70557 }, completionCount = 1 },
-    [SkillIds.Herbalism] = { title = "Agrikus <Trainer>", quests = { 70614, 70613, 70616 }, completionCount = 1 },
+    [SkillIds.Herbalism] = { title = "Agrikus <Trainer>", quests = { 70614, 70615, 70613, 70616 }, completionCount = 1 },
     [SkillIds.Inscription] = { title = "Talendara <Trainer>", quests = { 70561, 70558, 70559, 70560 }, completionCount = 1 },
     [SkillIds.Jewelcrafting] = { title = "Tuluradormi <Trainer>", quests = { 70565, 70564, 70563, 70562 }, completionCount = 1 },
     [SkillIds.Leatherworking] = { title = "Hideshaper Koruz <Trainer>", quests = { 70571, 70569, 70568, 70567 }, completionCount = 1 },
