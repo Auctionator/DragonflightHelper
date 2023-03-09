@@ -2,11 +2,11 @@ DFH_ProfessionStatusBar = CreateFromMixins(
   DFH_ProfessionLoader,
   DFH_TodoEventHandler,
   DFH_ProfessionUpdate,
-  DragonflightHelperStatusBarMixin
+  DFH_StatusBarMixin
 )
 
 function DFH_ProfessionStatusBar:OnLoad()
-  DragonflightHelperStatusBarMixin.OnLoad(self)
+  DFH_StatusBarMixin.OnLoad(self)
   self:LoadProfessions()
 
   local completedColor = FACTION_BAR_COLORS[5]

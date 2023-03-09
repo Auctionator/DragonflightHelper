@@ -1,26 +1,16 @@
-local KnowledgeCurrencies = {
-  [182] = 2034, -- Herbalism
-  [186] = 2035, -- Mining
-  [393] = 2033, -- Skinning
-  [171] = 2024, -- Alchemy
-  [164] = 2023, -- Blacksmithing
-  [333] = 2030, -- Enchanting
-  [202] = 2027, -- Engineering
-  [773] = 2028, -- Inscription
-  [755] = 2029, -- Jewelcrafting
-  [165] = 2025, -- Leatherworking
-  [197] = 2026, -- Tailoring
-}
+local KnowledgeCurrencies = DFH_Constants.KnowledgeCurrencies
 
 DFH_ProfessionContainerMixin = CreateFromMixins(DFH_TodoEventHandler, DFH_ProfessionLoader)
 
 function DFH_ProfessionContainerMixin:OnLoad()
   if self.professionIndex == nil then
-    DragonflightHelper.Utilities.error("[DEBUG]", "Unable to create profession container; no profession index provided")
+    DFH_Utilities.error("[DEBUG]", "Unable to create profession container; no profession index provided")
   end
 
-  self.professionChildren = { self.Treatise, self.Gathering, self.WeeklyDrops, self.ServicesRequested, self.Trainer,
-    self.Valdrakken }
+  self.professionChildren = {
+    self.Treatise, self.Gathering, self.WeeklyDrops, self.WeeklyServices, self.ValdrakkenTrainers, self.WeeklyProfession
+  }
+
   for _, child in ipairs(self.professionChildren) do
     child.professionIndex = self.professionIndex
   end
@@ -29,6 +19,8 @@ function DFH_ProfessionContainerMixin:OnLoad()
 end
 
 function DFH_ProfessionContainerMixin:Update()
+  DFH_Utilities.info("DFH_ProfessionContainerMixin:Update()")
+
   if not self:hasProfession(self.professionIndex) then
     self.Title:SetTitle("Profession " .. self.professionIndex .. " not selected")
     return
@@ -36,11 +28,19 @@ function DFH_ProfessionContainerMixin:Update()
 
   self.profession = self.professionInfo[self.professionIndex]
 
+  if not self.Treatise.initialized then
+    self.Treatise:Init(self.profession)
+  end
+
+  if not self.WeeklyDrops.Button.initialized then
+    self.WeeklyDrops.Button:Init(self.profession)
+  end
+
   local frameHeight = self.Title:GetHeight()
 
   for _, child in ipairs(self.professionChildren) do
     if not child.collapsed then
-      frameHeight = frameHeight + child:GetHeight() - 2 -- y offset -2
+      frameHeight = frameHeight + child:GetHeight()
     end
   end
 

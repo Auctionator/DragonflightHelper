@@ -2,7 +2,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
 
-  <Frame name="DragonflightHelperFrame" mixin="DragonflightHelperMixin" setAllPoints="true" movable="true" enableMouse="true" useParentLevel="true" parent="UIParent">
+  <Frame name="DragonflightHelperFrame" mixin="DFH_Mixin" setAllPoints="true" movable="true" enableMouse="true" useParentLevel="true" parent="UIParent">
     <Size x="200" y="667" />
 
     <Anchors>
@@ -21,7 +21,7 @@
       </Layer>
     </Layers>
     <Frames>
-      <Button inherits="UIPanelButtonTemplate" text="-" mixin="DragonflightHelperButtonMixin">
+      <Button inherits="UIPanelButtonTemplate" text="-" mixin="DFH_ButtonMixin">
         <Size x="15" y="15" />
         <Anchors>
           <Anchor point="TOPLEFT" x="4" y="-6" />
@@ -30,13 +30,13 @@
           <OnClick method="OnClick" />
         </Scripts>
       </Button>
-      <Frame parentKey="Reputations" inherits="DragonflightHelperReputationsFrame">
+      <Frame parentKey="Reputations" inherits="DFH_ReputationsFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.Title" relativePoint="BOTTOMLEFT" x="5" />
           <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />
         </Anchors>
       </Frame>
-      <Frame parentKey="Timers" inherits="DragonflightHelperTimersFrame">
+      <Frame parentKey="Timers" inherits="DFH_TimersFrame">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.Reputations" relativePoint="BOTTOMLEFT" />
           <Anchor point="RIGHT" relativeKey="$parent" relativePoint="RIGHT" />
@@ -60,6 +60,8 @@
       <OnLoad method="OnLoad" />
       <OnShow method="OnShow" />
       <OnHide method="OnHide" />
+      <OnMouseUp method="OnMouseUp" />
+      <OnMouseDown method="OnMouseDown" />
       <OnDragStart method="OnDragStart" />
       <OnDragStop method="OnDragStop" />
     </Scripts>

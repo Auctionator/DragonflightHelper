@@ -25,7 +25,7 @@ end
 
 function DFH_ProfessionLoader:InitializeProfessions()
   if self.Update == nil then
-    DragonflightHelper.Utilities.error("[DEBUG]", "DFH_ProfessionLoader: No Update method found for this entry")
+    DFH_Utilities.error("[DEBUG]", "DFH_ProfessionLoader: No Update method found for this entry")
     return
   end
 

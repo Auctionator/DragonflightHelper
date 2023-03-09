@@ -1,9 +1,9 @@
-DragonflightHelperFriendMixin = CreateFromMixins(DragonflightHelperReputationItemMixin)
+DFH_FriendMixin = CreateFromMixins(DFH_ReputationItemMixin)
 
-function DragonflightHelperFriendMixin:Init()
-  DragonflightHelperReputationItemMixin.Init(self)
+function DFH_FriendMixin:Init()
+  DFH_ReputationItemMixin.Init(self)
 
-  self.factionInfo = DragonflightHelper.FactionInfo:new()
+  self.factionInfo = DFH_FactionInfo:new()
   self.factionInfo:init(self.factionId)
 
   local color = self.factionInfo:getFactionColor()
@@ -19,7 +19,7 @@ function DragonflightHelperFriendMixin:Init()
   end
 end
 
-function DragonflightHelperFriendMixin:ShowFriendshipReputationTooltip()
+function DFH_FriendMixin:ShowFriendshipReputationTooltip()
   if not self.factionInfo then
     return
   end

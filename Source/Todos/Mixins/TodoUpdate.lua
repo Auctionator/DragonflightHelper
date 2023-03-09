@@ -13,7 +13,7 @@ local WeeklyQuests = {
 
 function DFH_TodoUpdate:Update()
   if self.weeklyIndex == nil then
-    DragonflightHelper.Utilities.error("[INCORRECT USAGE]", "DFH_TodoUpdate: A weeklyIndex must be provided")
+    DFH_Utilities.error("[INCORRECT USAGE]", "DFH_TodoUpdate: A weeklyIndex must be provided")
     self:SetTitle("Unknown weekly")
     self:SetForegroundColor(0, 0, 0, 0)
     return

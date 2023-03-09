@@ -3,11 +3,12 @@
 ## Title: Dragonflight Helper
 ## Author: Borjamacare
 ## SavedVariables: DRAGONFLIGHT_HELPER_CONFIG
-## OptionalDeps: LibSharedMedia-3.0
+## OptionalDeps: LibSharedMedia-3.0 TomTom
 
 Libs\lib.xml
 
-Source\Objects.lua
+Source\Data\Manifest.xml
+
 Source\Utilities\TablePrint.lua
 Source\Components\Manifest.xml
 

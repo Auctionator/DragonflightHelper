@@ -1,6 +1,6 @@
-DragonflightHelperSectionTitleMixin = {}
+DFH_SectionTitleMixin = {}
 
-function DragonflightHelperSectionTitleMixin:OnLoad()
+function DFH_SectionTitleMixin:OnLoad()
   if self.title == nil then
     self.title = ""
   end
@@ -8,7 +8,7 @@ function DragonflightHelperSectionTitleMixin:OnLoad()
   self:SetTitle(self.title)
 end
 
-function DragonflightHelperSectionTitleMixin:SetTitle(title)
+function DFH_SectionTitleMixin:SetTitle(title)
   self.title = title
 
   self.Title:SetText(self.title)

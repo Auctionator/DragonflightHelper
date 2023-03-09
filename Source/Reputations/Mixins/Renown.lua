@@ -1,9 +1,9 @@
-DragonflightHelperRenownMixin = CreateFromMixins(DragonflightHelperReputationItemMixin)
+DFH_RenownMixin = CreateFromMixins(DFH_ReputationItemMixin)
 
-function DragonflightHelperRenownMixin:Init()
-  DragonflightHelperReputationItemMixin.Init(self)
+function DFH_RenownMixin:Init()
+  DFH_ReputationItemMixin.Init(self)
 
-  self.factionInfo = DragonflightHelper.FactionInfo:new()
+  self.factionInfo = DFH_FactionInfo:new()
   self.factionInfo:init(self.factionId)
 
   local color = self.factionInfo:getFactionColor()
@@ -20,7 +20,7 @@ function DragonflightHelperRenownMixin:Init()
 end
 
 -- Copied from ReputationFrame.xml and ReputationFrame.lua (Mixing in was a problem because data)
-function DragonflightHelperRenownMixin:ShowMajorFactionRenownTooltip()
+function DFH_RenownMixin:ShowMajorFactionRenownTooltip()
   if self.initialized == false then
     return
   end

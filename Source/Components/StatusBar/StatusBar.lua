@@ -1,6 +1,6 @@
-DragonflightHelperStatusBarMixin = {}
+DFH_StatusBarMixin = {}
 
-function DragonflightHelperStatusBarMixin:OnLoad()
+function DFH_StatusBarMixin:OnLoad()
   self.description = ""
   self.rolloverDescription = nil
 
@@ -16,27 +16,27 @@ function DragonflightHelperStatusBarMixin:OnLoad()
   self:SetForegroundColor(color.r, color.g, color.b, 1)
 end
 
--- function DragonflightHelperStatusBarMixin:OnShow()
+-- function DFH_StatusBarMixin:OnShow()
 -- end
 
--- function DragonflightHelperStatusBarMixin:OnHide()
+-- function DFH_StatusBarMixin:OnHide()
 -- end
 
-function DragonflightHelperStatusBarMixin:SetTitle(title)
+function DFH_StatusBarMixin:SetTitle(title)
   self.Container.Title:SetText(title)
 end
 
-function DragonflightHelperStatusBarMixin:SetDescription(description)
+function DFH_StatusBarMixin:SetDescription(description)
   self.description = description
 
   self.Container.Description:SetText(description)
 end
 
-function DragonflightHelperStatusBarMixin:SetRolloverDescription(rolloverDescription)
+function DFH_StatusBarMixin:SetRolloverDescription(rolloverDescription)
   self.rolloverDescription = rolloverDescription
 end
 
-function DragonflightHelperStatusBarMixin:OnEnter()
+function DFH_StatusBarMixin:OnEnter()
   if self.rolloverDescription ~= nil then
     self.Container.Description:SetText(self.rolloverDescription)
   end
@@ -44,36 +44,36 @@ function DragonflightHelperStatusBarMixin:OnEnter()
   self.enterCallback()
 end
 
-function DragonflightHelperStatusBarMixin:OnLeave()
+function DFH_StatusBarMixin:OnLeave()
   self.Container.Description:SetText(self.description)
   self.leaveCallback()
 end
 
-function DragonflightHelperStatusBarMixin:SetValue(value)
+function DFH_StatusBarMixin:SetValue(value)
   self.StatusBarForeground:SetValue(value)
 end
 
-function DragonflightHelperStatusBarMixin:SetMinMaxValues(minimum, maximum)
+function DFH_StatusBarMixin:SetMinMaxValues(minimum, maximum)
   self.StatusBarForeground:SetMinMaxValues(minimum, maximum)
   self.StatusBarBackground:SetMinMaxValues(minimum, maximum)
 end
 
-function DragonflightHelperStatusBarMixin:SetForegroundColor(r, g, b, a)
+function DFH_StatusBarMixin:SetForegroundColor(r, g, b, a)
   self.StatusBarForeground:SetStatusBarColor(r, g, b, a)
 end
 
-function DragonflightHelperStatusBarMixin:SetBackgroundColor(r, g, b, a)
+function DFH_StatusBarMixin:SetBackgroundColor(r, g, b, a)
   self.StatusBarBackground:SetStatusBarColor(r, g, b, a)
 end
 
-function DragonflightHelperStatusBarMixin:SetReverseFill()
+function DFH_StatusBarMixin:SetReverseFill()
   self.StatusBarForeground:SetReverseFill(true)
 end
 
-function DragonflightHelperStatusBarMixin:SetEnterCallback(fn)
+function DFH_StatusBarMixin:SetEnterCallback(fn)
   self.enterCallback = fn
 end
 
-function DragonflightHelperStatusBarMixin:SetLeaveCallback(fn)
+function DFH_StatusBarMixin:SetLeaveCallback(fn)
   self.leaveCallback = fn
 end

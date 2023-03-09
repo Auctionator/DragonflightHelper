@@ -1,11 +1,11 @@
-DragonflightHelperReputationItemMixin = CreateFromMixins(DragonflightHelperStatusBarMixin)
+DFH_ReputationItemMixin = CreateFromMixins(DFH_StatusBarMixin)
 
-function DragonflightHelperReputationItemMixin:OnLoad()
-  DragonflightHelperStatusBarMixin.OnLoad(self)
+function DFH_ReputationItemMixin:OnLoad()
+  DFH_StatusBarMixin.OnLoad(self)
   self.initialized = false
 end
 
-function DragonflightHelperReputationItemMixin:OnShow()
+function DFH_ReputationItemMixin:OnShow()
   FrameUtil.RegisterFrameForEvents(self, {
     "UPDATE_FACTION",
     "MAJOR_FACTION_RENOWN_LEVEL_CHANGED",
@@ -13,7 +13,7 @@ function DragonflightHelperReputationItemMixin:OnShow()
   })
 end
 
-function DragonflightHelperReputationItemMixin:OnHide()
+function DFH_ReputationItemMixin:OnHide()
   FrameUtil.UnregisterFrameForEvents(self, {
     "UPDATE_FACTION",
     "MAJOR_FACTION_RENOWN_LEVEL_CHANGED",
@@ -21,7 +21,7 @@ function DragonflightHelperReputationItemMixin:OnHide()
   })
 end
 
-function DragonflightHelperReputationItemMixin:OnEvent(event, ...)
+function DFH_ReputationItemMixin:OnEvent(event, ...)
   if event == "UPDATE_FACTION" and self.initialized == false then
     self:Init()
     self:Update()
@@ -30,11 +30,11 @@ function DragonflightHelperReputationItemMixin:OnEvent(event, ...)
   end
 end
 
-function DragonflightHelperReputationItemMixin:Init()
+function DFH_ReputationItemMixin:Init()
   self.initialized = true
 end
 
-function DragonflightHelperReputationItemMixin:Update()
+function DFH_ReputationItemMixin:Update()
   self.factionInfo:update()
 
   self:SetText()
@@ -42,7 +42,7 @@ function DragonflightHelperReputationItemMixin:Update()
   self:SetValue(self.factionInfo.barValue)
 end
 
-function DragonflightHelperReputationItemMixin:SetText()
+function DFH_ReputationItemMixin:SetText()
   -- Artisan's Consortium name too long:
   local dashIndex = self.factionInfo.title:find("-")
   if dashIndex == nil then

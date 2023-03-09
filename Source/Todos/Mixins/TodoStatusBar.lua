@@ -1,11 +1,11 @@
 DFH_TodoStatusBar = CreateFromMixins(
   DFH_TodoEventHandler,
   DFH_TodoUpdate,
-  DragonflightHelperStatusBarMixin
+  DFH_StatusBarMixin
 )
 
 function DFH_TodoStatusBar:OnLoad()
-  DragonflightHelperStatusBarMixin.OnLoad(self)
+  DFH_StatusBarMixin.OnLoad(self)
 
   local completedColor = FACTION_BAR_COLORS[5]
   local incompleteColor = FACTION_BAR_COLORS[1]

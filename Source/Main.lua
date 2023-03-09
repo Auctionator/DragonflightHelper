@@ -1,8 +1,8 @@
-DragonflightHelperMixin = {};
+DFH_Mixin = {};
 
 SLASH_DFH_TOGGLE1 = "/dfh"
 
-function DragonflightHelperMixin:OnLoad()
+function DFH_Mixin:OnLoad()
   self:RegisterForDrag("RightButton")
 
   local texture = self:CreateTexture()
@@ -19,7 +19,7 @@ function DragonflightHelperMixin:OnLoad()
   end
 end
 
-function DragonflightHelperMixin:hideFrames()
+function DFH_Mixin:hideFrames()
   for _, frame in ipairs(self.sections) do
     frame:Hide()
   end
@@ -28,7 +28,7 @@ function DragonflightHelperMixin:hideFrames()
   self.showing = not self.showing
 end
 
-function DragonflightHelperMixin:showFrames()
+function DFH_Mixin:showFrames()
   for _, frame in ipairs(self.sections) do
     frame:Show()
   end
@@ -37,7 +37,7 @@ function DragonflightHelperMixin:showFrames()
   self.showing = not self.showing
 end
 
-function DragonflightHelperMixin:OnClick()
+function DFH_Mixin:OnClick()
   if self.showing then
     self:hideFrames()
   else
@@ -45,22 +45,30 @@ function DragonflightHelperMixin:OnClick()
   end
 end
 
-function DragonflightHelperMixin:OnShow()
+function DFH_Mixin:OnShow()
 end
 
-function DragonflightHelperMixin:OnHide()
+function DFH_Mixin:OnHide()
 end
 
-function DragonflightHelperMixin:OnDragStart()
-  self:StartMoving()
-end
-
-function DragonflightHelperMixin:OnDragStop()
+function DFH_Mixin:OnMouseUp()
   self:StopMovingOrSizing()
 end
 
-DragonflightHelperButtonMixin = {}
+function DFH_Mixin:OnMouseDown()
+  self:StartSizing("BOTTOMRIGHT");
+end
 
-function DragonflightHelperButtonMixin:OnClick()
+function DFH_Mixin:OnDragStart()
+  self:StartMoving()
+end
+
+function DFH_Mixin:OnDragStop()
+  self:StopMovingOrSizing()
+end
+
+DFH_ButtonMixin = {}
+
+function DFH_ButtonMixin:OnClick()
   self:GetParent():OnClick()
 end

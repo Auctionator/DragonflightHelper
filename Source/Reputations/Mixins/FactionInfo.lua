@@ -1,4 +1,4 @@
-DragonflightHelper.FactionInfo = {
+DFH_FactionInfo = {
   title = "",
   detail = "",
   name = "",
@@ -20,14 +20,14 @@ DragonflightHelper.FactionInfo = {
   renownLevel = 0
 }
 
-function DragonflightHelper.FactionInfo:new(o)
+function DFH_FactionInfo:new(o)
   o = o or {}
   setmetatable(o, self)
   self.__index = self
   return o
 end
 
-function DragonflightHelper.FactionInfo:init(factionId)
+function DFH_FactionInfo:init(factionId)
   local name, description, standingID, barMin, barMax, barValue, atWarWith, canToggleAtWar, isHeader, isCollapsed,
   hasRep, isWatched, isChild, factionID, hasBonusRepGain, canSetInactive = GetFactionInfoByID(factionId)
 
@@ -52,21 +52,21 @@ function DragonflightHelper.FactionInfo:init(factionId)
   self:update()
 end
 
-function DragonflightHelper.FactionInfo:isMajorFaction()
+function DFH_FactionInfo:isMajorFaction()
   return self.factionId and C_Reputation.IsMajorFaction(self.factionId)
 end
 
-function DragonflightHelper.FactionInfo:isFriendFaction()
+function DFH_FactionInfo:isFriendFaction()
   self.friendshipFactionData = self.factionId and C_GossipInfo.GetFriendshipReputation(self.factionId)
 
   return self.friendshipFactionData and self.friendshipFactionData.friendshipFactionID > 0
 end
 
-function DragonflightHelper.FactionInfo:getFriendshipFactionId()
+function DFH_FactionInfo:getFriendshipFactionId()
   return self.friendshipFactionData.friendshipFactionID
 end
 
-function DragonflightHelper.FactionInfo:getFactionColor()
+function DFH_FactionInfo:getFactionColor()
   if self:isFriendFaction() then
     return FACTION_BAR_COLORS[self.standingId]
   else
@@ -74,7 +74,7 @@ function DragonflightHelper.FactionInfo:getFactionColor()
   end
 end
 
-function DragonflightHelper.FactionInfo:update()
+function DFH_FactionInfo:update()
   if self:isFriendFaction() then
     self.detail = self.friendshipFactionData.reaction
 
