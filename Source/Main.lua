@@ -3,7 +3,7 @@ DFH_Mixin = {};
 SLASH_DFH_TOGGLE1 = "/dfh"
 
 function DFH_Mixin:OnLoad()
-  self:RegisterForDrag("RightButton")
+  self:RegisterForDrag("LeftButton")
 
   local texture = self:CreateTexture()
   texture:SetAllPoints()
@@ -56,11 +56,15 @@ function DFH_Mixin:OnMouseUp()
 end
 
 function DFH_Mixin:OnMouseDown()
-  self:StartSizing("BOTTOMRIGHT");
+  -- self:StartSizing("BOTTOMRIGHT");
 end
 
 function DFH_Mixin:OnDragStart()
-  self:StartMoving()
+  if IsShiftKeyDown() then
+    self:StartSizing("BOTTOMRIGHT")
+  else
+    self:StartMoving()
+  end
 end
 
 function DFH_Mixin:OnDragStop()

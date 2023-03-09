@@ -67,6 +67,7 @@
     "StaticPopupDialogs",
     "StaticPopup_Show",
     "SendChatMessage",
-    "TomTom"
+    "TomTom",
+    "IsShiftKeyDown"
   ]
 }
