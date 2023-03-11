@@ -54,19 +54,6 @@
         <KeyValues>
           <KeyValue key="questTypeKey" value="WeeklyDrops" type="string" />
         </KeyValues>
-        <Frames>
-          <Button mixin="DFH_ItemWaypointsButton" parentKey="Button" enableMouse="true">
-            <Anchors>
-              <Anchor point="TOPLEFT" />
-              <Anchor point="BOTTOMRIGHT" />
-            </Anchors>
-            <Scripts>
-              <OnClick method="OnClick" />
-              <OnEnter method="OnEnter" />
-              <OnLeave method="OnLeave" />
-            </Scripts>
-          </Button>
-        </Frames>
       </Frame>
       <Frame parentKey="WeeklyServices" inherits="DFH_ProfessionTodoItemFrame">
         <Anchors>

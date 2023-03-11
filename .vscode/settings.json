@@ -73,7 +73,8 @@
     "WOW_PROJECT_ID",
     "WOW_PROJECT_MAINLINE",
     "GetLocale",
-    "securecallfunction"
+    "securecallfunction",
+    "HIGHLIGHT_FONT_COLOR"
   ],
   "Lua.diagnostics.disable": [
     "deprecated"

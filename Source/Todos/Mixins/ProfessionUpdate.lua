@@ -97,7 +97,11 @@ function DFH_ProfessionUpdate:ShowItemsTooltip(entry, optionalTitle)
 
   GameTooltip_SetTitle(GameTooltip,
     (optionalTitle or entry.title or "") .. " (" .. self:getName(self.professionIndex) .. ")",
-    NORMAL_FONT_COLOR)
+    HIGHLIGHT_FONT_COLOR)
+
+  if self.questTypeKey == "WeeklyDrops" then
+    GameTooltip_AddNormalLine(GameTooltip, "Click for TomTom waypoint")
+  end
 
   GameTooltip_AddBlankLineToTooltip(GameTooltip)
 
@@ -132,38 +136,4 @@ function DFH_ProfessionUpdate:ShowItemsTooltip(entry, optionalTitle)
   end
 
   GameTooltip:Show()
-end
-
-DFH_ItemWaypointsButton = {}
-
-function DFH_ItemWaypointsButton:Init(profession)
-  self.initialized = true
-  self.profession = profession
-end
-
-function DFH_ItemWaypointsButton:OnEnter()
-  self:GetParent():OnEnter()
-end
-
-function DFH_ItemWaypointsButton:OnLeave()
-  self:GetParent():OnLeave()
-end
-
-function DFH_ItemWaypointsButton:OnClick()
-  if TomTom == nil then
-    DFH_Utilities.error("TomTom required to use this functionality")
-  end
-
-  if not self.initialized then
-    DFH_Utilities.error("Profession not initialized")
-    return
-  end
-
-  local entry = ProfessionQuests.WeeklyDrops[self.profession.skillId]
-
-  for i, waypoint in ipairs(entry.waypoints) do
-    if not C_QuestLog.IsQuestFlaggedCompleted(entry.quests[i]) then
-      TomTom:AddWaypoint(waypoint.map, waypoint.x, waypoint.y, waypoint.options)
-    end
-  end
 end

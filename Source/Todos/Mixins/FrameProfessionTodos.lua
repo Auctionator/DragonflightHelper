@@ -1,4 +1,5 @@
 local KnowledgeCurrencies = DFH_Constants.KnowledgeCurrencies
+local ProfessionQuests = DFH_Constants.ProfessionQuests
 
 DFH_ProfessionContainerMixin = CreateFromMixins(DFH_TodoEventHandler, DFH_ProfessionLoader)
 
@@ -15,12 +16,12 @@ function DFH_ProfessionContainerMixin:OnLoad()
     child.professionIndex = self.professionIndex
   end
 
+  self.weeklyClickInitialized = false
+
   self:LoadProfessions()
 end
 
 function DFH_ProfessionContainerMixin:Update()
-  DFH_Utilities.info("DFH_ProfessionContainerMixin:Update()")
-
   if not self:hasProfession(self.professionIndex) then
     self.Title:SetTitle("Profession " .. self.professionIndex .. " not selected")
     return
@@ -32,8 +33,11 @@ function DFH_ProfessionContainerMixin:Update()
     self.Treatise:Init(self.profession)
   end
 
-  if not self.WeeklyDrops.Button.initialized then
-    self.WeeklyDrops.Button:Init(self.profession)
+  if not self.weeklyClickInitialized then
+    self.weeklyClickInitialized = true
+    self.WeeklyDrops:SetClickCallback(function()
+      self:WaypointClick()
+    end)
   end
 
   local frameHeight = self.Title:GetHeight()
@@ -63,4 +67,18 @@ function DFH_ProfessionContainerMixin:getTitle()
   end
 
   return self.profession.name
+end
+
+function DFH_ProfessionContainerMixin:WaypointClick()
+  if TomTom == nil then
+    DFH_Utilities.error("TomTom required to use this functionality")
+  end
+
+  local entry = ProfessionQuests.WeeklyDrops[self.profession.skillId]
+
+  for i, waypoint in ipairs(entry.waypoints) do
+    if not C_QuestLog.IsQuestFlaggedCompleted(entry.quests[i]) then
+      TomTom:AddWaypoint(waypoint.map, waypoint.x, waypoint.y, waypoint.options)
+    end
+  end
 end

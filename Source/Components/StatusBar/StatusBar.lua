@@ -11,15 +11,7 @@ function DFH_StatusBarMixin:OnLoad()
     -- no op by default
   end
 
-  self.onClickCallback = function()
-    -- no op by default
-  end
-
-  self.onEnterButton = function()
-    -- no op by default
-  end
-
-  self.onLeaveButton = function()
+  self.clickCallback = function()
     -- no op by default
   end
 
@@ -61,6 +53,10 @@ function DFH_StatusBarMixin:OnLeave()
   self.leaveCallback()
 end
 
+function DFH_StatusBarMixin:OnClick()
+  self.clickCallback()
+end
+
 function DFH_StatusBarMixin:SetValue(value)
   self.StatusBarForeground:SetValue(value)
 end
@@ -90,28 +86,20 @@ function DFH_StatusBarMixin:SetLeaveCallback(fn)
   self.leaveCallback = fn
 end
 
-function DFH_StatusBarMixin:SetOnClickCallback(fn)
-  self.onClickCallback = fn
-end
-
-function DFH_StatusBarMixin:SetOnEnterButton(fn)
-  self.onEnterButton = fn
-end
-
-function DFH_StatusBarMixin:SetOnLeaveButton(fn)
-  self.onLeaveButton = fn
+function DFH_StatusBarMixin:SetClickCallback(fn)
+  self.clickCallback = fn
 end
 
 DFH_StatusBarButton = {}
 
-function DFH_StatusBarButton:InitButton()
-end
-
 function DFH_StatusBarButton:OnClick()
+  self:GetParent():OnClick()
 end
 
 function DFH_StatusBarButton:OnEnter()
+  self:GetParent():OnEnter()
 end
 
 function DFH_StatusBarButton:OnLeave()
+  self:GetParent():OnLeave()
 end
