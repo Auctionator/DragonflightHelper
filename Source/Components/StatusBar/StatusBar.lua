@@ -1,3 +1,5 @@
+local SharedMedia = LibStub("LibSharedMedia-3.0")
+
 DFH_StatusBarMixin = {}
 
 function DFH_StatusBarMixin:OnLoad()
@@ -15,9 +17,15 @@ function DFH_StatusBarMixin:OnLoad()
     -- no op by default
   end
 
+  local texture = SharedMedia:Fetch("statusbar", "BantoBar")
   local color = ITEM_QUALITY_COLORS[3]
+
   self.StatusBarBackground:SetStatusBarColor(220, 220, 220, 0.2)
+  self.StatusBarBackground:SetStatusBarTexture(texture)
+  self.StatusBarForeground:SetStatusBarTexture(texture)
+
   self:SetForegroundColor(color.r, color.g, color.b, 1)
+  self:SetBackgroundColor(255, 255, 255, 0.1)
 end
 
 -- function DFH_StatusBarMixin:OnShow()

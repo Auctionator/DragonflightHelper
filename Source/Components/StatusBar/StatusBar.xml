@@ -43,7 +43,6 @@
       </Frame>
 
       <StatusBar parentKey="StatusBarForeground">
-        <BarTexture file="Interface\AddOns\Details\images\BantoBar" />
         <Anchors>
           <Anchor point="TOPLEFT" x="1" />
           <Anchor point="BOTTOMRIGHT" />
@@ -51,7 +50,6 @@
       </StatusBar>
 
       <StatusBar parentKey="StatusBarBackground">
-        <BarTexture file="Interface\AddOns\Details\images\BantoBar" />
         <Anchors>
           <Anchor point="TOPLEFT" x="1" />
           <Anchor point="BOTTOMRIGHT" />
