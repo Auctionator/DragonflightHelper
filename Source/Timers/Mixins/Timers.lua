@@ -10,22 +10,11 @@ function DFH_TimerMixin:OnLoad()
   self:SetReverseFill()
   self:SetMinMaxValues(0, self.frequency * 60)
   self:SetForegroundColor(self.color.r, self.color.g, self.color.b)
-
-  self:InitializeTimes()
-end
-
-function DFH_TimerMixin:InitializeTimes()
-  self.times = {}
-
-  for i = self.startTime, self.endTime, self.frequency do
-    table.insert(self.times, i * 60)
-  end
 end
 
 function DFH_TimerMixin:OnShow()
-  self:FindNextTime()
   self:Update()
-  self.timer = C_Timer.NewTicker(30, function() self:Update() end)
+  self.timer = C_Timer.NewTicker(10, function() self:Update() end)
 end
 
 function DFH_TimerMixin:OnHide()
@@ -35,53 +24,43 @@ function DFH_TimerMixin:OnHide()
   end
 end
 
-function DFH_TimerMixin:FindNextTime()
-  local hour, minute = GetGameTime()
-  local compareValue = hour * 60 + minute
-
-  if self.nextTime ~= nil and compareValue > self.nextTime and self.nextTime == self.times[#self.times] then
-    self.nextTime = self.times[1]
-    return
-  end
-
-  self.nextTime = self.times[1]
-
-  for i = 1, #self.times do
-    if self.nextTime < compareValue then
-      self.nextTime = self.times[i]
-    end
-  end
-end
-
 function DFH_TimerMixin:Update()
   local hour, minute = GetGameTime()
-  local currentTime = hour * 60 + minute + 24 * 60
+  local currentTime = (hour * 60) + minute
 
-  -- Add one day to current time to avoid negative numbers
-  -- Divide by frequency in minutes (yields # of events "today")
-  -- Quantity times frequency in minutes to get number of "event minutes" elapsed in "day"
-  local eventMinutesInDay =
-      math.floor((currentTime + self.startTime * 60) / (self.frequency * 60)) *
-      (self.frequency * 60)
-  -- Add one day to current time to avoid negative numbers
-  -- Offset by start time in the day
-  -- subtract number of event minutes elapsed; gives time since last event
-  local timeSinceLast = currentTime - eventMinutesInDay
-  local timeUntilNext = (self.frequency * 60) - timeSinceLast
-  local eventOccurringNow = timeSinceLast < self.activeThreshold
+  local howManyToday = math.floor((currentTime - (self.startTime * 60)) / (self.frequency * 60))
+  local lastStartTime = howManyToday * self.frequency * 60 + self.startTime * 60
+  local diff = currentTime - lastStartTime
+  local untilNext = self.frequency * 60 - diff
+  local aboutToStart = untilNext <= self.activeThreshold
+  local inProgress = diff < self.activeThreshold
+  -- DFH_Utilities.dump({
+  --   frequency = self.frequency,
+  --   howManyToday = howManyToday,
+  --   lastStartTime = lastStartTime,
+  --   diff = diff,
+  --   untilNext = untilNext,
+  --   aboutToStart = untilNext < 15 and "yes" or "no",
+  --   inProgress = diff < self.frequency * 60 - 15 and "yes" or "no",
+  --   remaining = self.frequency * 60 - diff
+  -- }, self.title)
 
-  DFH_Utilities.info(self.title, timeSinceLast, timeUntilNext)
 
-  if eventOccurringNow then
+  if aboutToStart then
+    self:SetForegroundColor(self.color.r, self.color.g, self.color.b)
+    self:SetMinMaxValues(0, self.frequency * 60)
+    self:SetValue(untilNext)
+    self:SetDescription("About to start - " .. SecondsToTime(untilNext * 60))
+  elseif inProgress then
     self:SetForegroundColor(self.thresholdColor.r, self.thresholdColor.g, self.thresholdColor.b)
     self:SetMinMaxValues(0, self.activeThreshold)
-    self:SetValue(timeSinceLast)
-    self:SetDescription("Active - " .. SecondsToTime(timeSinceLast * 60))
+    self:SetValue(self.activeThreshold - diff)
+    self:SetDescription("Active - " .. SecondsToTime((self.activeThreshold - diff) * 60))
   else
     self:SetForegroundColor(self.color.r, self.color.g, self.color.b)
     self:SetMinMaxValues(0, self.frequency * 60)
-    self:SetValue(timeUntilNext)
-    self:SetDescription(SecondsToTime(timeUntilNext * 60))
+    self:SetValue(untilNext)
+    self:SetDescription(SecondsToTime(untilNext * 60))
   end
 end
 

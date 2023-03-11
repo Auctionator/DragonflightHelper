@@ -68,6 +68,14 @@
     "StaticPopup_Show",
     "SendChatMessage",
     "TomTom",
-    "IsShiftKeyDown"
+    "IsShiftKeyDown",
+    "strmatch",
+    "WOW_PROJECT_ID",
+    "WOW_PROJECT_MAINLINE",
+    "GetLocale",
+    "securecallfunction"
+  ],
+  "Lua.diagnostics.disable": [
+    "deprecated"
   ]
 }

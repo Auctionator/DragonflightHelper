@@ -1,6 +1,3 @@
-local SharedMedia = LibStub:GetLibrary("LibSharedMedia-3.0")
-SharedMedia:Register("statusbar", "BantoBar", [[Interface\AddOns\Details\images\BantoBar]])
-
 DFH_Constants = {
   SkillIds = {
     Alchemy = 171,

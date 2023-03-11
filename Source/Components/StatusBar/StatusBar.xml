@@ -57,6 +57,18 @@
           <Anchor point="BOTTOMRIGHT" />
         </Anchors>
       </StatusBar>
+
+      <Button mixin="DFH_StatusBarButton" parentKey="Button" enableMouse="true">
+        <Anchors>
+          <Anchor point="TOPLEFT" />
+          <Anchor point="BOTTOMRIGHT" />
+        </Anchors>
+        <Scripts>
+          <OnClick method="OnClick" />
+          <OnEnter method="OnEnter" />
+          <OnLeave method="OnLeave" />
+        </Scripts>
+      </Button>
     </Frames>
   </Frame>
 </Ui>
