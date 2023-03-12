@@ -4,6 +4,7 @@
 
   <Script file="KnowledgeCurrencies.lua" />
   <Script file="Quests_Gathering.lua" />
+  <Script file="Quests_ProfessionMasters.lua" />
   <Script file="Quests_Rabul.lua" />
   <Script file="Quests_Treatise.lua" />
   <Script file="Quests_ValdrakkenTrainers.lua" />

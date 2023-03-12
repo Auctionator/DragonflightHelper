@@ -43,8 +43,6 @@ function DFH_ProfessionUpdate:CollapseFrame()
   self:Hide()
   self:SetHeight(1)
 
-  DFH_Utilities.info("Collapsing frame", self.questTypeKey)
-
   -- This should be "TOPLEFT"
   local point, relativeTo, relativePoint = self:GetPoint()
   self:SetPoint(point, relativeTo, relativePoint, 0, 1)
@@ -80,6 +78,12 @@ function DFH_ProfessionUpdate:Update()
   end
 
   if ProfessionQuests[self.questTypeKey][self:getId(self.professionIndex)] == nil then
+    self:CollapseFrame()
+    return
+  end
+
+  DFH_Utilities.info("In ProfessionUpdate")
+  if self.questTypeKey == "ProfessionMasters" and C_QuestLog.IsQuestFlaggedCompleted(ProfessionQuests.ProfessionMasters[self:getId(self.professionIndex)].quests[1]) then
     self:CollapseFrame()
     return
   end

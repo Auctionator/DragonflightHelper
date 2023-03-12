@@ -38,11 +38,6 @@ function DFH_GenericUpdate:update(entry, optionalTitle)
     self:SetLeaveCallback(function()
       GameTooltip:Hide()
     end)
-  else
-    self:SetEnterCallback(function()
-    end)
-    self:SetLeaveCallback(function()
-    end)
   end
 
   if entry.title ~= nil then

@@ -9,7 +9,8 @@ function DFH_ProfessionContainerMixin:OnLoad()
   end
 
   self.professionChildren = {
-    self.Treatise, self.Gathering, self.WeeklyDrops, self.WeeklyServices, self.ValdrakkenTrainers, self.WeeklyProfession
+    self.Treatise, self.Gathering, self.WeeklyDrops, self.WeeklyServices, self.ValdrakkenTrainers,
+    self.WeeklyProfession, self.ProfessionMasters
   }
 
   for _, child in ipairs(self.professionChildren) do
@@ -20,6 +21,7 @@ function DFH_ProfessionContainerMixin:OnLoad()
   end
 
   self.weeklyClickInitialized = false
+  self.professionMasterClickInitialized = false
 
   self:LoadProfessions()
 end
@@ -39,7 +41,14 @@ function DFH_ProfessionContainerMixin:Update()
   if not self.weeklyClickInitialized then
     self.weeklyClickInitialized = true
     self.WeeklyDrops:SetClickCallback(function()
-      self:WaypointClick()
+      self:WeeklyDropClick()
+    end)
+  end
+
+  if not self.professionMasterClickInitialized then
+    self.professionMasterClickInitialized = true
+    self.ProfessionMasters:SetClickCallback(function()
+      self:ProfessionMasterClick()
     end)
   end
 
@@ -72,7 +81,7 @@ function DFH_ProfessionContainerMixin:getTitle()
   return self.profession.name
 end
 
-function DFH_ProfessionContainerMixin:WaypointClick()
+function DFH_ProfessionContainerMixin:WeeklyDropClick()
   if TomTom == nil then
     DFH_Utilities.error("TomTom required to use this functionality")
   end
@@ -84,4 +93,14 @@ function DFH_ProfessionContainerMixin:WaypointClick()
       TomTom:AddWaypoint(waypoint.map, waypoint.x, waypoint.y, waypoint.options)
     end
   end
+end
+
+function DFH_ProfessionContainerMixin:ProfessionMasterClick()
+  if TomTom == nil then
+    DFH_Utilities.error("TomTom required to use this functionality")
+  end
+
+  local waypoint = ProfessionQuests.ProfessionMasters[self.profession.skillId].waypoints[1]
+
+  TomTom:AddWaypoint(waypoint.map, waypoint.x, waypoint.y, waypoint.options)
 end
