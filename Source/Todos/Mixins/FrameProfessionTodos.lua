@@ -14,6 +14,9 @@ function DFH_ProfessionContainerMixin:OnLoad()
 
   for _, child in ipairs(self.professionChildren) do
     child.professionIndex = self.professionIndex
+    child:AfterLayout(function()
+      self:Update()
+    end)
   end
 
   self.weeklyClickInitialized = false

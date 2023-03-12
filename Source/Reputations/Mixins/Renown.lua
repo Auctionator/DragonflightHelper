@@ -7,6 +7,9 @@ function DFH_RenownMixin:Init()
   self.factionInfo:init(self.factionId)
 
   local color = self.factionInfo:getFactionColor()
+
+  DFH_Utilities.dump(color, self.factionInfo.name)
+
   self:SetForegroundColor(color.r, color.g, color.b, 1)
   self:Update()
 

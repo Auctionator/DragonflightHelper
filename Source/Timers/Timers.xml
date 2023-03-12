@@ -20,6 +20,10 @@
           <KeyValue key="duration" value="15" type="number" />
           <KeyValue key="colorIndex" value="3" type="number" />
           <KeyValue key="activeThreshold" value="15" type="number" />
+          <KeyValue key="tt_x" value="13.57" type="number" />
+          <KeyValue key="tt_y" value="48.58" type="number" />
+          <KeyValue key="tt_map" value="2024" type="number" />
+          <KeyValue key="tt_title" value="Feast" type="string" />
         </KeyValues>
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.Title" relativePoint="BOTTOMLEFT" y="-2" />
@@ -33,6 +37,10 @@
           <KeyValue key="frequency" value="2" type="number" />
           <KeyValue key="colorIndex" value="4" type="number" />
           <KeyValue key="activeThreshold" value="15" type="number" />
+          <KeyValue key="tt_x" value="30.51" type="number" />
+          <KeyValue key="tt_y" value="77.91" type="number" />
+          <KeyValue key="tt_map" value="2022" type="number" />
+          <KeyValue key="tt_title" value="Siege starting area" type="string" />
         </KeyValues>
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.FeastTimer" relativePoint="BOTTOMLEFT" y="-2" />

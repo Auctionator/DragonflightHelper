@@ -28,16 +28,49 @@ function DFH_GenericUpdate:update(entry, optionalTitle)
 
   self:SetMinMaxValues(0, completionCount)
 
-  local onQuestMarker = isOnQuest and "* " or ""
+  if isOnQuest then
+    local onQuestColor = FACTION_BAR_COLORS[4]
+    self:SetBackgroundColor(onQuestColor.r, onQuestColor.g, onQuestColor.b, 0.2)
+
+    self:SetEnterCallback(function()
+      self:ShowQuestTooltip(onQuestId)
+    end)
+    self:SetLeaveCallback(function()
+      GameTooltip:Hide()
+    end)
+  else
+    self:SetEnterCallback(function()
+    end)
+    self:SetLeaveCallback(function()
+    end)
+  end
 
   if entry.title ~= nil then
-    self:SetTitle(onQuestMarker .. entry.title)
+    self:SetTitle(entry.title)
   elseif optionalTitle ~= nil then
-    self:SetTitle(onQuestMarker .. optionalTitle)
+    self:SetTitle(optionalTitle)
   else
-    self:SetTitle(onQuestMarker .. C_QuestLog.GetTitleForQuestID(entry.quests[1]))
+    self:SetTitle(C_QuestLog.GetTitleForQuestID(entry.quests[1]))
   end
 
   self:SetDescription(completed .. " / " .. completionCount)
   self:SetValue(completed)
+end
+
+function DFH_GenericUpdate:ShowQuestTooltip(questId)
+  GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+
+  local title = C_TaskQuest.GetQuestInfoByQuestID(questId)
+  local objectives = C_QuestLog.GetQuestObjectives(questId)
+
+  GameTooltip_SetTitle(GameTooltip, "You are on this quest", HIGHLIGHT_FONT_COLOR)
+  GameTooltip_AddBlankLineToTooltip(GameTooltip)
+
+  GameTooltip_AddHighlightLine(GameTooltip, title)
+
+  for _, objective in ipairs(objectives) do
+    GameTooltip_AddNormalLine(GameTooltip, objective.text)
+  end
+
+  GameTooltip:Show()
 end

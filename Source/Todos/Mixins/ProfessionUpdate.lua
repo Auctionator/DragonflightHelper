@@ -5,6 +5,7 @@ DFH_TreatiseUpdater = {}
 function DFH_TreatiseUpdater:Init(profession)
   self.initialized = true
   self.profession = profession
+  self.collapsed = false
 
   if self.profession == nil or self.profession.skillId == nil then
     self.completed = true
@@ -34,19 +35,27 @@ end
 
 DFH_ProfessionUpdate = CreateFromMixins(DFH_GenericUpdate)
 
+function DFH_ProfessionUpdate:AfterLayout(fn)
+  self.afterLayout = fn
+end
+
 function DFH_ProfessionUpdate:CollapseFrame()
   self:Hide()
   self:SetHeight(1)
+
+  DFH_Utilities.info("Collapsing frame", self.questTypeKey)
 
   -- This should be "TOPLEFT"
   local point, relativeTo, relativePoint = self:GetPoint()
   self:SetPoint(point, relativeTo, relativePoint, 0, 1)
   self.collapsed = true
+
+  if self.afterLayout ~= nil then
+    self.afterLayout()
+  end
 end
 
 function DFH_ProfessionUpdate:Update()
-  self.collapsed = false
-
   if self.professionIndex == nil then
     DFH_Utilities.error("[INCORRECT USAGE]", "DFH_ProfessionUpdate: A professionIndex must be provided")
     self:SetTitle("Unknown profession")

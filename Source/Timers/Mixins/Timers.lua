@@ -9,7 +9,22 @@ function DFH_TimerMixin:OnLoad()
   self:SetTitle(self.title)
   self:SetReverseFill()
   self:SetMinMaxValues(0, self.frequency * 60)
-  self:SetForegroundColor(self.color.r, self.color.g, self.color.b)
+  self:SetForegroundColor(self.color.r, self.color.g, self.color.b, 1)
+
+  local waypoint = {
+    map = self.tt_map,
+    x = self.tt_x / 100,
+    y = self.tt_y / 100,
+    options = { title = self.tt_title }
+  }
+
+  self:SetClickCallback(function()
+    if TomTom == nil then
+      DFH_Utilities.error("TomTom required to use this functionality")
+    end
+
+    TomTom:AddWaypoint(waypoint.map, waypoint.x, waypoint.y, waypoint.options)
+  end)
 end
 
 function DFH_TimerMixin:OnShow()

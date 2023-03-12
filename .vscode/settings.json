@@ -74,7 +74,8 @@
     "WOW_PROJECT_MAINLINE",
     "GetLocale",
     "securecallfunction",
-    "HIGHLIGHT_FONT_COLOR"
+    "HIGHLIGHT_FONT_COLOR",
+    "C_TaskQuest"
   ],
   "Lua.diagnostics.disable": [
     "deprecated"
