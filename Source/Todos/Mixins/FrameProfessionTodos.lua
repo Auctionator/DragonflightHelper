@@ -9,8 +9,8 @@ function DFH_ProfessionContainerMixin:OnLoad()
   end
 
   self.professionChildren = {
-    self.Treatise, self.Gathering, self.WeeklyDrops, self.WeeklyServices, self.ValdrakkenTrainers,
-    self.WeeklyProfession, self.ProfessionMasters
+    self.Treatise, self.Gathering, self.WeeklyDrops, self.OpenWorldKnowledgeTreasures,
+    self.WeeklyServices, self.ValdrakkenTrainers, self.WeeklyProfession, self.ProfessionMasters
   }
 
   for _, child in ipairs(self.professionChildren) do
@@ -22,6 +22,7 @@ function DFH_ProfessionContainerMixin:OnLoad()
 
   self.weeklyClickInitialized = false
   self.professionMasterClickInitialized = false
+  self.knowledgeTreasuresClickInitialized = false
   self.firstCraftCounts = {}
 
   self:LoadProfessions()
@@ -50,6 +51,13 @@ function DFH_ProfessionContainerMixin:Update()
     self.professionMasterClickInitialized = true
     self.ProfessionMasters:SetClickCallback(function()
       self:ProfessionMasterClick()
+    end)
+  end
+
+  if not self.knowledgeTreasuresClickInitialized then
+    self.knowledgeTreasuresClickInitialized = true
+    self.OpenWorldKnowledgeTreasures:SetClickCallback(function()
+      self:KnowledgeTreasureClick()
     end)
   end
 
@@ -119,7 +127,21 @@ function DFH_ProfessionContainerMixin:ProfessionMasterClick()
     DFH_Utilities.error("TomTom required to use this functionality")
   end
 
-  local waypoint = ProfessionQuests.ProfessionMasters[self.profession.skillId].waypoints[1]
+  local waypoint = ProfessionQuests.ProfessionMasters[self.profession.skillId][1].waypoint
 
   TomTom:AddWaypoint(waypoint.map, waypoint.x, waypoint.y, waypoint.options)
+end
+
+function DFH_ProfessionContainerMixin:KnowledgeTreasureClick()
+  if TomTom == nil then
+    DFH_Utilities.error("TomTom required to use this functionality")
+  end
+
+  local entries = ProfessionQuests.OpenWorldKnowledgeTreasures[self.profession.skillId]
+
+  for _, entry in ipairs(entries) do
+    if not C_QuestLog.IsQuestFlaggedCompleted(entry.questId) then
+      TomTom:AddWaypoint(entry.waypoint.map, entry.waypoint.x, entry.waypoint.y, entry.waypoint.options)
+    end
+  end
 end

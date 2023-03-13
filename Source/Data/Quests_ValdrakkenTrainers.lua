@@ -1,15 +1,48 @@
 local SkillIds = DFH_Constants.SkillIds
 
 DFH_Constants.ProfessionQuests.ValdrakkenTrainers = {
-  [SkillIds.Alchemy] = { title = "Conflago <Trainer>", quests = { 70532, 70533, 70530, 70531 }, completionCount = 1 },
-  [SkillIds.Blacksmithing] = { title = "Metalshaper Kuroko <Trainer>", quests = { 70234, 70233, 70235, 70211 }, completionCount = 1 },
-  [SkillIds.Enchanting] = { title = "Soragosa <Trainer>", quests = { 72175, 72173, 72172, 72155 }, completionCount = 1 },
-  [SkillIds.Engineering] = { title = "Clinkyclick Shatterboom <Trainer>", quests = { 70540, 70539, 70545, 70557 }, completionCount = 1 },
-  [SkillIds.Herbalism] = { title = "Agrikus <Trainer>", quests = { 70614, 70615, 70613, 70616 }, completionCount = 1 },
-  [SkillIds.Inscription] = { title = "Talendara <Trainer>", quests = { 70561, 70558, 70559, 70560 }, completionCount = 1 },
-  [SkillIds.Jewelcrafting] = { title = "Tuluradormi <Trainer>", quests = { 70565, 70564, 70563, 70562 }, completionCount = 1 },
-  [SkillIds.Leatherworking] = { title = "Hideshaper Koruz <Trainer>", quests = { 70571, 70569, 70568, 70567 }, completionCount = 1 },
-  [SkillIds.Mining] = { title = "Sekita the Burrower <Trainer>", quests = { 72156, 70617, 70618, 72157 }, completionCount = 1 },
-  [SkillIds.Skinning] = { title = "Ralathor the Rugged <Trainer>", quests = { 72158, 70619, 72159, 70620 }, completionCount = 1 },
-  [SkillIds.Tailoring] = { title = "Threadfinder Fulafong <Trainer>", quests = { 70587, 70586, 70572, 70582 }, completionCount = 1 },
+  [SkillIds.Alchemy] = {
+    title = "Conflago <Trainer>",
+    completionCount = 1,
+    { questId = 70532 }, { questId = 70533 }, { questId = 70530 }, { questId = 70531 } },
+  [SkillIds.Blacksmithing] = {
+    title = "Metalshaper Kuroko <Trainer>",
+    completionCount = 1,
+    { questId = 70234 }, { questId = 70233 }, { questId = 70235 }, { questId = 70211 } },
+  [SkillIds.Enchanting] = {
+    title = "Soragosa <Trainer>",
+    completionCount = 1,
+    { questId = 72175 }, { questId = 72173 }, { questId = 72172 }, { questId = 72155 } },
+  [SkillIds.Engineering] = {
+    title = "Clinkyclick Shatterboom <Trainer>",
+    completionCount = 1,
+    { questId = 70540 }, { questId = 70539 }, { questId = 70545 }, { questId = 70557 } },
+  [SkillIds.Herbalism] = {
+    title = "Agrikus <Trainer>",
+    completionCount = 1,
+    { questId = 70614 }, { questId = 70615 }, { questId = 70613 }, { questId = 70616 } },
+  [SkillIds.Inscription] = {
+    title = "Talendara <Trainer>",
+    completionCount = 1,
+    { questId = 70561 }, { questId = 70558 }, { questId = 70559 }, { questId = 70560 } },
+  [SkillIds.Jewelcrafting] = {
+    title = "Tuluradormi <Trainer>",
+    completionCount = 1,
+    { questId = 70565 }, { questId = 70564 }, { questId = 70563 }, { questId = 70562 } },
+  [SkillIds.Leatherworking] = {
+    title = "Hideshaper Koruz <Trainer>",
+    completionCount = 1,
+    { questId = 70571 }, { questId = 70569 }, { questId = 70568 }, { questId = 70567 } },
+  [SkillIds.Mining] = {
+    title = "Sekita the Burrower <Trainer>",
+    completionCount = 1,
+    { questId = 72156 }, { questId = 70617 }, { questId = 70618 }, { questId = 72157 } },
+  [SkillIds.Skinning] = {
+    title = "Ralathor the Rugged <Trainer>",
+    completionCount = 1,
+    { questId = 72158 }, { questId = 70619 }, { questId = 72159 }, { questId = 70620 } },
+  [SkillIds.Tailoring] = {
+    title = "Threadfinder Fulafong <Trainer>",
+    completionCount = 1,
+    { questId = 70587 }, { questId = 70586 }, { questId = 70572 }, { questId = 70582 } },
 }

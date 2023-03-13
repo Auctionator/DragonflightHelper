@@ -1,29 +1,29 @@
 DFH_GenericUpdate = {}
 
-function DFH_GenericUpdate:update(entry, optionalTitle)
+function DFH_GenericUpdate:update(entries, optionalTitle)
   local completed = 0
-  local completionCount = entry.completionCount
+  local completionCount = entries.completionCount
   local isOnQuest = false
   local onQuestId = 0
 
   if completionCount == nil then
-    completionCount = #entry.quests
+    completionCount = #entries
   end
 
-  for _, questId in ipairs(entry.quests) do
-    if C_QuestLog.IsOnQuest(questId) then
+  for _, entry in ipairs(entries) do
+    if C_QuestLog.IsOnQuest(entry.questId) then
       isOnQuest = true
-      onQuestId = questId
+      onQuestId = entry.questId
     end
 
-    if C_QuestLog.IsQuestFlaggedCompleted(questId) then
+    if C_QuestLog.IsQuestFlaggedCompleted(entry.questId) then
       completed = completed + 1
     end
   end
 
   -- it seems like completing any Aiding the Accord quest marks all Aiding the Accord quests as completed?
-  if completed > (entry.completionCount or #entry.quests) then
-    completed = entry.completionCount
+  if completed > (completionCount or #entries) then
+    completed = completionCount
   end
 
   self:SetMinMaxValues(0, completionCount)
@@ -40,12 +40,12 @@ function DFH_GenericUpdate:update(entry, optionalTitle)
     end)
   end
 
-  if entry.title ~= nil then
-    self:SetTitle(entry.title)
+  if entries.title ~= nil then
+    self:SetTitle(entries.title)
   elseif optionalTitle ~= nil then
     self:SetTitle(optionalTitle)
   else
-    self:SetTitle(C_QuestLog.GetTitleForQuestID(entry.quests[1]))
+    self:SetTitle(C_QuestLog.GetTitleForQuestID(entries[1].questId))
   end
 
   self:SetDescription(completed .. " / " .. completionCount)

@@ -63,9 +63,17 @@
           <KeyValue key="questTypeKey" value="ProfessionMasters" type="string" />
         </KeyValues>
       </Frame>
-      <Frame parentKey="WeeklyDrops" inherits="DFH_ProfessionTodoItemFrame" enableMouse="true">
+      <Frame parentKey="OpenWorldKnowledgeTreasures" inherits="DFH_ProfessionTodoItemFrame" enableMouse="true">
         <Anchors>
           <Anchor point="TOPLEFT" relativeKey="$parent.ProfessionMasters" relativePoint="BOTTOMLEFT" y="-2" />
+        </Anchors>
+        <KeyValues>
+          <KeyValue key="questTypeKey" value="OpenWorldKnowledgeTreasures" type="string" />
+        </KeyValues>
+      </Frame>
+      <Frame parentKey="WeeklyDrops" inherits="DFH_ProfessionTodoItemFrame" enableMouse="true">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeKey="$parent.OpenWorldKnowledgeTreasures" relativePoint="BOTTOMLEFT" y="-2" />
         </Anchors>
         <KeyValues>
           <KeyValue key="questTypeKey" value="WeeklyDrops" type="string" />

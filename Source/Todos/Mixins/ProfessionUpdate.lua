@@ -72,18 +72,7 @@ function DFH_ProfessionUpdate:Update()
     return
   end
 
-  if ProfessionQuests[self.questTypeKey] == nil then
-    self:CollapseFrame()
-    return
-  end
-
-  if ProfessionQuests[self.questTypeKey][self:getId(self.professionIndex)] == nil then
-    self:CollapseFrame()
-    return
-  end
-
-  if self.questTypeKey == "ProfessionMasters" and C_QuestLog.IsQuestFlaggedCompleted(ProfessionQuests.ProfessionMasters[self:getId(self.professionIndex)].quests[1]) then
-    self:CollapseFrame()
+  if self:CheckForCollapsedFrames() then
     return
   end
 
@@ -102,6 +91,44 @@ function DFH_ProfessionUpdate:Update()
   end
 
   DFH_GenericUpdate.update(self, entry[self:getId(self.professionIndex)], entry.title)
+end
+
+function DFH_ProfessionUpdate:CheckForCollapsedFrames()
+  -- This really needs to be moved out so I can just turn off these checks
+  -- for one time knowledge point items per toon once they are all completed
+  -- Until that day:
+  if ProfessionQuests[self.questTypeKey] == nil then
+    self:CollapseFrame()
+    return true
+  end
+
+  if ProfessionQuests[self.questTypeKey][self:getId(self.professionIndex)] == nil then
+    self:CollapseFrame()
+    return true
+  end
+
+  if self.questTypeKey == "ProfessionMasters" and C_QuestLog.IsQuestFlaggedCompleted(ProfessionQuests.ProfessionMasters[self:getId(self.professionIndex)][1].questId) then
+    self:CollapseFrame()
+    return true
+  end
+
+  if self.questTypeKey == "OpenWorldKnowledgeTreasures" and ProfessionQuests.OpenWorldKnowledgeTreasures[self:getId(self.professionIndex)] ~= nil then
+    local completed = 0
+    local quests = ProfessionQuests.OpenWorldKnowledgeTreasures[self:getId(self.professionIndex)]
+
+    for _, entry in ipairs(quests) do
+      if C_QuestLog.IsQuestFlaggedCompleted(entry.questId) then
+        completed = completed + 1
+      end
+    end
+
+    if completed == #quests then
+      self:CollapseFrame()
+      return true
+    end
+  end
+
+  return false
 end
 
 function DFH_ProfessionUpdate:ShowItemsTooltip(entry, optionalTitle)

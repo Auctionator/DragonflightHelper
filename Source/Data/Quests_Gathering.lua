@@ -1,20 +1,40 @@
 local SkillIds = DFH_Constants.SkillIds
 
 DFH_Constants.ProfessionQuests.Gathering = {
-  [SkillIds.Herbalism] = { title = "Dreambloom", quests = { 71857, 71858, 71859, 71860, 71861, 71864 } },
-  [SkillIds.Mining] = { title = "Iridescent Ore", quests = { 72160, 72161, 72162, 72163, 72164, 72165 } },
-  [SkillIds.Skinning] = { title = "Curious Hide", quests = { 70381, 70383, 70384, 70385, 70386, 70389 } },
-  [SkillIds.Alchemy] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66373, 66374 }, items = { 193891, 193897 } },
-  [SkillIds.Blacksmithing] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66381, 66382 }, items = { 192131,
-    192132 } },
-  [SkillIds.Enchanting] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66377, 66378 }, items = { 193900, 193901 } },
-  [SkillIds.Engineering] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66379, 66380 }, items = { 193902,
-    193903 } },
-  [SkillIds.Inscription] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66375, 66376 }, items = { 193904,
-    193905 } },
-  [SkillIds.Jewelcrafting] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66388, 66389 }, items = { 193907,
-    193909 } },
-  [SkillIds.Leatherworking] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66384, 66385 }, items = { 193910,
-    193913 } },
-  [SkillIds.Tailoring] = { title = "Disturbed Dirt or Scout's Pack", quests = { 66386, 66387 }, items = { 193899, 193898 } },
+  [SkillIds.Herbalism] = {
+    title = "Dreambloom",
+    { questId = 71857 }, { questId = 71858 }, { questId = 71859 },
+    { questId = 71860 }, { questId = 71861 }, { questId = 71864 } },
+  [SkillIds.Mining] = {
+    title = "Iridescent Ore",
+    { questId = 72160 }, { questId = 72161 }, { questId = 72162 },
+    { questId = 72163 }, { questId = 72164 }, { questId = 72165 } },
+  [SkillIds.Skinning] = {
+    title = "Curious Hide",
+    { questId = 70381 }, { questId = 70383 }, { questId = 70384 },
+    { questId = 70385 }, { questId = 70386 }, { questId = 70389 } },
+  [SkillIds.Alchemy] = {
+    title = "Disturbed Dirt or Scout's Pack",
+    { questId = 66373, item = 193891 }, { questId = 66374, item = 193897 }, },
+  [SkillIds.Blacksmithing] = {
+    title = "Disturbed Dirt or Scout's Pack",
+    { questId = 66381, item = 192131 }, { questId = 66382, item = 192132 }, },
+  [SkillIds.Enchanting] = {
+    title = "Disturbed Dirt or Scout's Pack",
+    { questId = 66377, item = 193900 }, { questId = 66378, item = 193901 }, },
+  [SkillIds.Engineering] = {
+    title = "Disturbed Dirt or Scout's Pack",
+    { questId = 66379, item = 193902 }, { questId = 66380, item = 193903 }, },
+  [SkillIds.Inscription] = {
+    title = "Disturbed Dirt or Scout's Pack",
+    { questId = 66375, item = 193904 }, { questId = 66376, item = 193905 }, },
+  [SkillIds.Jewelcrafting] = {
+    title = "Disturbed Dirt or Scout's Pack",
+    { questId = 66388, item = 193907 }, { questId = 66389, item = 193909 }, },
+  [SkillIds.Leatherworking] = {
+    title = "Disturbed Dirt or Scout's Pack",
+    { questId = 66384, item = 193910 }, { questId = 66385, item = 193913 }, },
+  [SkillIds.Tailoring] = {
+    title = "Disturbed Dirt or Scout's Pack",
+    { questId = 66386, item = 193899 }, { questId = 66387, item = 193898 }, },
 }
