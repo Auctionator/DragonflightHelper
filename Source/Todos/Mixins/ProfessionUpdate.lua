@@ -82,7 +82,6 @@ function DFH_ProfessionUpdate:Update()
     return
   end
 
-  DFH_Utilities.info("In ProfessionUpdate")
   if self.questTypeKey == "ProfessionMasters" and C_QuestLog.IsQuestFlaggedCompleted(ProfessionQuests.ProfessionMasters[self:getId(self.professionIndex)].quests[1]) then
     self:CollapseFrame()
     return

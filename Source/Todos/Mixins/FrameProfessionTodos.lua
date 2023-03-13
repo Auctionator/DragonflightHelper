@@ -22,6 +22,7 @@ function DFH_ProfessionContainerMixin:OnLoad()
 
   self.weeklyClickInitialized = false
   self.professionMasterClickInitialized = false
+  self.firstCraftCounts = {}
 
   self:LoadProfessions()
 end
@@ -66,19 +67,37 @@ end
 
 function DFH_ProfessionContainerMixin:skillIsLevel25()
   -- TODO could add some messaging or hide/show based on availability
-  return self.profession.rank >= 25
+  return self.profession.skillLevel >= 25
 end
 
 function DFH_ProfessionContainerMixin:getTitle()
-  if self:skillIsLevel25() and KnowledgeCurrencies[self.profession.skillId] ~= nil then
+  -- local firstCraftDisplay = " [?]"
+  local unspentPointDisplay = " (0)"
+
+  -- if self.tradeSkillShowing then
+  --   local profession = C_TradeSkillUI.GetChildProfessionInfos()[1]
+
+  --   for _, recipeId in ipairs(C_TradeSkillUI.GetFilteredRecipeIDs()) do
+  --     local recipe = C_TradeSkillUI.GetRecipeInfo(recipeId)
+  --     self.firstCraftCounts[self.profession.skillId] = 0
+
+  --     if C_TradeSkillUI.IsRecipeInSkillLine(recipeId, profession.professionID) and recipe.learned and recipe.firstCraft then
+  --       self.firstCraftCounts[self.profession.skillId] = self.firstCraftCounts[self.profession.skillId] + 1
+  --     end
+  --   end
+
+  --   firstCraftDisplay = " [" .. self.firstCraftCounts[self.profession.skillId] .. "]"
+  -- end
+
+  if KnowledgeCurrencies[self.profession.skillId] ~= nil then
     local unspentPoints = C_CurrencyInfo.GetCurrencyInfo(KnowledgeCurrencies[self.profession.skillId]).quantity
 
     if unspentPoints > 0 then
-      return self.profession.name .. " (" .. unspentPoints .. ")"
+      unspentPointDisplay = " (" .. unspentPoints .. ")"
     end
   end
 
-  return self.profession.name
+  return self.profession.name .. unspentPointDisplay
 end
 
 function DFH_ProfessionContainerMixin:WeeklyDropClick()

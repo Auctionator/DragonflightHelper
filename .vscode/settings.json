@@ -75,7 +75,8 @@
     "GetLocale",
     "securecallfunction",
     "HIGHLIGHT_FONT_COLOR",
-    "C_TaskQuest"
+    "C_TaskQuest",
+    "Professions"
   ],
   "Lua.diagnostics.disable": [
     "deprecated"

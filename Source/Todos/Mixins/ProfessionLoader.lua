@@ -55,11 +55,9 @@ function DFH_ProfessionLoader:initializeProfession(professionIdentifier, index)
 
   self.professionInfo[index] = {
     name = name,
-    skillLineName = skillLineName,
     initialized = true,
     skillId = skillLine,
-    rank = rank,
-    texture = texture
+    skillLevel = rank,
   }
 end
 
