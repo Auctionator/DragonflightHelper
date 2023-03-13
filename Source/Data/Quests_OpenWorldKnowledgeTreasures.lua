@@ -93,7 +93,7 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
       },
     },
     {
-      questId = 0,
+      questId = 70313,
       item = 201004,
       waypoint = {
         map = MapIds.OhnAhranPlains,
@@ -103,7 +103,7 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
       },
     },
     {
-      questId = 0,
+      questId = 70353,
       item = 201009,
       waypoint = {
         map = MapIds.OhnAhranPlains,
@@ -113,12 +113,12 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
       },
     },
     {
-      questId = 0,
+      questId = 70314,
       item = 201011,
       waypoint = { map = MapIds.AzureSpan, x = 53.1 / 100, y = 65.3 / 100, options = { title = "Spelltouched Tongs" } },
     },
     {
-      questId = 0,
+      questId = 70311,
       item = 201006,
       waypoint = { map = MapIds.Thaldraszus, x = 52.2 / 100, y = 80.5 / 100, options = { title = "Draconic Flux" } },
     }
