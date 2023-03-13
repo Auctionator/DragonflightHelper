@@ -12,7 +12,7 @@ function DFH_TreatiseUpdater:Init(profession)
     return
   else
     self.completed = false
-    self.treatiseQuestId = ProfessionQuests.Treatise[self.profession.skillId].quests[1]
+    self.treatiseQuestId = ProfessionQuests.Treatise[self.profession.skillId][1].questId
 
     if C_QuestLog.IsQuestFlaggedCompleted(self.treatiseQuestId) then
       self.completed = true
