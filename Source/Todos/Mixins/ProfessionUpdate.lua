@@ -76,21 +76,30 @@ function DFH_ProfessionUpdate:Update()
     return
   end
 
-  local entry = ProfessionQuests[self.questTypeKey]
+  local questTypeEntry = ProfessionQuests[self.questTypeKey]
+  local entry = questTypeEntry[self:getId(self.professionIndex)]
 
-  if ProfessionQuests[self.questTypeKey][self:getId(self.professionIndex)].items ~= nil then
-    self.items = ProfessionQuests[self.questTypeKey][self:getId(self.professionIndex)].items
+  if entry ~= nil then
+    self.items = {}
 
-    self:SetEnterCallback(function()
-      self:ShowItemsTooltip(entry[self:getId(self.professionIndex)], entry.title)
-    end)
+    for _, questEntry in ipairs(entry) do
+      if questEntry.item ~= nil then
+        tinsert(self.items, questEntry.item)
+      end
+    end
 
-    self:SetLeaveCallback(function()
-      GameTooltip:Hide()
-    end)
+    if #self.items > 0 then
+      self:SetEnterCallback(function()
+        self:ShowItemsTooltip(entry, questTypeEntry)
+      end)
+
+      self:SetLeaveCallback(function()
+        GameTooltip:Hide()
+      end)
+    end
   end
 
-  DFH_GenericUpdate.update(self, entry[self:getId(self.professionIndex)], entry.title)
+  DFH_GenericUpdate.update(self, entry, questTypeEntry.title)
 end
 
 function DFH_ProfessionUpdate:CheckForCollapsedFrames()
@@ -131,11 +140,11 @@ function DFH_ProfessionUpdate:CheckForCollapsedFrames()
   return false
 end
 
-function DFH_ProfessionUpdate:ShowItemsTooltip(entry, optionalTitle)
+function DFH_ProfessionUpdate:ShowItemsTooltip(entry, questTypeEntry)
   GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
 
   GameTooltip_SetTitle(GameTooltip,
-    (optionalTitle or entry.title or "") .. " (" .. self:getName(self.professionIndex) .. ")",
+    (questTypeEntry.title or entry.title or "") .. " (" .. self:getName(self.professionIndex) .. ")",
     HIGHLIGHT_FONT_COLOR)
 
   if self.questTypeKey == "WeeklyDrops" then
@@ -147,16 +156,16 @@ function DFH_ProfessionUpdate:ShowItemsTooltip(entry, optionalTitle)
   if entry.description ~= nil then
     GameTooltip_AddHighlightLine(
       GameTooltip,
-      entry.description
+      questTypeEntry.description
     )
     GameTooltip_AddBlankLineToTooltip(GameTooltip)
   end
 
   local completed = 0
 
-  for index, itemId in ipairs(entry.items) do
-    if not C_QuestLog.IsQuestFlaggedCompleted(entry.quests[index]) then
-      local item = Item:CreateFromItemID(itemId)
+  for index, questEntry in ipairs(entry) do
+    if not C_QuestLog.IsQuestFlaggedCompleted(questEntry.questId) then
+      local item = Item:CreateFromItemID(questEntry.item)
 
       item:ContinueOnItemLoad(function()
         local itemName = item:GetItemName();
@@ -170,7 +179,7 @@ function DFH_ProfessionUpdate:ShowItemsTooltip(entry, optionalTitle)
     end
   end
 
-  if completed == #entry.quests then
+  if completed == #entry then
     GameTooltip_AddHighlightLine(GameTooltip, "All items found this week")
   end
 

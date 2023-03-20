@@ -113,11 +113,11 @@ function DFH_ProfessionContainerMixin:WeeklyDropClick()
     DFH_Utilities.error("TomTom required to use this functionality")
   end
 
-  local entry = ProfessionQuests.WeeklyDrops[self.profession.skillId]
+  local skillEntry = ProfessionQuests.WeeklyDrops[self.profession.skillId]
 
-  for i, waypoint in ipairs(entry.waypoints) do
-    if not C_QuestLog.IsQuestFlaggedCompleted(entry.quests[i]) then
-      TomTom:AddWaypoint(waypoint.map, waypoint.x, waypoint.y, waypoint.options)
+  for i, entry in ipairs(skillEntry) do
+    if not C_QuestLog.IsQuestFlaggedCompleted(entry.questId) then
+      TomTom:AddWaypoint(entry.waypoint.map, entry.waypoint.x, entry.waypoint.y, entry.waypoint.options)
     end
   end
 end

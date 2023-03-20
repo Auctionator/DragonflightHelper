@@ -76,9 +76,9 @@
     "securecallfunction",
     "HIGHLIGHT_FONT_COLOR",
     "C_TaskQuest",
-    "Professions"
+    "Professions",
+    "C_DateAndTime",
+    "tinsert"
   ],
-  "Lua.diagnostics.disable": [
-    "deprecated"
-  ]
+  "Lua.diagnostics.disable": ["deprecated"]
 }
