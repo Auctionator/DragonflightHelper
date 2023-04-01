@@ -78,7 +78,9 @@
     "C_TaskQuest",
     "Professions",
     "C_DateAndTime",
-    "tinsert"
+    "tinsert",
+    "GetCurrentRegion",
+    "GetServerTime"
   ],
   "Lua.diagnostics.disable": ["deprecated"]
 }

@@ -12,6 +12,6 @@ function DFH_ProfessionStatusBar:OnLoad()
   local completedColor = FACTION_BAR_COLORS[5]
   local incompleteColor = FACTION_BAR_COLORS[1]
 
-  self:SetBackgroundColor(incompleteColor.r, incompleteColor.g, incompleteColor.b, 0.3)
+  self:SetBackgroundColor(incompleteColor.r, incompleteColor.g, incompleteColor.b, 0.4)
   self:SetForegroundColor(completedColor.r, completedColor.g, completedColor.b)
 end

@@ -14,9 +14,9 @@
       <Frame parentKey="FeastTimer" inherits="DFH_StatusBarFrame" mixin="DFH_FeastTimerMixin">
         <KeyValues>
           <KeyValue key="title" value="Feast Timer" type="string" />
+          <KeyValue key="frequency" value="1.5" type="number" />
           <KeyValue key="startTime" value="1" type="number" />
           <KeyValue key="endTime" value="24" type="number" />
-          <KeyValue key="frequency" value="1.5" type="number" />
           <KeyValue key="duration" value="15" type="number" />
           <KeyValue key="colorIndex" value="3" type="number" />
           <KeyValue key="activeThreshold" value="15" type="number" />
