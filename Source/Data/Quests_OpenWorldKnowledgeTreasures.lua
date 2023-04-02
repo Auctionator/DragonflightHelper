@@ -58,32 +58,47 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
   },
   [SkillIds.Blacksmithing] = {
     {
-      questId = 0,
+      questId = 70230,
       item = 198791,
       waypoint = {
         map = MapIds.WakingShore,
         x = 56.4 / 100,
         y = 19.5 / 100,
-        options = { title = "Glimmer of Blacksmithing Wisdom" }
+        options = { title = "Glimmer of Blacksmithing Wisdom (Take crafting mats for a primal alloy)" }
       }
     },
     {
-      questId = 0,
+      questId = 70246,
       item = 201007,
-      waypoint = { map = MapIds.WakingShore, x = 22.0 / 100, y = 87.0 / 100, options = { title = "Ancient Monument" } },
+      waypoint = {
+        map = MapIds.WakingShore,
+        x = 22.0 / 100,
+        y = 87.0 / 100,
+        options = { title = "Ancient Monument" }
+      },
     },
     {
-      questId = 0,
+      questId = 70312,
       item = 201005,
-      waypoint = { map = MapIds.WakingShore, x = 65.5 / 100, y = 25.7 / 100, options = { title = "Curious Ingots" } }
+      waypoint = {
+        map = MapIds.WakingShore,
+        x = 65.5 / 100,
+        y = 25.7 / 100,
+        options = { title = "Curious Ingots" }
+      }
     },
     {
-      questId = 0,
+      questId = 70296,
       item = 201008,
-      waypoint = { map = MapIds.WakingShore, x = 35.5 / 100, y = 64.3 / 100, options = { title = "Molten Ingot" } }
+      waypoint = {
+        map = MapIds.WakingShore,
+        x = 35.5 / 100,
+        y = 64.3 / 100,
+        options = { title = "Molten Ingot" }
+      }
     },
     {
-      questId = 0,
+      questId = 70310,
       item = 201010,
       waypoint = {
         map = MapIds.WakingShore,
@@ -115,12 +130,22 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
     {
       questId = 70314,
       item = 201011,
-      waypoint = { map = MapIds.AzureSpan, x = 53.1 / 100, y = 65.3 / 100, options = { title = "Spelltouched Tongs" } },
+      waypoint = {
+        map = MapIds.AzureSpan,
+        x = 53.1 / 100,
+        y = 65.3 / 100,
+        options = { title = "Spelltouched Tongs" }
+      },
     },
     {
       questId = 70311,
       item = 201006,
-      waypoint = { map = MapIds.Thaldraszus, x = 52.2 / 100, y = 80.5 / 100, options = { title = "Draconic Flux" } },
+      waypoint = {
+        map = MapIds.Thaldraszus,
+        x = 52.2 / 100,
+        y = 80.5 / 100,
+        options = { title = "Draconic Flux" }
+      },
     }
   },
   [SkillIds.Enchanting] = {
@@ -135,7 +160,7 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
       }
     },
     {
-      questId = 0,
+      questId = 70283,
       item = 198675,
       waypoint = {
         map = MapIds.WakingShore,
@@ -145,17 +170,17 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
       }
     },
     {
-      questId = 0,
+      questId = 70272,
       item = 201012,
       waypoint = {
         map = MapIds.WakingShore,
         x = 57.5 / 100,
         y = 58.5 / 100,
-        options = { title = "Enchanted Debris" }
+        options = { title = "Enchanted Debris (Interact with disenchanted broom" }
       }
     },
     {
-      questId = 0,
+      questId = 70291,
       item = 198689,
       waypoint = {
         map = MapIds.OhnAhranPlains,
@@ -165,7 +190,7 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
       }
     },
     {
-      questId = 0,
+      questId = 70336,
       item = 198799,
       waypoint = {
         map = MapIds.AzureSpan,
@@ -175,7 +200,7 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
       }
     },
     {
-      questId = 0,
+      questId = 70290,
       item = 201013,
       waypoint = {
         map = MapIds.AzureSpan,
@@ -185,17 +210,17 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
       }
     },
     {
-      questId = 0,
+      questId = 70298,
       item = 198694,
       waypoint = {
         map = MapIds.AzureSpan,
-        x = 21 / 100,
-        y = 45 / 100,
+        x = 21.55 / 100,
+        y = 45.5 / 100,
         options = { title = "Enriched Earthen Shard" }
       }
     },
     {
-      questId = 0,
+      questId = 70342,
       item = 198800,
       waypoint = {
         map = MapIds.Thaldraszus,
@@ -207,12 +232,17 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
   },
   [SkillIds.Engineering] = {
     {
-      questId = 0,
+      questId = 70270,
       item = 201014,
-      waypoint = { map = MapIds.WakingShore, x = 56.0 / 100, y = 44.9 / 100, options = { title = "Boomthyr Rocket" } },
+      waypoint = {
+        map = MapIds.WakingShore,
+        x = 56.0 / 100,
+        y = 44.9 / 100,
+        options = { title = "Boomthyr Rocket" }
+      },
     },
     {
-      questId = 0,
+      questId = 70275,
       item = 198789,
       waypoint = {
         map = MapIds.WakingShore,
@@ -224,12 +254,17 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
   },
   [SkillIds.Inscription] = {
     {
-      questId = 0,
+      questId = 70306,
       item = 198704,
-      waypoint = { map = MapIds.WakingShore, x = 67.87 / 100, y = 57.96 / 100, options = { title = "Pulsing Earth Rune" } },
+      waypoint = {
+        map = MapIds.WakingShore,
+        x = 67.87 / 100,
+        y = 57.96 / 100,
+        options = { title = "Pulsing Earth Rune" }
+      },
     },
     {
-      questId = 0,
+      questId = 70307,
       item = 198703,
       waypoint = {
         map = MapIds.OhnAhranPlains,
@@ -241,45 +276,55 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
     {
       questId = 0,
       item = 198693,
-      waypoint = { map = MapIds.AzureSpan, x = 46.2 / 100, y = 23.9 / 100, options = { title = "Dusty Darkmoon Card" } },
+      waypoint = {
+        map = MapIds.AzureSpan,
+        x = 46.2 / 100,
+        y = 23.9 / 100,
+        options = { title = "Dusty Darkmoon Card" }
+      },
     },
     {
-      questId = 0,
+      questId = 70293,
       item = 198686,
-      waypoint = { map = MapIds.AzureSpan, x = 43.7 / 100, y = 30.9 / 100, options = { title = "Frosted Parchment" } },
+      waypoint = {
+        map = MapIds.AzureSpan,
+        x = 43.7 / 100,
+        y = 30.9 / 100,
+        options = { title = "Frosted Parchment" }
+      },
     },
     {
-      questId = 0,
+      questId = 70281,
       item = 198669,
       waypoint = {
         map = MapIds.Valdrakken,
         x = 13.2 / 100,
         y = 63.68 / 100,
-        options = { title = "How to Train Your Whelpling" }
+        options = { title = "How to Train Your Whelpling (bugged; use bronze timelock, zone, return)" }
       },
     },
     {
-      questId = 0,
+      questId = 70264,
       item = 198659,
       waypoint = {
         map = MapIds.Thaldraszus,
-        x = 56.3 / 100,
-        y = 41.2 / 100,
-        options = { title = "Forgetful Apprentice's Tome" }
+        x = 56.29 / 100,
+        y = 41.17 / 100,
+        options = { title = "Forgetful Apprentice's Tome (2)" }
       },
     },
     {
-      questId = 0,
+      questId = 70248,
       item = 198659,
       waypoint = {
         map = MapIds.Thaldraszus,
         x = 47.24 / 100,
         y = 40.1 / 100,
-        options = { title = "Forgetful Apprentice's Tome" }
+        options = { title = "Forgetful Apprentice's Tome (1)" }
       },
     },
     {
-      questId = 0,
+      questId = 70287,
       item = 201015,
       waypoint = {
         map = MapIds.Thaldraszus,
@@ -291,7 +336,7 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
   },
   [SkillIds.Jewelcrafting] = {
     {
-      questId = 0,
+      questId = 70292,
       item = 198687,
       waypoint = {
         map = MapIds.WakingShore,
@@ -303,25 +348,45 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
     {
       questId = 70273,
       item = 201017,
-      waypoint = { map = MapIds.WakingShore, x = 33.9 / 100, y = 63.7 / 100, options = { title = "Igneous Gem" } },
+      waypoint = {
+        map = MapIds.WakingShore,
+        x = 33.9 / 100,
+        y = 63.7 / 100,
+        options = { title = "Igneous Gem" }
+      },
     },
     {
-      questId = 0,
+      questId = 70282,
       item = 198670,
-      waypoint = { map = MapIds.OhnAhranPlains, x = 25.2 / 100, y = 35.4 / 100, options = { title = "Lofty Malygite" } },
+      waypoint = {
+        map = MapIds.OhnAhranPlains,
+        x = 25.2 / 100,
+        y = 35.4 / 100,
+        options = { title = "Lofty Malygite" }
+      },
     },
     {
-      questId = 0,
+      questId = 70263,
       item = 198660,
-      waypoint = { map = MapIds.OhnAhranPlains, x = 61.8 / 100, y = 13.0 / 100, options = { title = "Fragmented Key" } },
+      waypoint = {
+        map = MapIds.OhnAhranPlains,
+        x = 61.8 / 100,
+        y = 13.0 / 100,
+        options = { title = "Fragmented Key" }
+      },
     },
     {
-      questId = 0,
+      questId = 70277,
       item = 198664,
-      waypoint = { map = MapIds.AzureSpan, x = 45.0 / 100, y = 61.3 / 100, options = { title = "Crystalline Overgrowth" } },
+      waypoint = {
+        map = MapIds.AzureSpan,
+        x = 45.0 / 100,
+        y = 61.3 / 100,
+        options = { title = "Crystalline Overgrowth" }
+      },
     },
     {
-      questId = 0,
+      questId = 70271,
       item = 201016,
       waypoint = {
         map = MapIds.AzureSpan,
@@ -331,7 +396,7 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
       },
     },
     {
-      questId = 0,
+      questId = 70285,
       item = 198682,
       waypoint = {
         map = MapIds.Thaldraszus,
@@ -341,7 +406,7 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
       },
     },
     {
-      questId = 0,
+      questId = 70261,
       item = 198656,
       waypoint = {
         map = MapIds.Thaldraszus,
@@ -395,12 +460,17 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
   },
   [SkillIds.Tailoring] = {
     {
-      questId = 0,
+      questId = 70302,
       item = 198699,
-      waypoint = { map = MapIds.WakingShore, x = 74.7 / 100, y = 37.9 / 100, options = { title = "Mysterious Banner" } },
+      waypoint = {
+        map = MapIds.WakingShore,
+        x = 74.7 / 100,
+        y = 37.9 / 100,
+        options = { title = "Mysterious Banner" }
+      },
     },
     {
-      questId = 0,
+      questId = 70304,
       item = 198702,
       waypoint = {
         map = MapIds.WakingShore,
@@ -410,7 +480,7 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
       },
     },
     {
-      questId = 0,
+      questId = 70295,
       item = 198692,
       waypoint = {
         map = MapIds.OhnAhranPlains,
@@ -420,12 +490,19 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
       },
     },
     {
-      questId = 0,
+      questId = 70303,
       item = 201020,
-      waypoint = { map = MapIds.OhnAhranPlains, x = 66.1 / 100, y = 52.9 / 100, options = { title = "Silky Surprise" } },
+      waypoint = {
+        map = MapIds.OhnAhranPlains,
+        x = 66.1 / 100,
+        y = 52.9 / 100,
+        options = { title = "Silky Surprise" }
+      },
     },
     {
-      questId = 0,
+      -- Two quests completed at the same time, so not sure if this is the right
+      -- quest id or not (the other was 70525)
+      questId = 70284,
       item = 198680,
       waypoint = {
         map = MapIds.AzureSpan,
@@ -435,7 +512,7 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
       },
     },
     {
-      questId = 0,
+      questId = 70267,
       item = 198662,
       waypoint = {
         map = MapIds.AzureSpan,
@@ -445,7 +522,7 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
       },
     },
     {
-      questId = 0,
+      questId = 70288,
       item = 198684,
       waypoint = {
         map = MapIds.Thaldraszus,
@@ -455,7 +532,7 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
       },
     },
     {
-      questId = 0,
+      questId = 70372,
       item = 201019,
       waypoint = {
         map = MapIds.Thaldraszus,
