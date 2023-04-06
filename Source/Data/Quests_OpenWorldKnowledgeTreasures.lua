@@ -149,6 +149,8 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
     }
   },
   [SkillIds.Enchanting] = {
+    -- There is a bug that prevents this from being looted,
+    -- commenting out for now
     {
       questId = 0,
       item = 198798,
@@ -274,6 +276,7 @@ DFH_Constants.ProfessionQuests.OpenWorldKnowledgeTreasures = {
       },
     },
     {
+      -- maybe: 70297
       questId = 0,
       item = 198693,
       waypoint = {
