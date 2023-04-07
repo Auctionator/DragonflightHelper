@@ -142,7 +142,6 @@ function DFH_ProfessionContainerMixin:KnowledgeTreasureClick()
   for _, entry in ipairs(entries) do
     -- if entry.questId ~= 0 and not C_QuestLog.IsQuestFlaggedCompleted(entry.questId) then
     if not C_QuestLog.IsQuestFlaggedCompleted(entry.questId) then
-      DFH_Utilities.info(entry.questId)
       TomTom:AddWaypoint(entry.waypoint.map, entry.waypoint.x, entry.waypoint.y, entry.waypoint.options)
     end
   end

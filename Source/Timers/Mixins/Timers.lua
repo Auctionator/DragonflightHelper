@@ -33,23 +33,20 @@ function DFH_TimerMixin:OnShow()
 end
 
 function DFH_TimerMixin:OnHide()
-  if self.timer ~= nil then
-    -- self.timer:Cancel()
-    -- self.timer = nil
-  end
+  -- no op now
 end
 
 function DFH_TimerMixin:Update()
   local interval = self.frequency * 60 * 60
   local secondsUntilNextEvent = (C_DateAndTime.GetSecondsUntilDailyReset() / interval) % 1 * interval
 
-  local aboutToStart = secondsUntilNextEvent <= (15 * 60)
+  local aboutToStart = secondsUntilNextEvent <= (10 * 60)
   local inProgress = math.abs(interval - secondsUntilNextEvent) <= (self.activeThreshold * 60)
 
   if aboutToStart then
     self:SetForegroundColor(self.color.r, self.color.g, self.color.b)
-    self:SetMinMaxValues(0, interval)
-    self:SetValue(interval - secondsUntilNextEvent)
+    self:SetMinMaxValues(0, 10 * 60)
+    self:SetValue(secondsUntilNextEvent)
     self:SetDescription("About to start - " .. SecondsToTime(secondsUntilNextEvent))
   elseif inProgress then
     self:SetForegroundColor(self.thresholdColor.r, self.thresholdColor.g, self.thresholdColor.b)
@@ -58,7 +55,6 @@ function DFH_TimerMixin:Update()
     self:SetDescription("Active - " ..
       SecondsToTime((secondsUntilNextEvent - self.activeThreshold * 60), true))
   else
-    DFH_Utilities.info(self.title, interval, secondsUntilNextEvent)
     self:SetForegroundColor(self.color.r, self.color.g, self.color.b)
     self:SetMinMaxValues(0, interval)
     self:SetValue(secondsUntilNextEvent)
