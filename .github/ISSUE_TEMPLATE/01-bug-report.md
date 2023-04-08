@@ -1,5 +1,6 @@
 ---
 name: Bug report for Dragonflight Helper
+about: Submit a bug report for Dragonflight Helper
 title: ""
 labels: retail
 assignees: ""
