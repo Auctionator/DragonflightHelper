@@ -1,4 +1,4 @@
-package-as: Dragonflight Helper
+package-as: DragonflightHelper
 
 externals:
   Libs/LibStub:
