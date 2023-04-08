@@ -14,6 +14,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      CF_API_KEY: ${{ secrets.borj_curseforge }}
     steps:
       - name: Clone project
         uses: actions/checkout@v3
@@ -24,5 +26,3 @@ jobs:
         uses: BigWigsMods/packager@v2
         with:
           args: -p 847708 -g wrath
-        env:
-          CF_API_KEY: ${{ secrets.borj_curseforge }}
