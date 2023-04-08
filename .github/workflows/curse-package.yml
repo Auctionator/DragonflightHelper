@@ -25,4 +25,4 @@ jobs:
       - name: Package and release
         uses: BigWigsMods/packager@v2
         with:
-          args: -p 847708 -g wrath
+          args: -p 847708
