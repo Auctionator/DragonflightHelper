@@ -1,0 +1,28 @@
+name: Package and release
+
+on:
+  push:
+    tags:
+      - "**"
+
+    paths-ignore:
+      - "docs/**"
+      - ".github/**"
+      - ".vscode/"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone project
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Package and release
+        uses: BigWigsMods/packager@v2
+        with:
+          args: -p 847708 -g wrath
+        env:
+          CF_API_KEY: ${{ secrets.borj_curseforge }}
