@@ -22,6 +22,8 @@ function theme:init()
       custom_events.FONT_CHANGED,
       custom_events.BACKGROUND_OPACITY_CHANGED,
       custom_events.SECTION_SELECTION_CHANGED,
+      custom_events.FRAME_SHOWING_CHANGED,
+      custom_events.FRAME_LOCKED_CHANGED
     },
     "Theme"
   )
@@ -39,6 +41,8 @@ function theme:notify(event_name, ...)
       self:get_font(),
       self:get_statusbar(),
       self:get_background_opacity(),
+      self:get_is_showing(),
+      self:get_is_locked(),
       self:get_sections()
     )
   elseif event_name == custom_events.STATUSBAR_TEXTURE_CHANGED then
@@ -48,8 +52,12 @@ function theme:notify(event_name, ...)
   elseif event_name == custom_events.SECTION_SELECTION_CHANGED then
     local section, enabled = ...
     self.config.sections[section] = enabled
+  elseif event_name == custom_events.FRAME_SHOWING_CHANGED then
+    self.config.showing = ...
   elseif event_name == custom_events.BACKGROUND_OPACITY_CHANGED then
     self.config.background_opacity = math.floor(... * 100) / 100
+  elseif event_name == custom_events.FRAME_LOCKED_CHANGED then
+    self.config.locked = ...
   end
 end
 
@@ -63,6 +71,22 @@ end
 
 function theme:get_background_opacity()
   return self.config.background_opacity or 0.5
+end
+
+function theme:get_is_showing()
+  if self.config.showing == nil then
+    self.config.showing = true
+  end
+
+  return self.config.showing
+end
+
+function theme:get_is_locked()
+  if self.config.locked == nil then
+    self.config.locked = true
+  end
+
+  return self.config.locked
 end
 
 function theme:get_sections()
