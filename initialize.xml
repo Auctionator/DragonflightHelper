@@ -19,6 +19,7 @@
 
   <!-- Configuration manager loaded to make config available to successive components -->
   <Script file="core\configuration\font_dropdown.lua" />
+  <Script file="core\configuration\opacity_slider.lua" />
   <Script file="core\configuration\statusbar_dropdown.lua" />
   <Script file="core\configuration\section_selector.lua" />
   <Script file="core\configuration\panel.lua" />

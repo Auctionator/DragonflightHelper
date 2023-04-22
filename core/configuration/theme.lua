@@ -20,7 +20,8 @@ function theme:init()
       "ADDON_LOADED",
       custom_events.STATUSBAR_TEXTURE_CHANGED,
       custom_events.FONT_CHANGED,
-      custom_events.SECTION_SELECTION_CHANGED
+      custom_events.BACKGROUND_OPACITY_CHANGED,
+      custom_events.SECTION_SELECTION_CHANGED,
     },
     "Theme"
   )
@@ -33,7 +34,13 @@ function theme:notify(event_name, ...)
     event_manager:unsubscribe(self, "ADDON_LOADED")
 
     self.config = DRAGONFLIGHT_HELPER_CONFIG.theme or {}
-    event_manager:handle(custom_events.THEME_LOADED, self:get_font(), self:get_statusbar(), self:get_sections())
+    event_manager:handle(
+      custom_events.THEME_LOADED,
+      self:get_font(),
+      self:get_statusbar(),
+      self:get_background_opacity(),
+      self:get_sections()
+    )
   elseif event_name == custom_events.STATUSBAR_TEXTURE_CHANGED then
     self.config.statusbar = ...
   elseif event_name == custom_events.FONT_CHANGED then
@@ -41,6 +48,8 @@ function theme:notify(event_name, ...)
   elseif event_name == custom_events.SECTION_SELECTION_CHANGED then
     local section, enabled = ...
     self.config.sections[section] = enabled
+  elseif event_name == custom_events.BACKGROUND_OPACITY_CHANGED then
+    self.config.background_opacity = math.floor(... * 100) / 100
   end
 end
 
@@ -50,6 +59,10 @@ end
 
 function theme:get_statusbar()
   return self.config.statusbar or media:get_default_statusbar()
+end
+
+function theme:get_background_opacity()
+  return self.config.background_opacity or 0.5
 end
 
 function theme:get_sections()

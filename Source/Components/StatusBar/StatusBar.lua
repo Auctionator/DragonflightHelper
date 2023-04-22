@@ -58,10 +58,11 @@ end
 function DFH_StatusBarMixin:notify(event, ...)
   if event == custom_events.THEME_LOADED then
     local font, statusbar = ...
+    local font_object = media:get_font_object(font)
 
     self:update_texture(statusbar)
-    self.Container.Title:SetFontObject(media:get_font_object(font))
-    self.Container.Description:SetFontObject(media:get_font_object(font))
+    self.Container.Title:SetFontObject(font_object)
+    self.Container.Description:SetFontObject(font_object)
   elseif event == custom_events.STATUSBAR_TEXTURE_CHANGED then
     self:update_texture(...)
   elseif event == custom_events.FONT_CHANGED then

@@ -10,9 +10,10 @@ SLASH_DFH_TOGGLE1 = "/dfh"
 function DFH_Mixin:OnLoad()
   self:RegisterForDrag("LeftButton")
 
-  local texture = self:CreateTexture()
-  texture:SetAllPoints()
-  texture:SetColorTexture(0, 0, 0, 0.5)
+  self.texture = self:CreateTexture()
+  self.texture:SetAllPoints()
+  self.texture:SetColorTexture(0, 0, 0)
+  self.texture:SetAlpha(0)
 
   self.showing = true
   self.openHeight = self:GetHeight()
@@ -23,17 +24,28 @@ function DFH_Mixin:OnLoad()
     self:OnClick()
   end
 
-  event_manager:subscribe(self, { custom_events.FONT_CHANGED, custom_events.THEME_LOADED }, "DFH_Main_Frame")
+  event_manager:subscribe(
+    self,
+    {
+      custom_events.FONT_CHANGED,
+      custom_events.THEME_LOADED,
+      custom_events.BACKGROUND_OPACITY_CHANGED
+    },
+    "DFH_Main_Frame"
+  )
   event_manager:handle(custom_events.MAIN_FRAME_LOADED, self)
 end
 
 function DFH_Mixin:notify(event_name, ...)
   if event_name == custom_events.THEME_LOADED then
-    local font = ...
+    local font, _, opacity = ...
     self.Title:SetFontObject(media:get_font_object(font))
+    self.texture:SetAlpha(opacity)
   elseif event_name == custom_events.FONT_CHANGED then
     local _, font_object = ...
     self.Title:SetFontObject(font_object)
+  elseif event_name == custom_events.BACKGROUND_OPACITY_CHANGED then
+    self.texture:SetAlpha(...)
   end
 
   for _, section in ipairs(self.sections) do

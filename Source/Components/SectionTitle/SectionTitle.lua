@@ -17,18 +17,19 @@ function DFH_SectionTitleMixin:OnLoad()
   id = id + 1
 
   event_manager:subscribe(self, { custom_events.FONT_CHANGED, custom_events.THEME_LOADED }, self.id)
-  self:SetTitle(self.title)
 end
 
 function DFH_SectionTitleMixin:notify(event_name, ...)
   if event_name == custom_events.FONT_CHANGED then
     local _, font_object = ...
     self.Title:SetFontObject(font_object)
+    self:SetTitle(self.title)
   else
     local font_name = ...
     local font_object = media:get_font_object(font_name)
 
     self.Title:SetFontObject(font_object)
+    self:SetTitle(self.title)
   end
 end
 

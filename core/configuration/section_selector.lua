@@ -1,9 +1,7 @@
 local addon, ns = ...
 
-local media = ns.media
 local event_manager = ns.events.manager
 local custom_events = ns.events.custom
-local theme = ns.theme
 
 local section_selector = CreateFrame(
   "Frame",
