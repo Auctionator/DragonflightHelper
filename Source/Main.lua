@@ -1,3 +1,8 @@
+local _, ns = ...
+local event_manager = ns.events.manager
+local custom_events = ns.events.custom
+local media = ns.media
+
 DFH_Mixin = {};
 
 SLASH_DFH_TOGGLE1 = "/dfh"
@@ -16,6 +21,23 @@ function DFH_Mixin:OnLoad()
 
   SlashCmdList["DFH_TOGGLE"] = function()
     self:OnClick()
+  end
+
+  event_manager:subscribe(self, { custom_events.FONT_CHANGED, custom_events.THEME_LOADED }, "DFH_Main_Frame")
+  event_manager:handle(custom_events.MAIN_FRAME_LOADED, self)
+end
+
+function DFH_Mixin:notify(event_name, ...)
+  if event_name == custom_events.THEME_LOADED then
+    local font = ...
+    self.Title:SetFontObject(media:get_font_object(font))
+  elseif event_name == custom_events.FONT_CHANGED then
+    local _, font_object = ...
+    self.Title:SetFontObject(font_object)
+  end
+
+  for _, section in ipairs(self.sections) do
+    section.Title:notify(event_name, ...)
   end
 end
 
@@ -46,6 +68,15 @@ function DFH_Mixin:OnClick()
 end
 
 function DFH_Mixin:OnShow()
+  event_manager:handle(custom_events.MAIN_FRAME_SHOWN, self)
+  local children = self:GetChildren()
+  local total = 0
+
+  for _, child in ipairs(children) do
+    total = total + child:GetHeight()
+  end
+
+  -- self:SetHeight(total)
 end
 
 function DFH_Mixin:OnHide()
@@ -75,4 +106,10 @@ DFH_ButtonMixin = {}
 
 function DFH_ButtonMixin:OnClick()
   self:GetParent():OnClick()
+end
+
+DFH_ConfigButtonMixin = {}
+
+function DFH_ConfigButtonMixin:OnClick()
+  event_manager:handle("OPEN_CONFIG", self:GetParent())
 end

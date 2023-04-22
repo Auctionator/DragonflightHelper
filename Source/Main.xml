@@ -22,9 +22,18 @@
     </Layers>
     <Frames>
       <Button inherits="UIPanelButtonTemplate" text="-" mixin="DFH_ButtonMixin">
-        <Size x="15" y="15" />
+        <Size x="20" y="20" />
         <Anchors>
           <Anchor point="TOPLEFT" x="4" y="-6" />
+        </Anchors>
+        <Scripts>
+          <OnClick method="OnClick" />
+        </Scripts>
+      </Button>
+      <Button inherits="UIPanelButtonTemplate" text="*" mixin="DFH_ConfigButtonMixin">
+        <Size x="20" y="20" />
+        <Anchors>
+          <Anchor point="TOPRIGHT" x="-4" y="-6" />
         </Anchors>
         <Scripts>
           <OnClick method="OnClick" />
