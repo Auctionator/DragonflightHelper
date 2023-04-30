@@ -47,25 +47,19 @@ function addon_configuration:initialize_frames(theme)
   self.font_dropdown:SetPoint("TOP", self, "TOP")
   self.font_dropdown:SetPoint("LEFT", self, "LEFT")
   self.font_dropdown:SetPoint("RIGHT", self, "RIGHT")
-  -- UIDropDownMenu_SetWidth(self.font_dropdown, self:GetWidth() - 24)
 
   self.statusbar_dropdown = statusbar_dropdown:init(self, theme.statusbar_name)
   self.statusbar_dropdown:SetPoint("TOPLEFT", self.font_dropdown, "BOTTOMLEFT")
   self.statusbar_dropdown:SetPoint("RIGHT", self, "RIGHT")
-  -- UIDropDownMenu_SetWidth(self.statusbar_dropdown, self:GetWidth() - 24)
 
-  self.opacity_slider = opacity_slider:init(self, theme.background_opacity, media:get_font_object(theme.font_name)
+  self.opacity_slider = opacity_slider:init(
+    self,
+    theme.background_opacity,
+    media:get_font_object(theme.font_name),
+    theme.statusbar_name
   )
-  self.opacity_slider:ClearAllPoints()
-  self.opacity_slider:SetPoint("TOP", self.statusbar_dropdown, "BOTTOM", 0, -10)
-  self.opacity_slider:SetPoint("LEFT", self, "LEFT", 10, 0)
-  self.opacity_slider:SetPoint("RIGHT", self, "RIGHT", 10, 0)
-  -- self.opacity_slider:SetWidth(200 - 20)
-  -- self.opacity_slider:SetPoint("TOP", self.statusbar_dropdown, "BOTTOM", 0, -10)
-  -- self.section_selector = section_selector:init(self, sections)
-  -- self.section_selector:SetPoint("TOP", self.opacity_slider, "BOTTOM")
-  -- self.section_selector:SetPoint("LEFT", self, "LEFT")
-  -- self.section_selector:SetPoint("RIGHT", self, "RIGHT")
+  self.opacity_slider:SetPoint("TOPLEFT", self.statusbar_dropdown, "BOTTOMLEFT", 0, -5)
+  self.opacity_slider:SetPoint("RIGHT", self, "RIGHT")
 end
 
 function addon_configuration:notify(event_name, ...)

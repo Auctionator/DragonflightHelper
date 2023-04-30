@@ -9,52 +9,52 @@ local opacity_slider = CreateFrame(
   nil
 )
 
-function opacity_slider:init(parent, current_opacity, font_object)
+function opacity_slider:init(parent, current_opacity, font_object, statusbar_name)
   self:SetParent(parent)
   self:SetHeight(20)
 
-  local slider = CreateFrame("Frame", addon .. "_opacity_slider", self)
-  slider:SetHeight(15)
-  slider:SetPoint("TOPLEFT", self, "TOPLEFT", 10)
-  slider:SetPoint("RIGHT", self, "RIGHT", -10)
+  local slider = helpers:create_status_bar({
+    parent            = self,
+    font_object       = font_object,
+    title             = ("Background Opacity (%d%%)"):format(current_opacity * 100),
+    value             = current_opacity * 100,
+    statusbar_texture = statusbar_name,
+    visible           = true
+  })
 
-  helpers:add_border(slider)
+  slider.sliding = false
 
-  slider:SetScript("OnMouseDown", function()
-    local mouse_x, mouse_y = GetCursorPosition()
-    local frame_x = slider:GetLeft()
-    local width = slider:GetWidth()
+  slider:EnableMouse(true)
+  slider:RegisterForDrag("LeftButton")
 
-    print((mouse_x - frame_x) / width)
+  slider:SetScript("OnUpdate", function()
+    if self.sliding then
+      local x = GetCursorPosition()
+      local ui_scale = UIParent:GetEffectiveScale()
+      local opacity = ((x / ui_scale) - self:GetLeft()) / self:GetWidth()
+      local value = 100 * opacity
+
+      slider.foreground:SetValue(value)
+      slider.title:SetText(("Background Opacity (%d%%)"):format(value))
+      event_manager:handle(custom_events.BACKGROUND_OPACITY_CHANGED, opacity)
+    end
+  end)
+  slider:SetScript("OnMouseDown", function(_, button)
+    print("OnMouseDown", button)
+    self.sliding = true
+  end)
+  slider:SetScript("OnDragStart", function(_, button)
+    print("OnDragStart", button)
+    self.sliding = true
+  end)
+  slider:SetScript("OnDragStop", function(_, button)
+    print("OnDragStop", button)
+    self.sliding = false
   end)
 
-  -- self.slider = CreateFrame(
-  --   "Slider",
-  --   addon .. "_OpacitySlider",
-  --   self
-  -- )
-  -- self.slider:SetPoint("TOPLEFT", slider, "BOTTOMLEFT")
-  -- self.slider:SetPoint("RIGHT", slider, "RIGHT")
-  -- self.slider:SetHeight(10)
-  -- self.slider:SetOrientation("HORIZONTAL")
-  -- self.slider:SetHeight(15)
-  -- self.slider:SetMinMaxValues(0, 1)
-  -- self.slider:SetValue(current_opacity)
-  -- self.slider:SetValueStep(0.01)
-  -- self.slider:SetObeyStepOnDrag(true)
 
-  -- self.title = helpers:create_title_string(self, font_object, ("Background Opacity (%d%%)"):format(current_opacity * 100))
-  -- self:SetHeight(self.title:GetStringHeight() + 15)
-  -- self.title:ClearAllPoints()
-  -- self.title:SetAllPoints()
-
-  -- self.slider:SetPoint("TOPLEFT", slider, "BOTTOMLEFT", 0, -2)
-
-  -- self.slider:SetScript("OnValueChanged", function(_, value)
-  --   self.slider.Text:SetText("Background Opacity (" .. math.floor(value * 100) .. "%)")
-
-  --   event_manager:handle(custom_events.BACKGROUND_OPACITY_CHANGED, value)
-  -- end)
+  slider:SetPoint("TOPLEFT", self, "TOPLEFT", 2, 0)
+  slider:SetPoint("RIGHT", self, "RIGHT", -2, 0)
 
   return self
 end
