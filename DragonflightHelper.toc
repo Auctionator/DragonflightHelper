@@ -3,7 +3,7 @@
 ## Title: Dragonflight Helper
 ## Author: Borjamacare
 ## SavedVariables: DRAGONFLIGHT_HELPER_CONFIG
-## OptionalDeps: TomTom LibSharedMedia-3.0
+## OptionalDeps: TomTom LibSharedMedia-3.0 _DebugLog
 
 initialize.xml
 

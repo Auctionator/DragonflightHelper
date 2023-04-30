@@ -1,9 +1,12 @@
 local addon, ns = ...
+
+local log = ns.debug.log
 local EventSubscriber = ns.events.subscriber
 
 local event_manager = {}
 
 function event_manager:init()
+  log("OK", "event_manager", 1, "init", "Loading")
   self.events = {}
   self.subscriber_map = {}
   self.initialized = false
@@ -15,6 +18,8 @@ function event_manager:init()
 end
 
 function event_manager:notify(event_name, ...)
+  log(nil, "event_manager", 1, "notify", event_name, ...)
+
   if ... == addon then
     self.initialized = true
     self:unsubscribe(self, event_name)
@@ -22,11 +27,15 @@ function event_manager:notify(event_name, ...)
 end
 
 function event_manager:handle(event_name, ...)
+  log(nil, "event_manager", 1, "handle", event_name, ...)
+
   if event_name == "ADDON_LOADED" and addon == ... then
     self:notify(event_name, ...)
+    log("OK", "event_manager", 1, "notify", "Loading")
   end
 
   if not self.initialized then
+    log("ERR", "event_manager", 1, "notify", "Not initialized yet", event_name, ...)
     return
   end
 
@@ -56,7 +65,10 @@ function event_manager:subscribe(component, events, name)
     events = { events }
   end
 
+  -- log(nil, 1, "subscribe", name, tostring(events))
+
   if not status then
+    log("ERR", "event_manager", 1, "subscribe", "failed to load subscriber")
     error("Error occurred creating subscriber for " .. name .. " (" .. #events .. ")")
     return
   end
@@ -78,7 +90,10 @@ end
 function event_manager:unsubscribe(component, event)
   local subscriber = self.subscriber_map[EventSubscriber.id_for(component)]
 
+  log(nil, "event_manager", 1, "unsubscribe", tostring(subscriber))
+
   if subscriber == nil or self.events[event] == nil then
+    log("ERR", "event_manager", 1, "unsubscribe", "subscriber is nil or no events")
     return
   end
 
@@ -92,10 +107,13 @@ function event_manager:unsubscribe(component, event)
 end
 
 function event_manager:debug()
-  print("** REGISTERED EVENTS **")
+  local s = ""
+
   for key, value in pairs(self.events) do
-    print(string.format("%s (%d)", key, value.event_count))
+    s = string.format("%s\n%s (%d)", s, key, value.event_count)
   end
+
+  return s
 end
 
 event_manager:init()

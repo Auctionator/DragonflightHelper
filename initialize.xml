@@ -1,6 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
   <!-- Set up addon namespace -->
   <Script file="core\initialize.lua" />
+  <Script file="core\debug.lua" />
 
   <!-- Event manager must be loaded first -->
   <Script file="core\events\custom.lua" />
@@ -12,10 +13,25 @@
 
   <!-- Wrapper for LibSharedMedia -->
   <Script file="core\media\loader.lua" />
+
+  <!-- Theme management -->
   <Script file="core\configuration\theme.lua" />
 
   <!-- Components -->
+  <Script file="components\helpers\get_unique_id.lua" />
+  <Script file="components\helpers\add_frame_border.lua" />
+  <Script file="components\helpers\create_title_string.lua" />
+  <Script file="components\helpers\create_status_bar.lua" />
   <Script file="components\frame.lua" />
+
+  <Script file="src\panels\factions\info.lua" />
+  <Script file="src\panels\factions.lua" />
+  <Script file="src\panels\friends.lua" />
+  <Script file="src\panels\professions.lua" />
+  <Script file="src\panels\timers\info.lua" />
+  <Script file="src\panels\timers.lua" />
+  <Script file="src\panels\todos.lua" />
+  <Script file="src\main.lua" />
 
   <!-- Configuration manager loaded to make config available to successive components -->
   <Script file="core\configuration\font_dropdown.lua" />

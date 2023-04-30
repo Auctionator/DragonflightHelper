@@ -1,0 +1,237 @@
+local addon, ns = ...
+
+local event_manager = ns.events.manager
+local custom_events = ns.events.custom
+local media = ns.media
+local components = ns.components
+local panels = ns.panels
+
+local main_frame_name = addon .. "_main_frame"
+local main = CreateFrame("Frame", main_frame_name, UIParent)
+
+function main:init()
+  self:SetPoint("CENTER")
+
+  self:RegisterForDrag("LeftButton")
+  self:SetClampedToScreen(true)
+
+  self:SetHeight(20)
+  self:SetWidth(200)
+
+  self:SetScript("OnDragStart", function() self:on_drag_start() end)
+  self:SetScript("OnDragStop", function() self:on_drag_stop() end)
+
+  event_manager:subscribe(
+    self,
+    {
+      custom_events.THEME_LOADED,
+      custom_events.FONT_CHANGED,
+      custom_events.BACKGROUND_OPACITY_CHANGED,
+    },
+    main_frame_name
+  )
+
+  SlashCmdList["DFH_TOGGLE"] = function()
+    -- Slash command logic here
+  end
+
+  return self
+end
+
+function main:notify(event_name, ...)
+  if event_name == custom_events.THEME_LOADED then
+    self:theme_loaded(...)
+  elseif event_name == custom_events.FONT_CHANGED then
+    local _, font_object = ...
+
+    self.title:SetFontObject(font_object)
+
+    self.minimize_button:SetNormalFontObject(font_object)
+    self.lock_button:SetNormalFontObject(font_object)
+    self.config_button:SetNormalFontObject(font_object)
+  elseif event_name == custom_events.BACKGROUND_OPACITY_CHANGED then
+    self.texture:SetAlpha(...)
+  end
+end
+
+function main:theme_loaded(theme)
+  local font_object = media:get_font_object(theme.font_name)
+
+  self.title = components.helpers:create_title_string(self, font_object, "Dragonflight Helper")
+  self.title:ClearAllPoints()
+  self.title:SetPoint("TOPLEFT", self, "TOPLEFT", 2, -2)
+  self.title:SetPoint("RIGHT", self, "RIGHT", -2)
+  self:create_background_texture(theme.background_opacity)
+
+  self.is_maximized = theme.is_maximized
+  self:create_minimize_button(font_object, theme.background_opacity)
+
+  self.is_locked = theme.is_locked
+  self:create_lock_button(font_object, theme.background_opacity)
+
+  self:create_config_button(font_object, theme.background_opacity)
+
+  self:initialize_panels(font_object, theme)
+end
+
+function main:create_background_texture(background_opacity)
+  self.texture = self:CreateTexture()
+  self.texture:SetAllPoints()
+  self.texture:SetColorTexture(0, 0, 0)
+  self.texture:SetAlpha(background_opacity)
+end
+
+function main:create_minimize_button(font_object, background_opacity)
+  self.minimize_button = CreateFrame("Button", nil, self)
+
+  self.minimize_button:SetPoint("TOPLEFT", 3, -3)
+  self.minimize_button:SetHeight(16)
+  self.minimize_button:SetWidth(16)
+  self.minimize_button:SetNormalFontObject(font_object)
+  self.minimize_button:SetScript("OnClick", function()
+    self:minimize_or_maximize()
+  end)
+
+  components.helpers:add_border(self.minimize_button, { ["alpha"] = background_opacity })
+
+  if self.is_maximized then
+    self.minimize_button:SetText("m")
+  else
+    self.minimize_button:SetText("M")
+  end
+end
+
+function main:minimize_or_maximize()
+  if self.is_maximized then
+    -- TODO Hide child frames
+  else
+    -- TODO Show child frames
+  end
+
+  self.is_maximized = not self.is_maximized
+
+  if self.is_maximized then
+    self.minimize_button:SetText("m")
+  else
+    self.minimize_button:SetText("M")
+  end
+end
+
+function main:create_lock_button(font_object, background_opacity)
+  self.lock_button = CreateFrame("Button", nil, self)
+
+  self.lock_button:SetPoint("TOPLEFT", 22, -3)
+  self.lock_button:SetHeight(16)
+  self.lock_button:SetWidth(16)
+  self.lock_button:SetNormalFontObject(font_object)
+  self.lock_button:SetScript("OnClick", function()
+    self:lock_or_unlock()
+  end)
+
+  components.helpers:add_border(self.lock_button, { ["alpha"] = background_opacity })
+
+  self:update_lock_functionality()
+end
+
+function main:lock_or_unlock()
+  self.is_locked = not self.is_locked
+  self:update_lock_functionality()
+
+  event_manager:handle(custom_events.FRAME_LOCKED_CHANGED, self.is_locked)
+end
+
+function main:update_lock_functionality()
+  if self.is_locked then
+    self.lock_button:SetText("U")
+  else
+    self.lock_button:SetText("L")
+  end
+
+  self:EnableMouse(not self.is_locked)
+  self:SetMovable(not self.is_locked)
+end
+
+function main:on_drag_start()
+  if not self.is_locked then
+    if IsShiftKeyDown() then
+      self:StartSizing("BOTTOMRIGHT")
+    else
+      self:StartMoving()
+    end
+  end
+end
+
+function main:on_drag_stop()
+  self:StopMovingOrSizing()
+end
+
+function main:create_config_button(font_object, background_opacity)
+  self.config_button = CreateFrame("Button", nil, self)
+  -- Needed so long as I'm using the UIDropDownMenuTemplate in config
+  -- (it invisibly extends outside of config frame boundaries)
+  self.config_button:SetFrameStrata("TOOLTIP")
+  self.config_showing = false
+
+  self.config_button:SetPoint("TOPRIGHT", -2, -3)
+  self.config_button:SetHeight(16)
+  self.config_button:SetWidth(16)
+  self.config_button:SetNormalFontObject(font_object)
+  self.config_button:SetScript("OnClick", function()
+    if self.config_showing then
+      event_manager:handle(custom_events.CLOSE_CONFIG, self)
+    else
+      event_manager:handle(custom_events.OPEN_CONFIG, self)
+    end
+
+    self.config_showing = not self.config_showing
+  end)
+
+  self.config_button:SetText("C")
+
+  components.helpers:add_border(self.config_button, { ["alpha"] = background_opacity })
+end
+
+function main:initialize_panels(font_object, theme)
+  local previous = self.title
+
+  self.factions = panels.factions:init(self, font_object, theme.statusbar_name, theme.factions)
+  self.factions:Hide()
+  if theme.section_visibility.FACTIONS then
+    self.factions:Show()
+    self:SetHeight(self:GetHeight() + self.factions:GetHeight())
+    self.texture:SetAllPoints()
+
+    self.factions:SetPoint("TOPLEFT", previous, "BOTTOMLEFT")
+    self.factions:SetPoint("RIGHT")
+
+    previous = self.factions
+  end
+
+  self.friends = panels.friends:init(self, font_object, theme.statusbar_name, theme.friends)
+  self.friends:Hide()
+  if theme.section_visibility.FRIENDS then
+    self.friends:Show()
+    self:SetHeight(self:GetHeight() + self.friends:GetHeight())
+    self.texture:SetAllPoints()
+
+    self.friends:SetPoint("TOPLEFT", previous, "BOTTOMLEFT")
+    self.friends:SetPoint("RIGHT")
+
+    previous = self.friends
+  end
+
+  self.timers = panels.timers:init(self, font_object, theme.statusbar_name, theme.timers)
+  self.timers:Hide()
+  if theme.section_visibility.TIMERS then
+    self.timers:Show()
+    self:SetHeight(self:GetHeight() + self.timers:GetHeight())
+    self.texture:SetAllPoints()
+
+    self.timers:SetPoint("TOPLEFT", previous, "BOTTOMLEFT")
+    self.timers:SetPoint("RIGHT")
+
+    previous = self.timers
+  end
+end
+
+ns.main = main:init()

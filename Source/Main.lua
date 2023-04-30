@@ -22,9 +22,9 @@ function DFH_Mixin:OnLoad()
   -- I'm sure there's a better way to do this but I want to go sit in raid finder
   self.sections = { self.Reputations, self.Timers, self.Todos, self.ProfessionTodos }
 
-  SlashCmdList["DFH_TOGGLE"] = function()
-    self:OnClick()
-  end
+  -- SlashCmdList["DFH_TOGGLE"] = function()
+  --   self:OnClick()
+  -- end
 
   self.showing = true
 
@@ -33,6 +33,7 @@ function DFH_Mixin:OnLoad()
     {
       custom_events.FONT_CHANGED,
       custom_events.THEME_LOADED,
+      custom_events.THEME_MEDIA_UPDATED,
       custom_events.BACKGROUND_OPACITY_CHANGED
     },
     "DFH_Main_Frame"
@@ -41,12 +42,13 @@ function DFH_Mixin:OnLoad()
 end
 
 function DFH_Mixin:notify(event_name, ...)
-  if event_name == custom_events.THEME_LOADED then
-    local font, _, opacity, _, locked = ...
-    self.Title:SetFontObject(media:get_font_object(font))
-    self.texture:SetAlpha(opacity)
+  if event_name == custom_events.THEME_LOADED or event_name == custom_events.THEME_MEDIA_UPDATED then
+    local theme = ...
 
-    self.locked = locked
+    self.Title:SetFontObject(media:get_font_object(theme.font_name))
+    self.texture:SetAlpha(theme.background_opacity)
+
+    self.locked = theme.is_locked
     -- Need to figure out how to correctly load status bars when hidden
     -- if showing then
     --   self:showFrames()

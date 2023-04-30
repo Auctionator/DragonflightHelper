@@ -2,7 +2,6 @@ local addon, ns = ...
 
 local event_manager = ns.events.manager
 local custom_events = ns.events.custom
-local theme = ns.media
 local media = ns.media
 DFH_StatusBarMixin = {}
 
@@ -33,6 +32,7 @@ function DFH_StatusBarMixin:OnLoad()
     self,
     {
       custom_events.THEME_LOADED,
+      custom_events.THEME_MEDIA_UPDATED,
       custom_events.STATUSBAR_TEXTURE_CHANGED,
       custom_events.FONT_CHANGED
     },
@@ -56,11 +56,12 @@ function DFH_StatusBarMixin:update_texture(texture_name)
 end
 
 function DFH_StatusBarMixin:notify(event, ...)
-  if event == custom_events.THEME_LOADED then
-    local font, statusbar = ...
-    local font_object = media:get_font_object(font)
+  if event == custom_events.THEME_LOADED or event == custom_events.THEME_MEDIA_UPDATED then
+    local theme = ...
 
-    self:update_texture(statusbar)
+    local font_object = media:get_font_object(theme.font_name)
+
+    self:update_texture(theme.statusbar_name)
     self.Container.Title:SetFontObject(font_object)
     self.Container.Description:SetFontObject(font_object)
   elseif event == custom_events.STATUSBAR_TEXTURE_CHANGED then
