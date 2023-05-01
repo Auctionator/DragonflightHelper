@@ -22,6 +22,7 @@
   <Script file="components\helpers\add_frame_border.lua" />
   <Script file="components\helpers\create_title_string.lua" />
   <Script file="components\helpers\create_status_bar.lua" />
+  <Script file="components\helpers\create_checkbox.lua" />
   <Script file="components\frame.lua" />
 
   <Script file="src\panels\factions\info.lua" />

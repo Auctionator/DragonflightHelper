@@ -32,7 +32,6 @@ function info:attach(container, id)
     function container:update_data()
       listener.data.detail = friend_data.reaction
       listener.data.color = FACTION_BAR_COLORS[standingID]
-      print("Setting friend color", standingID)
 
       if friend_data.nextThreshold then
         listener.data.bar_min = friend_data.reactionThreshold

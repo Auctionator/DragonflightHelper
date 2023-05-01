@@ -11,8 +11,8 @@ function helpers:create_title_string(parent_frame, font_object, text)
 
   title:SetFontObject(font_object)
   title:SetText(text)
-  title:SetPoint("TOPLEFT", 2, -4)
-  title:SetPoint("RIGHT", -2)
+  title:SetPoint("TOPLEFT", parent_frame, "TOPLEFT", 2, -4)
+  title:SetPoint("RIGHT", parent_frame, "RIGHT", -2)
 
   title.notify = function(_, event, ...)
     if event == custom_events.FONT_CHANGED then

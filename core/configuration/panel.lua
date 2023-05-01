@@ -60,6 +60,10 @@ function addon_configuration:initialize_frames(theme)
   )
   self.opacity_slider:SetPoint("TOPLEFT", self.statusbar_dropdown, "BOTTOMLEFT", 0, -5)
   self.opacity_slider:SetPoint("RIGHT", self, "RIGHT")
+
+  self.section_selector = section_selector:init(self, theme.section_visibility)
+  self.section_selector:SetPoint("TOPLEFT", self.opacity_slider, "BOTTOMLEFT")
+  self.section_selector:SetPoint("RIGHT", self, "RIGHT")
 end
 
 function addon_configuration:notify(event_name, ...)

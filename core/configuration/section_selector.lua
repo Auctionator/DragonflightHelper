@@ -2,17 +2,18 @@ local addon, ns = ...
 
 local event_manager = ns.events.manager
 local custom_events = ns.events.custom
+local helpers = ns.components.helpers
 
 local section_selector = CreateFrame(
   "Frame",
-  "DFH_SectionSelectorFrame"
+  addon .. "_SectionSelectorFrame"
 )
 
 function section_selector:init(parent, current_sections)
   self:SetParent(parent)
 
   local title = self:CreateFontString(nil, "OVERLAY", "GameTooltipText")
-  title:SetText("Show/Hide Sections")
+  title:SetText("Select Sections")
   title:SetJustifyH("CENTER")
   title:SetPoint("TOPLEFT")
   title:SetPoint("RIGHT")
@@ -22,29 +23,20 @@ function section_selector:init(parent, current_sections)
   local previous = title
 
   for section, enabled in pairs(current_sections) do
-    local option_frame = CreateFrame("Frame", nil, self)
-    option_frame:SetHeight(30)
-    option_frame:SetPoint("TOPLEFT", previous, "BOTTOMLEFT")
-    option_frame:SetPoint("RIGHT", self, "RIGHT")
-    previous = option_frame
+    local section_selector = helpers:create_checkbox({
+      parent = self,
+      text = section:sub(1, 1) .. section:sub(2, section:len()):lower(),
+      checked = enabled,
+      handler = function(checked)
+        event_manager:handle(custom_events.SECTION_SELECTION_CHANGED, section, checked)
+      end
+    })
 
-    local option = CreateFrame(
-      "CheckButton",
-      addon .. "_" .. section .. "_section_selector_checkbox",
-      option_frame,
-      "UICheckButtonTemplate"
-    )
-    option:SetChecked(enabled)
-    option:SetPoint("TOPLEFT", 0)
-    option:SetScript("OnClick", function(checkbox)
-      event_manager:handle(custom_events.SECTION_SELECTION_CHANGED, section, checkbox:GetChecked())
-    end)
+    section_selector:SetPoint("TOPLEFT", previous, "BOTTOMLEFT")
+    section_selector:SetPoint("RIGHT", self, "RIGHT")
+    previous = section_selector
 
-    local label = option_frame:CreateFontString(nil, "OVERLAY", "GameTooltipText")
-    label:SetText(section:sub(1, 1) .. section:sub(2, section:len()):lower())
-    label:SetPoint("TOPLEFT", option_frame, "TOPLEFT", 40, -8)
-
-    self:SetHeight(option_frame:GetHeight() + self:GetHeight())
+    self:SetHeight(section_selector:GetHeight() + self:GetHeight())
   end
 
   return self

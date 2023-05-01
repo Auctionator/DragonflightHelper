@@ -98,6 +98,7 @@ function theme:notify(event_name, ...)
   elseif event_name == custom_events.SECTION_SELECTION_CHANGED then
     local section, enabled = ...
     self.config.sections[section] = enabled
+    event_manager:handle(custom_events.THEME_SECTIONS_UPDATED, section, enabled)
   elseif event_name == custom_events.FRAME_SHOWING_CHANGED then
     self.config.showing = ...
   elseif event_name == custom_events.BACKGROUND_OPACITY_CHANGED then

@@ -33,7 +33,7 @@ function helpers:create_status_bar(options)
   local bar_texture = media:get_statusbar(statusbar_texture)
 
   local frame = CreateFrame("FRAME", container_name, parent_frame)
-  frame:SetHeight(15)
+  frame:SetHeight(18)
   frame:EnableMouse(true)
   frame.data = data
 
@@ -41,20 +41,22 @@ function helpers:create_status_bar(options)
     frame:Hide()
   end
 
-  local foreground = CreateFrame("StatusBar", addon .. "_status_bar_" .. self:get_id(), frame)
+  local bar_id = self:get_id()
+
+  local foreground = CreateFrame("StatusBar", addon .. "_status_bar_foreground_" .. bar_id, frame)
   foreground:ClearAllPoints()
-  foreground:SetPoint("TOPLEFT", frame, "TOPLEFT", 2)
-  foreground:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2)
+  foreground:SetPoint("TOPLEFT", frame, "TOPLEFT")
+  foreground:SetPoint("RIGHT", frame, "RIGHT", -3, 0)
   foreground:SetStatusBarTexture(bar_texture)
   foreground:SetStatusBarColor(color.r, color.g, color.b, color.a)
   foreground:SetMinMaxValues(min, max)
   foreground:SetValue(value)
   frame.foreground = foreground
 
-  local background = CreateFrame("StatusBar", addon .. "_status_bar_" .. self:get_id(), frame)
+  local background = CreateFrame("StatusBar", addon .. "_status_bar_background_" .. bar_id, frame)
   background:ClearAllPoints()
-  background:SetPoint("TOPLEFT", frame, "TOPLEFT", 2)
-  background:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2)
+  background:SetPoint("TOPLEFT", foreground, "TOPLEFT")
+  background:SetPoint("BOTTOMRIGHT", foreground, "BOTTOMRIGHT")
   background:SetStatusBarTexture(bar_texture)
   background:SetStatusBarColor(220, 220, 220, 0.2)
   background:SetMinMaxValues(min, max)
@@ -62,16 +64,16 @@ function helpers:create_status_bar(options)
 
   local title = self:create_title_string(foreground, font_object, title)
   title:ClearAllPoints()
-  title:SetPoint("TOPLEFT", frame, "TOPLEFT", 3, 0)
-  title:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -3, 0)
+  title:SetPoint("TOPLEFT", foreground, "TOPLEFT", 4, 0)
+  title:SetPoint("BOTTOMRIGHT", foreground, "BOTTOMRIGHT", -4, 0)
   title:SetJustifyH("LEFT")
   title:SetJustifyV("MIDDLE")
   frame.title = title
 
   local description = self:create_title_string(foreground, font_object, description)
   description:ClearAllPoints()
-  description:SetPoint("TOPLEFT", frame, "TOPLEFT", 3, 0)
-  description:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -3, 0)
+  description:SetPoint("TOPLEFT", foreground, "TOPLEFT", 4, 0)
+  description:SetPoint("BOTTOMRIGHT", foreground, "BOTTOMRIGHT", -4, 0)
   description:SetJustifyH("RIGHT")
   description:SetJustifyV("MIDDLE")
   frame.description = description

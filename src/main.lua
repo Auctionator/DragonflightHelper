@@ -5,6 +5,7 @@ local custom_events = ns.events.custom
 local media = ns.media
 local components = ns.components
 local panels = ns.panels
+local theme = ns.theme
 
 local main_frame_name = addon .. "_main_frame"
 local main = CreateFrame("Frame", main_frame_name, UIParent)
@@ -27,6 +28,7 @@ function main:init()
       custom_events.THEME_LOADED,
       custom_events.FONT_CHANGED,
       custom_events.BACKGROUND_OPACITY_CHANGED,
+      custom_events.THEME_SECTIONS_UPDATED
     },
     main_frame_name
   )
@@ -51,6 +53,8 @@ function main:notify(event_name, ...)
     self.config_button:SetNormalFontObject(font_object)
   elseif event_name == custom_events.BACKGROUND_OPACITY_CHANGED then
     self.texture:SetAlpha(...)
+  elseif event_name == custom_events.THEME_SECTIONS_UPDATED then
+    self:recalculate_height(...)
   end
 end
 
@@ -62,6 +66,7 @@ function main:theme_loaded(theme)
   self.title:SetPoint("TOPLEFT", self, "TOPLEFT", 2, -2)
   self.title:SetPoint("RIGHT", self, "RIGHT", -2)
   self:create_background_texture(theme.background_opacity)
+  self:SetHeight(self.title:GetHeight() + 3)
 
   self.is_maximized = theme.is_maximized
   self:create_minimize_button(font_object, theme.background_opacity)
@@ -191,8 +196,32 @@ function main:create_config_button(font_object, background_opacity)
   components.helpers:add_border(self.config_button, { ["alpha"] = background_opacity })
 end
 
+function main:recalculate_height(...)
+  local sections = theme:get_sections()
+
+  self:SetHeight(self.title:GetHeight() + 3)
+
+  for section, enabled in pairs(sections) do
+    local panel = self.panels[section]
+
+    if panel ~= nil then
+      if enabled then
+        panel:recalculate_height()
+        self:SetHeight(self:GetHeight() + panel:GetHeight())
+        panel:Show()
+      else
+        panel:SetHeight(0.01)
+        self:SetHeight(self:GetHeight() - panel:GetHeight())
+        panel:Hide()
+      end
+    end
+  end
+end
+
 function main:initialize_panels(font_object, theme)
   local previous = self.title
+
+  self.panels = {}
 
   self.factions = panels.factions:init(self, font_object, theme.statusbar_name, theme.factions)
   self.factions:Hide()
@@ -207,6 +236,8 @@ function main:initialize_panels(font_object, theme)
     previous = self.factions
   end
 
+  self.panels["FACTIONS"] = self.factions
+
   self.friends = panels.friends:init(self, font_object, theme.statusbar_name, theme.friends)
   self.friends:Hide()
   if theme.section_visibility.FRIENDS then
@@ -215,10 +246,12 @@ function main:initialize_panels(font_object, theme)
     self.texture:SetAllPoints()
 
     self.friends:SetPoint("TOPLEFT", previous, "BOTTOMLEFT")
-    self.friends:SetPoint("RIGHT")
+    self.friends:SetPoint("RIGHT", self, "RIGHT", -3)
 
     previous = self.friends
   end
+
+  self.panels["FRIENDS"] = self.friends
 
   self.timers = panels.timers:init(self, font_object, theme.statusbar_name, theme.timers)
   self.timers:Hide()
@@ -232,6 +265,8 @@ function main:initialize_panels(font_object, theme)
 
     previous = self.timers
   end
+
+  self.panels["TIMERS"] = self.timers
 end
 
 ns.main = main:init()
