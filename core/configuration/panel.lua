@@ -61,8 +61,8 @@ function addon_configuration:initialize_frames(theme)
   self.opacity_slider:SetPoint("TOPLEFT", self.statusbar_dropdown, "BOTTOMLEFT", 0, -5)
   self.opacity_slider:SetPoint("RIGHT", self, "RIGHT")
 
-  self.section_selector = section_selector:init(self, theme.section_visibility)
-  self.section_selector:SetPoint("TOPLEFT", self.opacity_slider, "BOTTOMLEFT")
+  self.section_selector = section_selector:init(self)
+  self.section_selector:SetPoint("TOPLEFT", self.opacity_slider, "BOTTOMLEFT", 0, -5)
   self.section_selector:SetPoint("RIGHT", self, "RIGHT")
 end
 
@@ -78,7 +78,8 @@ function addon_configuration:notify(event_name, ...)
   elseif event_name == custom_events.THEME_LOADED then
     self:initialize_frames(...)
   elseif event_name == custom_events.BACKGROUND_OPACITY_CHANGED then
-    self:SetBackdropColor(0, 0, 0, ...)
+    local opacity = ...
+    self.texture:SetAlpha(opacity)
   end
 end
 

@@ -4,19 +4,5 @@
 ## Author: Borjamacare
 ## SavedVariables: DRAGONFLIGHT_HELPER_CONFIG
 ## OptionalDeps: TomTom LibSharedMedia-3.0 _DebugLog
-
-initialize.xml
-
 Libs\lib.xml
-
-Source\Data\Manifest.xml
-
-Source\Utilities\TablePrint.lua
-Source\Components\Manifest.xml
-
-Source\Reputations\_Manifest.xml
-Source\Timers\_Manifest.xml
-Source\Todos\_Manifest.xml
-
-Source\Main.lua
-Source\Main.xml
+initialize.xml

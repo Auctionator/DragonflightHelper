@@ -23,6 +23,7 @@
   <Script file="components\helpers\create_title_string.lua" />
   <Script file="components\helpers\create_status_bar.lua" />
   <Script file="components\helpers\create_checkbox.lua" />
+  <Script file="components\helpers\create_expanding_frame.lua" />
   <Script file="components\frame.lua" />
 
   <Script file="src\panels\factions\info.lua" />

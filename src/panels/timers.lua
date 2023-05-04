@@ -1,19 +1,25 @@
 local addon, ns = ...
 local components = ns.components
 local theme = ns.theme
+local media = ns.media
+local constants = ns.constants
 
 local frame_name = addon .. "_timers_frame"
 local timers = CreateFrame("Frame", frame_name)
 
-function timers:init(parent, initial_font_object, statusbar_texture, timer_settings)
+function timers:init(parent)
   self:SetParent(parent)
 
-  self.title = components.helpers:create_title_string(self, initial_font_object, "Timers")
+  self.title = components.helpers:create_title_string(
+    self,
+    media:get_font_object(theme:get_font()),
+    "Timers"
+  )
   self.previous = self.title
 
-  self:SetHeight(self.title:GetStringHeight())
+  self:SetHeight(self.title:GetStringHeight() + 3)
 
-  self:initialize_timers(initial_font_object, statusbar_texture, timer_settings)
+  self:initialize_timers()
 
   return self
 end
@@ -32,15 +38,19 @@ function timers:recalculate_height()
   self:SetHeight(self:GetHeight() + self.relative_end_frame:GetHeight())
 end
 
-function timers:initialize_timers(font_object, statusbar_texture, timer_settings)
+function timers:initialize_timers()
   self.timer_bars = {}
+
+  local timers = theme:get_section(constants.SECTIONS.TIMERS)
+  local statusbar_texture = theme:get_statusbar()
+  local font_object = media:get_font_object(theme:get_font())
 
   self.siege_bar = components.helpers:create_status_bar({
     parent = self,
     font_object = font_object,
     statusbar_texture = statusbar_texture,
     title = "Siege Timer",
-    visible = timer_settings.Siege
+    visible = timers.subsections.Siege.display
   })
   ns.timers.info:attach(
     self.siege_bar,
@@ -52,7 +62,7 @@ function timers:initialize_timers(font_object, statusbar_texture, timer_settings
   )
   self.timer_bars["Siege"] = self.siege_bar
 
-  if timer_settings.Siege then
+  if timers.subsections.Siege.display then
     self.siege_bar:ClearAllPoints()
     self.siege_bar:SetPoint("TOPLEFT", self.previous, "BOTTOMLEFT", 0, -2)
     self.siege_bar:SetPoint("RIGHT", self.previous, "RIGHT")
@@ -67,7 +77,7 @@ function timers:initialize_timers(font_object, statusbar_texture, timer_settings
     font_object = font_object,
     statusbar_texture = statusbar_texture,
     title = "Feast Timer",
-    visible = timer_settings.Feast
+    visible = timers.subsections.Feast.display
   })
   ns.timers.info:attach(
     self.feast_bar,
@@ -79,7 +89,7 @@ function timers:initialize_timers(font_object, statusbar_texture, timer_settings
   )
   self.timer_bars["Feast"] = self.feast_bar
 
-  if timer_settings.Feast then
+  if timers.subsections.Feast.display then
     self.feast_bar:ClearAllPoints()
     self.feast_bar:SetPoint("TOPLEFT", self.previous, "BOTTOMLEFT", 0, -2)
     self.feast_bar:SetPoint("RIGHT", self, "RIGHT")

@@ -2,12 +2,14 @@ local addon, ns = ...
 
 local helpers = ns.components.helpers
 local event_manager = ns.events.manager
+local custom_events = ns.events.custom
 
 local info = {}
 local REPUTATION_EVENTS = {
   "UPDATE_FACTION",
   "MAJOR_FACTION_RENOWN_LEVEL_CHANGED",
-  "MAJOR_FACTION_UNLOCKED"
+  "MAJOR_FACTION_UNLOCKED",
+  custom_events.THEME_LOADED
 }
 
 function info:attach(container, id)

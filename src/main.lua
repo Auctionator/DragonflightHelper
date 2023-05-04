@@ -6,11 +6,17 @@ local media = ns.media
 local components = ns.components
 local panels = ns.panels
 local theme = ns.theme
+local constants = ns.constants
+local log = ns.debug.log
 
 local main_frame_name = addon .. "_main_frame"
 local main = CreateFrame("Frame", main_frame_name, UIParent)
 
 function main:init()
+  log("OK", "main", 1, "init", "initializing")
+
+  self.initialized = false
+
   self:SetPoint("CENTER")
 
   self:RegisterForDrag("LeftButton")
@@ -37,13 +43,23 @@ function main:init()
     -- Slash command logic here
   end
 
+  log("OK", "main", 1, "init", "initializing completed")
+
   return self
 end
 
 function main:notify(event_name, ...)
+  log(nil, "main", 1, "event", event_name)
+
   if event_name == custom_events.THEME_LOADED then
-    self:theme_loaded(...)
-  elseif event_name == custom_events.FONT_CHANGED then
+    self:theme_loaded()
+  end
+
+  if not self.initialized then
+    return
+  end
+
+  if event_name == custom_events.FONT_CHANGED then
     local _, font_object = ...
 
     self.title:SetFontObject(font_object)
@@ -58,25 +74,26 @@ function main:notify(event_name, ...)
   end
 end
 
-function main:theme_loaded(theme)
-  local font_object = media:get_font_object(theme.font_name)
+function main:theme_loaded()
+  self.initialized = true
+  local font_object = media:get_font_object(theme:get_font())
 
   self.title = components.helpers:create_title_string(self, font_object, "Dragonflight Helper")
   self.title:ClearAllPoints()
   self.title:SetPoint("TOPLEFT", self, "TOPLEFT", 2, -2)
   self.title:SetPoint("RIGHT", self, "RIGHT", -2)
-  self:create_background_texture(theme.background_opacity)
+  self:create_background_texture(theme:get_background_opacity())
   self:SetHeight(self.title:GetHeight() + 3)
 
-  self.is_maximized = theme.is_maximized
-  self:create_minimize_button(font_object, theme.background_opacity)
+  self.is_maximized = theme:get_is_showing()
+  self:create_minimize_button(font_object, theme:get_background_opacity())
 
-  self.is_locked = theme.is_locked
-  self:create_lock_button(font_object, theme.background_opacity)
+  self.is_locked = theme:get_is_locked()
+  self:create_lock_button(font_object, theme:get_background_opacity())
 
-  self:create_config_button(font_object, theme.background_opacity)
+  self:create_config_button(font_object, theme:get_background_opacity())
 
-  self:initialize_panels(font_object, theme)
+  self:initialize_panels(font_object)
 end
 
 function main:create_background_texture(background_opacity)
@@ -218,14 +235,16 @@ function main:recalculate_height(...)
   end
 end
 
-function main:initialize_panels(font_object, theme)
+function main:initialize_panels(font_object)
   local previous = self.title
 
   self.panels = {}
 
-  self.factions = panels.factions:init(self, font_object, theme.statusbar_name, theme.factions)
+  local faction_settings = theme:get_section(constants.SECTIONS.FACTIONS)
+  self.factions = panels.factions:init(self)
   self.factions:Hide()
-  if theme.section_visibility.FACTIONS then
+
+  if faction_settings.display then
     self.factions:Show()
     self:SetHeight(self:GetHeight() + self.factions:GetHeight())
     self.texture:SetAllPoints()
@@ -238,9 +257,11 @@ function main:initialize_panels(font_object, theme)
 
   self.panels["FACTIONS"] = self.factions
 
-  self.friends = panels.friends:init(self, font_object, theme.statusbar_name, theme.friends)
+  local friend_settings = theme:get_section(constants.SECTIONS.FRIENDS)
+  self.friends = panels.friends:init(self)
   self.friends:Hide()
-  if theme.section_visibility.FRIENDS then
+
+  if friend_settings.display then
     self.friends:Show()
     self:SetHeight(self:GetHeight() + self.friends:GetHeight())
     self.texture:SetAllPoints()
@@ -253,9 +274,11 @@ function main:initialize_panels(font_object, theme)
 
   self.panels["FRIENDS"] = self.friends
 
-  self.timers = panels.timers:init(self, font_object, theme.statusbar_name, theme.timers)
+  local timer_settings = theme:get_section(constants.SECTIONS.TIMERS)
+  self.timers = panels.timers:init(self)
   self.timers:Hide()
-  if theme.section_visibility.TIMERS then
+
+  if timer_settings.display then
     self.timers:Show()
     self:SetHeight(self:GetHeight() + self.timers:GetHeight())
     self.texture:SetAllPoints()

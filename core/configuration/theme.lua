@@ -8,47 +8,6 @@ local log = ns.debug.log
 local theme = {}
 
 function theme:init()
-  self.sections = {
-    FACTIONS = "Factions",
-    FRIENDS = "Friends",
-    TIMERS = "Timers",
-    TODOS = "Todos",
-    PROFESSIONS = "Professions",
-  }
-  self.factions = {
-    [2507] = true,
-    [2503] = true,
-    [2511] = true,
-    [2510] = true,
-  }
-  self.friends = {
-    [2544] = true,
-    [2550] = true,
-    [2518] = true,
-    [2517] = true,
-  }
-  self.timers = {
-    Feast = true,
-    Siege = true
-  }
-  self.todos = {
-    Aiding = true,
-    Catalyst = true,
-    Feast = true,
-    Siege = true,
-    Hunts = true,
-    Flood = true,
-    Elements = true,
-    Bosses = true
-  }
-  self.professions = {
-    true, true
-  }
-  self.profession_settings = {
-    { Treatise = true, Gathering = true, Trainer = true, MobDrops = true, Azley = true, Weekly = true },
-    { Treatise = true, Gathering = true, Trainer = true, MobDrops = true, Azley = true, Weekly = true }
-  }
-
   event_manager:subscribe(
     self,
     {
@@ -97,7 +56,7 @@ function theme:notify(event_name, ...)
     self.config.font = ...
   elseif event_name == custom_events.SECTION_SELECTION_CHANGED then
     local section, enabled = ...
-    self.config.sections[section] = enabled
+    print(event_name, section, enabled)
     event_manager:handle(custom_events.THEME_SECTIONS_UPDATED, section, enabled)
   elseif event_name == custom_events.FRAME_SHOWING_CHANGED then
     self.config.showing = ...
@@ -115,18 +74,16 @@ function theme:to_message()
     background_opacity = self:get_background_opacity(),
     is_showing = self:get_is_showing(),
     is_locked = self:get_is_locked(),
-    factions = self:get_factions(),
-    friends = self:get_friends(),
-    timers = self:get_timers(),
-    todos = self:get_todos(),
-    professions = self:get_professions(),
-    profession_settings = self:get_profession_settings(),
-    section_visibility = self:get_sections()
+    sections = self:get_sections()
   }
 end
 
 function theme:get_font()
-  return self.config.font or media:get_default_font()
+  if self.config.font == nil then
+    self.config.font = media:get_default_font()
+  end
+
+  return self.config.font
 end
 
 function theme:get_statusbar()
@@ -154,63 +111,23 @@ function theme:get_is_locked()
 end
 
 function theme:get_sections()
-  if self.config.sections == nil then
-    self.config.sections = {}
+  if self.config.SECTIONS == nil then
+    self.config.SECTIONS = ns.constants.DEFAULT_THEME.SECTIONS
+  end
 
-    for key, _ in pairs(self.sections) do
-      self.config.sections[key] = true
+  return self.config.SECTIONS
+end
+
+function theme:get_section(section_name)
+  local sections = self:get_sections()
+
+  for _, section in ipairs(sections) do
+    if section.name == section_name then
+      return section
     end
   end
 
-  return self.config.sections
-end
-
-function theme:get_factions()
-  if self.config.factions == nil then
-    self.config.factions = self.factions
-  end
-
-  return self.config.factions
-end
-
-function theme:get_friends()
-  if self.config.friends == nil then
-    self.config.friends = self.friends
-  end
-
-  return self.config.friends
-end
-
-function theme:get_timers()
-  if self.config.timers == nil then
-    self.config.timers = self.timers
-  end
-
-  return self.config.timers
-end
-
-function theme:get_todos()
-  if self.config.todos == nil then
-    self.config.todos = self.todos
-  end
-
-  return self.config.todos
-end
-
-function theme:get_professions()
-  if self.config.professions == nil then
-    self.config.professions = self.professions
-  end
-
-  return self.config.professions
-end
-
-function theme:get_profession_settings()
-  if self.config.profession_settings == nil then
-    self.config.profession_settings = self.profession_settings
-  end
-
-  return self.config.profession_settings
+  return {}
 end
 
 ns.theme = theme:init()
