@@ -47,6 +47,7 @@ ns.constants.DEFAULT_THEME = {
         [2503] = { display = true },
         [2511] = { display = true },
         [2510] = { display = true },
+        [2564] = { display = true },
       }
     },
     {

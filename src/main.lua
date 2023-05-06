@@ -213,7 +213,7 @@ function main:create_config_button(font_object, background_opacity)
   components.helpers:add_border(self.config_button, { ["alpha"] = background_opacity })
 
   -- FOR DEBUG
-  event_manager:handle(custom_events.OPEN_CONFIG, self)
+  -- event_manager:handle(custom_events.OPEN_CONFIG, self)
 end
 
 function main:recalculate_height(...)

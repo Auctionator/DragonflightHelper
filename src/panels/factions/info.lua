@@ -45,6 +45,38 @@ function info:attach(container, id)
         listener.data.bar_value = 1
       end
     end
+
+    function container:show_tooltip()
+      GameTooltip:SetOwner(container, "ANCHOR_RIGHT");
+
+      local rankInfo = C_GossipInfo.GetFriendshipReputationRanks(friend_data.friendshipFactionID)
+
+      if (rankInfo.maxLevel > 0) then
+        GameTooltip:SetText(
+          friend_data.name .. " (" .. rankInfo.currentLevel .. " / " ..
+          rankInfo.maxLevel .. ")", 1, 1, 1
+        )
+      else
+        GameTooltip:SetText(friend_data.name, 1, 1, 1)
+      end
+
+      GameTooltip:AddLine(friend_data.text, nil, nil, nil, true)
+
+      if (friend_data.nextThreshold) then
+        local current = friend_data.standing -
+            friend_data.reactionThreshold
+        local max = friend_data.nextThreshold -
+            friend_data.reactionThreshold
+
+        GameTooltip:AddLine(
+          friend_data.reaction .. " (" .. current .. " / " ..
+          max .. ")", 1, 1, 1, true
+        )
+      else
+        GameTooltip:AddLine(friend_data.reaction, 1, 1, 1, true)
+      end
+      GameTooltip:Show();
+    end
   elseif listener.data.is_major_faction then
     function container:update_data()
       listener.data.faction_data = C_MajorFactions.GetMajorFactionData(factionID)
@@ -56,6 +88,56 @@ function info:attach(container, id)
           listener.data.faction_data.renownLevelThreshold or
           listener.data.faction_data.renownReputationEarned or 0
       listener.data.detail = RENOWN_LEVEL_LABEL .. listener.data.faction_data.renownLevel
+    end
+
+    function container:show_tooltip()
+      local function AddRenownRewardsToTooltip(renownRewards)
+        GameTooltip_AddHighlightLine(GameTooltip, MAJOR_FACTION_BUTTON_TOOLTIP_NEXT_REWARDS);
+
+        for _, rewardInfo in ipairs(renownRewards) do
+          local renownRewardString
+          local icon, name = RenownRewardUtil.GetRenownRewardInfo(
+            rewardInfo,
+            GenerateClosure(self.show_tooltip, self)
+          )
+
+          if icon then
+            local file, width, height = icon, 16, 16
+            local rewardTexture = CreateSimpleTextureMarkup(file, width, height)
+            renownRewardString = rewardTexture .. " " .. name;
+          end
+          local wrapText = false;
+          GameTooltip_AddNormalLine(GameTooltip, renownRewardString, wrapText)
+        end
+      end
+
+      GameTooltip:SetOwner(container, "ANCHOR_RIGHT");
+
+      local faction_info = C_MajorFactions.GetMajorFactionData(factionID)
+
+      GameTooltip_SetTitle(GameTooltip, faction_info.name, NORMAL_FONT_COLOR)
+      GameTooltip_AddColoredLine(
+        GameTooltip,
+        RENOWN_LEVEL_LABEL .. faction_info.renownLevel,
+        BLUE_FONT_COLOR
+      )
+      GameTooltip_AddBlankLineToTooltip(GameTooltip);
+
+      GameTooltip_AddHighlightLine(
+        GameTooltip,
+        MAJOR_FACTION_RENOWN_TOOLTIP_PROGRESS:format(faction_info.name)
+      )
+      GameTooltip_AddBlankLineToTooltip(GameTooltip)
+
+      local nextRenownRewards = C_MajorFactions.GetRenownRewardsForLevel(
+        faction_info.factionID,
+        C_MajorFactions.GetCurrentRenownLevel(faction_info.factionID) + 1
+      )
+      if #nextRenownRewards > 0 then
+        AddRenownRewardsToTooltip(nextRenownRewards);
+      end
+
+      GameTooltip:Show();
     end
   end
 
@@ -73,9 +155,11 @@ function info:attach(container, id)
 
   container:SetScript("OnEnter", function()
     container.description:SetText(("%d / %d"):format(listener.data.bar_value, listener.data.bar_max))
+    container:show_tooltip()
   end)
   container:SetScript("OnLeave", function()
     container.description:SetText(listener.data.detail)
+    GameTooltip:Hide()
   end)
 
   event_manager:subscribe(listener, REPUTATION_EVENTS, listener_name)

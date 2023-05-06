@@ -34,21 +34,23 @@ function opacity_slider:init(parent, current_opacity, font_object, statusbar_nam
       local opacity = ((x / ui_scale) - self:GetLeft()) / self:GetWidth()
       local value = 100 * opacity
 
+      if opacity > 1 then opacity = 1 end
+      if opacity < 0 then opacity = 0 end
+
+      if value > 100 then value = 100 end
+      if value < 0 then value = 0 end
+
+
+
       slider.foreground:SetValue(value)
       slider.title:SetText(("Background Opacity (%d%%)"):format(value))
       event_manager:handle(custom_events.BACKGROUND_OPACITY_CHANGED, opacity)
     end
   end)
-  slider:SetScript("OnMouseDown", function(_, button)
-    print("OnMouseDown", button)
-    self.sliding = true
-  end)
   slider:SetScript("OnDragStart", function(_, button)
-    print("OnDragStart", button)
     self.sliding = true
   end)
   slider:SetScript("OnDragStop", function(_, button)
-    print("OnDragStop", button)
     self.sliding = false
   end)
 
