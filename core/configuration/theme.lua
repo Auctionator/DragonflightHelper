@@ -20,6 +20,7 @@ function theme:init()
       custom_events.FONT_CHANGED,
       custom_events.BACKGROUND_OPACITY_CHANGED,
       custom_events.SECTION_SELECTION_CHANGED,
+      custom_events.SUBSECTION_SELECTION_CHANGED,
       custom_events.FRAME_SHOWING_CHANGED,
       custom_events.FRAME_LOCKED_CHANGED
     },
@@ -56,8 +57,25 @@ function theme:notify(event_name, ...)
     self.config.font = ...
   elseif event_name == custom_events.SECTION_SELECTION_CHANGED then
     local section, enabled = ...
-    print(event_name, section, enabled)
+
+    section.display = enabled
+    for _, entry in pairs(section.subsections) do
+      entry.display = enabled
+    end
+
     event_manager:handle(custom_events.THEME_SECTIONS_UPDATED, section, enabled)
+  elseif event_name == custom_events.SUBSECTION_SELECTION_CHANGED then
+    local section, id, checked = ...
+
+    section.subsections[id].display = checked
+
+    local section_displayed = true
+    for _, entry in pairs(section.subsections) do
+      section_displayed = section_displayed and not entry.display
+    end
+    section.display = section_displayed
+
+    event_manager:handle(custom_events.THEME_SECTIONS_UPDATED, section, section_displayed)
   elseif event_name == custom_events.FRAME_SHOWING_CHANGED then
     self.config.showing = ...
   elseif event_name == custom_events.BACKGROUND_OPACITY_CHANGED then

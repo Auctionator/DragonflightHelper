@@ -1,10 +1,9 @@
 local addon, ns = ...
 
 local event_manager = ns.events.manager
-local ui_components = ns.components
 local custom_events = ns.events.custom
-local theme = ns.theme
 local media = ns.media
+local log = ns.debug.log
 
 local font_dropdown = ns.config.font_dropdown
 local statusbar_dropdown = ns.config.statusbar_dropdown
@@ -14,12 +13,10 @@ local opacity_slider = ns.config.opacity_slider
 local frame_name = addon .. "_configuration_panel"
 local addon_configuration = CreateFrame("Frame", frame_name, ns.main)
 
--- local addon_configuration = ui_components:frame({
---   name = "DFH_Configuration", width = 200, height = 500
--- })
-
 function addon_configuration:init()
-  self:SetHeight(500)
+  log("OK", "addon_configuration", 1, "init", "Loading")
+
+  self:SetHeight(0)
   self:SetWidth(200)
 
   self.texture = self:CreateTexture()
@@ -38,6 +35,8 @@ function addon_configuration:init()
     },
     frame_name
   )
+
+  return self
 end
 
 function addon_configuration:initialize_frames(theme)
@@ -47,10 +46,12 @@ function addon_configuration:initialize_frames(theme)
   self.font_dropdown:SetPoint("TOP", self, "TOP")
   self.font_dropdown:SetPoint("LEFT", self, "LEFT")
   self.font_dropdown:SetPoint("RIGHT", self, "RIGHT")
+  self:SetHeight(self:GetHeight() + self.font_dropdown:GetHeight())
 
   self.statusbar_dropdown = statusbar_dropdown:init(self, theme.statusbar_name)
   self.statusbar_dropdown:SetPoint("TOPLEFT", self.font_dropdown, "BOTTOMLEFT")
   self.statusbar_dropdown:SetPoint("RIGHT", self, "RIGHT")
+  self:SetHeight(self:GetHeight() + self.statusbar_dropdown:GetHeight())
 
   self.opacity_slider = opacity_slider:init(
     self,
@@ -60,10 +61,12 @@ function addon_configuration:initialize_frames(theme)
   )
   self.opacity_slider:SetPoint("TOPLEFT", self.statusbar_dropdown, "BOTTOMLEFT", 0, -5)
   self.opacity_slider:SetPoint("RIGHT", self, "RIGHT")
+  self:SetHeight(self:GetHeight() + self.opacity_slider:GetHeight() + 5)
 
   self.section_selector = section_selector:init(self)
   self.section_selector:SetPoint("TOPLEFT", self.opacity_slider, "BOTTOMLEFT", 0, -5)
   self.section_selector:SetPoint("RIGHT", self, "RIGHT")
+  self:SetHeight(self:GetHeight() + self.section_selector:GetHeight() + 5)
 end
 
 function addon_configuration:notify(event_name, ...)
@@ -83,5 +86,4 @@ function addon_configuration:notify(event_name, ...)
   end
 end
 
-addon_configuration:init()
-ns.config.panel = addon_configuration
+ns.config.panel = addon_configuration:init()

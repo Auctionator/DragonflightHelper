@@ -1,19 +1,21 @@
 local addon, ns = ...
 
 local function log(status, from, verbosity, category, message, ...)
+  local debug_message = {}
+
+  if status then
+    table.insert(debug_message, status)
+  end
+
+  table.insert(debug_message, category or "")
+  table.insert(debug_message, verbosity or 1)
+  table.insert(debug_message, message or "")
+
   if DLAPI then
-    local debug_message = ""
-
-    if status then
-      debug_message = status .. "~"
-    end
-
-    debug_message = debug_message .. (category or "") .. "~"
-    debug_message = debug_message .. (verbosity or 1) .. "~"
-    debug_message = debug_message .. message
-
     DLAPI.DebugLog(
-      addon .. (from and "_" .. from or ""), debug_message, ...)
+      addon .. (from and "_" .. from or ""), table.concat(debug_message, "~"), ...)
+    -- else
+    --   print(unpack(debug_message))
   end
 end
 
