@@ -153,11 +153,11 @@ function info:attach(container, id)
     container.foreground:SetValue(data.bar_value)
   end
 
-  container:SetScript("OnEnter", function()
+  container.button:SetScript("OnEnter", function()
     container.description:SetText(("%d / %d"):format(listener.data.bar_value, listener.data.bar_max))
     container:show_tooltip()
   end)
-  container:SetScript("OnLeave", function()
+  container.button:SetScript("OnLeave", function()
     container.description:SetText(listener.data.detail)
     GameTooltip:Hide()
   end)

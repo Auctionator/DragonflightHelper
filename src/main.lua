@@ -293,6 +293,38 @@ function main:initialize_panels(font_object)
   end
 
   self.panels["TIMERS"] = self.timers
+
+  local profession_one_settings = theme:get_section(constants.SECTIONS.PROFESSIONS_ONE)
+  self.profession_one_settings = panels.professions:init(self, constants.SECTIONS.PROFESSIONS_ONE)
+
+  if profession_one_settings.display then
+    self.profession_one_settings:Show()
+    self:SetHeight(self:GetHeight() + self.profession_one_settings:GetHeight())
+    self.texture:SetAllPoints()
+
+    self.profession_one_settings:SetPoint("TOPLEFT", previous, "BOTTOMLEFT")
+    self.profession_one_settings:SetPoint("RIGHT")
+
+    previous = self.profession_one_settings
+  end
+
+  self.panels["PROFESSIONS_ONE"] = self.profession_one_settings
+
+  local profession_two_settings = theme:get_section(constants.SECTIONS.PROFESSIONS_TWO)
+  self.profession_two_settings = panels.professions:init(self, constants.SECTIONS.PROFESSIONS_TWO)
+
+  if profession_two_settings.display then
+    self.profession_two_settings:Show()
+    self:SetHeight(self:GetHeight() + self.profession_two_settings:GetHeight())
+    self.texture:SetAllPoints()
+
+    self.profession_two_settings:SetPoint("TOPLEFT", previous, "BOTTOMLEFT")
+    self.profession_two_settings:SetPoint("RIGHT")
+
+    previous = self.profession_two_settings
+  end
+
+  self.panels["PROFESSIONS_TWO"] = self.profession_two_settings
 end
 
 ns.main = main:init()

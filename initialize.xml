@@ -3,6 +3,11 @@
   <Script file="core\initialize.lua" />
   <Script file="core\debug.lua" />
 
+  <!-- Constants -->
+  <Script file="core\constants\panel_sections.lua" />
+  <Script file="core\constants\skills.lua" />
+  <Script file="core\constants\theme_defaults.lua" />
+
   <!-- Event manager must be loaded first -->
   <Script file="core\events\custom.lua" />
   <Script file="core\events\subscriber.lua" />
@@ -18,17 +23,28 @@
   <Script file="core\configuration\theme.lua" />
 
   <!-- Components -->
+  <!-- Component helpers -->
   <Script file="components\helpers\get_unique_id.lua" />
   <Script file="components\helpers\add_frame_border.lua" />
   <Script file="components\helpers\create_title_string.lua" />
+  <Script file="components\helpers\create_auto_sizing_frame.lua" />
   <Script file="components\helpers\create_status_bar.lua" />
   <Script file="components\helpers\create_checkbox.lua" />
   <Script file="components\helpers\create_expanding_frame.lua" />
   <Script file="components\frame.lua" />
 
+  <!-- Main UI cmoponents-->
   <Script file="src\panels\factions\info.lua" />
   <Script file="src\panels\factions.lua" />
   <Script file="src\panels\friends.lua" />
+  <Script file="src\panels\professions\helpers.lua" />
+  <Script file="src\panels\professions\setup_azley.lua" />
+  <Script file="src\panels\professions\setup_gathering.lua" />
+  <Script file="src\panels\professions\setup_mob_drops.lua" />
+  <Script file="src\panels\professions\setup_trainer.lua" />
+  <Script file="src\panels\professions\setup_treatises.lua" />
+  <Script file="src\panels\professions\setup_weekly.lua" />
+  <Script file="src\panels\professions\create_profession_statusbar.lua" />
   <Script file="src\panels\professions.lua" />
   <Script file="src\panels\timers\info.lua" />
   <Script file="src\panels\timers.lua" />

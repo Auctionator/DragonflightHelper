@@ -36,7 +36,12 @@ function theme:notify(event_name, ...)
   if event_name == "ADDON_LOADED" then
     event_manager:unsubscribe(self, "ADDON_LOADED")
 
-    self.config = DRAGONFLIGHT_HELPER_CONFIG.theme or {}
+    if DRAGONFLIGHT_HELPER_CONFIG == nil then
+      DRAGONFLIGHT_HELPER_CONFIG = {}
+    end
+
+    self.config = DRAGONFLIGHT_HELPER_CONFIG or ns.constants.DEFAULT_THEME
+
     event_manager:handle(
       custom_events.THEME_LOADED,
       self:to_message()
@@ -81,6 +86,7 @@ function theme:notify(event_name, ...)
   elseif event_name == custom_events.BACKGROUND_OPACITY_CHANGED then
     self.config.background_opacity = math.floor(... * 100) / 100
   elseif event_name == custom_events.FRAME_LOCKED_CHANGED then
+    print(...)
     self.config.locked = ...
   end
 end
@@ -129,23 +135,33 @@ function theme:get_is_locked()
 end
 
 function theme:get_sections()
-  if self.config.SECTIONS == nil then
-    self.config.SECTIONS = ns.constants.DEFAULT_THEME.SECTIONS
+  if self.config.sections == nil then
+    self.config.sections = ns.constants.DEFAULT_THEME
   end
 
-  return self.config.SECTIONS
+  return self.config.sections
 end
 
 function theme:get_section(section_name)
-  local sections = self:get_sections()
+  local requested_section = self:get_sections()[section_name]
 
-  for _, section in ipairs(sections) do
-    if section.name == section_name then
-      return section
-    end
+  if requested_section == nil then
+    return {}
+  else
+    return requested_section
   end
+end
 
-  return {}
+function theme:get_completed_quest_color()
+  return FACTION_BAR_COLORS[5]
+end
+
+function theme:get_incomplete_quest_color()
+  return { r = FACTION_BAR_COLORS[1].r, g = FACTION_BAR_COLORS[1].g, b = FACTION_BAR_COLORS[1].b, a = 0.4 }
+end
+
+function theme:get_accepted_quest_color()
+  return { r = FACTION_BAR_COLORS[4].r, g = FACTION_BAR_COLORS[4].g, b = FACTION_BAR_COLORS[4].b, a = 0.4 }
 end
 
 ns.theme = theme:init()

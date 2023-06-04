@@ -20,6 +20,7 @@ function helpers:create_status_bar(options)
   local value = options.value or 0
   local data = options.data or {}
   local visible = options.visible or false
+  local background_color = options.background_color or { r = 220, g = 220, b = 220, a = 0.2 }
 
   if font_object == nil then
     error("font_object is required to create a status bar")
@@ -58,7 +59,7 @@ function helpers:create_status_bar(options)
   background:SetPoint("TOPLEFT", foreground, "TOPLEFT")
   background:SetPoint("BOTTOMRIGHT", foreground, "BOTTOMRIGHT")
   background:SetStatusBarTexture(bar_texture)
-  background:SetStatusBarColor(220, 220, 220, 0.2)
+  background:SetStatusBarColor(background_color.r, background_color.g, background_color.b, background_color.a)
   background:SetMinMaxValues(min, max)
   frame.background = background
 
@@ -77,6 +78,10 @@ function helpers:create_status_bar(options)
   description:SetJustifyH("RIGHT")
   description:SetJustifyV("MIDDLE")
   frame.description = description
+
+  local button = CreateFrame("Button", addon .. "_statusbar_button_" .. bar_id, frame)
+  button:SetAllPoints()
+  frame.button = button
 
   frame.notify = function(_, event_name, ...)
     if event_name == custom_events.STATUSBAR_TEXTURE_CHANGED then

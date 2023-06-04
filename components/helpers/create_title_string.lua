@@ -25,7 +25,6 @@ function helpers:create_title_string(parent_frame, font_object, text)
     end
   end
 
-
   event_manager:subscribe(title, { custom_events.FONT_CHANGED, custom_events.THEME_MEDIA_UPDATED }, title_frame_name)
 
   return title

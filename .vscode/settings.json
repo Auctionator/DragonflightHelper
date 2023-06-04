@@ -104,7 +104,9 @@
     "ToggleDropDownMenu",
     "getglobal",
     "GetCursorPosition",
-    "DLAPI"
+    "DLAPI",
+    "GetQuestLogQuestText",
+    "GameTooltip_AddQuest"
   ],
   "Lua.diagnostics.disable": ["deprecated"]
 }

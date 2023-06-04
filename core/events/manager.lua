@@ -65,7 +65,7 @@ function event_manager:subscribe(component, events, name)
     events = { events }
   end
 
-  -- log(nil, 1, "subscribe", name, tostring(events))
+  log(nil, 1, "subscribe", name, tostring(events))
 
   if not status then
     log("ERR", "event_manager", 1, "subscribe", "failed to load subscriber")
