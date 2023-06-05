@@ -1,0 +1,5 @@
+<Bindings>
+  <Binding category="Dragonflight Helper" name="Toggle display" description="Toggle between minimizing and maximizing the addon window.">
+    DragonflightHelperAddonKeyBindings.ToggleBinding()
+  </Binding>
+</Bindings>

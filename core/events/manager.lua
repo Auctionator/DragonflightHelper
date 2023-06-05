@@ -65,15 +65,16 @@ function event_manager:subscribe(component, events, name)
     events = { events }
   end
 
-  log(nil, 1, "subscribe", name, tostring(events))
-
   if not status then
     log("ERR", "event_manager", 1, "subscribe", "failed to load subscriber")
     error("Error occurred creating subscriber for " .. name .. " (" .. #events .. ")")
     return
   end
 
-  for _, event in ipairs(events) do
+  log(nil, "event_manager", 1, "subscribe", string.format("(%d events)", #events))
+  for key, event in pairs(events) do
+    log(nil, "event_manager", 1, "subscribe", name .. ":" .. key .. " - " .. event)
+
     self.events[event] = self.events[event] or { event_count = 0 }
     subscriber:add_event(event)
 
@@ -110,7 +111,7 @@ function event_manager:debug()
   local s = ""
 
   for key, value in pairs(self.events) do
-    s = string.format("%s\n%s (%d)", s, key, value.event_count)
+    s = string.format("%s\n%s (%d subscribers)\n", s, key, value.event_count)
   end
 
   return s

@@ -6,7 +6,7 @@ ns.constants.SECTIONS = {
   TIMERS = "Timers",
   TODOS = "Todos",
   PROFESSIONS_ONE = "Profession One",
-  PROFESSIONS_TWO = "Professions Two"
+  PROFESSIONS_TWO = "Profession Two"
 }
 
 ns.constants.SKILL_SUBSECTIONS = {

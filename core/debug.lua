@@ -33,7 +33,12 @@ local function log(status, from, verbosity, category, message, ...)
 
   table.insert(debug_message, category or "")
   table.insert(debug_message, verbosity or 1)
-  table.insert(debug_message, message or "")
+
+  if type(message) == "boolean" then
+    table.insert(debug_message, (message and "true" or "false"))
+  else
+    table.insert(debug_message, message or "")
+  end
 
   DLAPI.DebugLog(from or "?", table.concat(debug_message, "~"), ...)
 end

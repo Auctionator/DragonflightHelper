@@ -86,7 +86,6 @@ function theme:notify(event_name, ...)
   elseif event_name == custom_events.BACKGROUND_OPACITY_CHANGED then
     self.config.background_opacity = math.floor(... * 100) / 100
   elseif event_name == custom_events.FRAME_LOCKED_CHANGED then
-    print(...)
     self.config.locked = ...
   end
 end

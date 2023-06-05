@@ -11,11 +11,11 @@ function helpers:create_auto_sizing_frame(parent, title_text, frame_enabled)
   local frame_name = addon .. "_auto_sizing_frame_" .. self:get_id()
 
   local frame = CreateFrame("FRAME", frame_name, parent)
-  frame:SetHeight(0)
+  frame:SetHeight(0.1)
   frame.children = {}
 
   function frame:recalculate_height()
-    self:SetHeight(0)
+    self:SetHeight(0.1)
 
     for _, child in ipairs(frame.children) do
       -- not sure if font string's get height method will return correctly here...

@@ -1,4 +1,5 @@
 local _, ns = ...
+local log = ns.debug.log
 
 local subscriber = {}
 
@@ -33,11 +34,13 @@ function subscriber:id()
 end
 
 function subscriber:add_event(event_name)
+  log(nil, "subscriber", 1, "add_event", tostring(self) .. ": " .. event_name)
   self.events[event_name] = true
   self.count = self.count + 1
 end
 
 function subscriber:remove_event(event_name)
+  log(nil, "subscriber", 1, "remove_event", tostring(self) .. ": " .. event_name)
   self.events[event_name] = nil
   self.count = self.count - 1
 end
@@ -49,7 +52,7 @@ function subscriber:__tostring()
     event_list = key .. " " .. tostring(value) .. ", "
   end
 
-  return string.format("<%s> %s (%d) {%s}", self:id(), self.name, self.count, event_list:sub(1, event_list:len() - 2))
+  return string.format("<%s> %s (%d) {%s}", self:id(), self.name, self.count, event_list)
 end
 
 ns.events.subscriber = subscriber

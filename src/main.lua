@@ -17,9 +17,10 @@ function main:init()
 
   self.initialized = false
 
-  self:SetPoint("CENTER")
+  self:SetPoint("TOPLEFT")
 
   self:RegisterForDrag("LeftButton")
+  self:SetResizable(true)
   self:SetClampedToScreen(true)
 
   self:SetHeight(20)
@@ -34,7 +35,8 @@ function main:init()
       custom_events.THEME_LOADED,
       custom_events.FONT_CHANGED,
       custom_events.BACKGROUND_OPACITY_CHANGED,
-      custom_events.THEME_SECTIONS_UPDATED
+      custom_events.THEME_SECTIONS_UPDATED,
+      custom_events.FRAME_SHOWING_CHANGED
     },
     main_frame_name
   )
@@ -70,7 +72,9 @@ function main:notify(event_name, ...)
   elseif event_name == custom_events.BACKGROUND_OPACITY_CHANGED then
     self.texture:SetAlpha(...)
   elseif event_name == custom_events.THEME_SECTIONS_UPDATED then
-    self:recalculate_height(...)
+    self:recalculate_height()
+  elseif event_name == custom_events.FRAME_SHOWING_CHANGED then
+    self:update_visibility(...)
   end
 end
 
@@ -94,6 +98,7 @@ function main:theme_loaded()
   self:create_config_button(font_object, theme:get_background_opacity())
 
   self:initialize_panels(font_object)
+  self:recalculate_height()
 end
 
 function main:create_background_texture(background_opacity)
@@ -124,18 +129,30 @@ function main:create_minimize_button(font_object, background_opacity)
 end
 
 function main:minimize_or_maximize()
-  if self.is_maximized then
-    -- TODO Hide child frames
-  else
-    -- TODO Show child frames
-  end
+  event_manager:handle(custom_events.FRAME_SHOWING_CHANGED, not self.is_maximized)
+end
 
-  self.is_maximized = not self.is_maximized
+function main:update_visibility(visible)
+  log(nil, "main", 1, "uv", "")
+  self.is_maximized = visible
 
-  if self.is_maximized then
+  if visible then
     self.minimize_button:SetText("m")
   else
     self.minimize_button:SetText("M")
+  end
+
+  for section, panel in pairs(self.panels) do
+    local settings = theme:get_section(section)
+    log(nil, "main", 1, "uv", section .. ":" .. (settings.display and "true" or "false"))
+
+    if settings.display and visible then
+      panel:Show()
+    else
+      panel:Hide()
+    end
+
+    self:recalculate_height()
   end
 end
 
@@ -216,17 +233,21 @@ function main:create_config_button(font_object, background_opacity)
   -- event_manager:handle(custom_events.OPEN_CONFIG, self)
 end
 
-function main:recalculate_height(...)
-  local sections = theme:get_sections()
+function main:recalculate_height()
+  log(nil, "main", 1, "rh", self.is_maximized)
 
-  self:SetHeight(self.title:GetHeight() + 3)
+  self:SetHeight(self.title:GetHeight() + 10)
 
-  for section, enabled in pairs(sections) do
-    local panel = self.panels[section]
-
+  for section, panel in pairs(self.panels) do
     if panel ~= nil then
-      if enabled then
+      local spec = theme:get_section(section)
+
+      log(nil, "main", 1, "section", spec.display)
+
+      if spec.display and self.is_maximized then
         panel:recalculate_height()
+        log(nil, "main", 1, "h", "Height after recalc: " .. panel:GetHeight())
+
         self:SetHeight(self:GetHeight() + panel:GetHeight())
         panel:Show()
       else
@@ -236,6 +257,8 @@ function main:recalculate_height(...)
       end
     end
   end
+
+  self.texture:SetAllPoints()
 end
 
 function main:initialize_panels(font_object)
@@ -258,7 +281,7 @@ function main:initialize_panels(font_object)
     previous = self.factions
   end
 
-  self.panels["FACTIONS"] = self.factions
+  self.panels[constants.SECTIONS.FACTIONS] = self.factions
 
   local friend_settings = theme:get_section(constants.SECTIONS.FRIENDS)
   self.friends = panels.friends:init(self)
@@ -275,7 +298,7 @@ function main:initialize_panels(font_object)
     previous = self.friends
   end
 
-  self.panels["FRIENDS"] = self.friends
+  self.panels[constants.SECTIONS.FRIENDS] = self.friends
 
   local timer_settings = theme:get_section(constants.SECTIONS.TIMERS)
   self.timers = panels.timers:init(self)
@@ -292,7 +315,7 @@ function main:initialize_panels(font_object)
     previous = self.timers
   end
 
-  self.panels["TIMERS"] = self.timers
+  self.panels[constants.SECTIONS.TIMERS] = self.timers
 
   local profession_one_settings = theme:get_section(constants.SECTIONS.PROFESSIONS_ONE)
   self.profession_one_settings = panels.professions:init(self, constants.SECTIONS.PROFESSIONS_ONE)
@@ -308,7 +331,7 @@ function main:initialize_panels(font_object)
     previous = self.profession_one_settings
   end
 
-  self.panels["PROFESSIONS_ONE"] = self.profession_one_settings
+  self.panels[constants.SECTIONS.PROFESSIONS_ONE] = self.profession_one_settings
 
   local profession_two_settings = theme:get_section(constants.SECTIONS.PROFESSIONS_TWO)
   self.profession_two_settings = panels.professions:init(self, constants.SECTIONS.PROFESSIONS_TWO)
@@ -324,7 +347,7 @@ function main:initialize_panels(font_object)
     previous = self.profession_two_settings
   end
 
-  self.panels["PROFESSIONS_TWO"] = self.profession_two_settings
+  self.panels[constants.SECTIONS.PROFESSIONS_TWO] = self.profession_two_settings
 end
 
 ns.main = main:init()

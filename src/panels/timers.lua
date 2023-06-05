@@ -25,12 +25,12 @@ function timers:init(parent)
 end
 
 function timers:recalculate_height()
-  local selected_timers = theme:get_timers()
+  local selected_timers = theme:get_section(constants.SECTIONS.TIMERS)
 
   self:SetHeight(self.title:GetStringHeight())
 
-  for key, is_showing in pairs(selected_timers) do
-    if is_showing then
+  for key, spec in pairs(selected_timers.subsections) do
+    if spec.display then
       self:SetHeight(self:GetHeight() + self.timer_bars[key]:GetHeight() + 3)
     end
   end

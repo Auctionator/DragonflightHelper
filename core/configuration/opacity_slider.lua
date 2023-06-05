@@ -24,10 +24,10 @@ function opacity_slider:init(parent, current_opacity, font_object, statusbar_nam
 
   slider.sliding = false
 
-  slider:EnableMouse(true)
-  slider:RegisterForDrag("LeftButton")
+  slider.button:EnableMouse(true)
+  slider.button:RegisterForDrag("LeftButton")
 
-  slider:SetScript("OnUpdate", function()
+  slider.button:SetScript("OnUpdate", function()
     if self.sliding then
       local x = GetCursorPosition()
       local ui_scale = UIParent:GetEffectiveScale()
@@ -40,20 +40,27 @@ function opacity_slider:init(parent, current_opacity, font_object, statusbar_nam
       if value > 100 then value = 100 end
       if value < 0 then value = 0 end
 
-
-
       slider.foreground:SetValue(value)
       slider.title:SetText(("Background Opacity (%d%%)"):format(value))
       event_manager:handle(custom_events.BACKGROUND_OPACITY_CHANGED, opacity)
     end
   end)
-  slider:SetScript("OnDragStart", function(_, button)
+
+  slider.button:SetScript("OnDragStart", function(_, button)
     self.sliding = true
   end)
-  slider:SetScript("OnDragStop", function(_, button)
+
+  slider.button:SetScript("OnDragStop", function(_, button)
     self.sliding = false
   end)
 
+  slider.button:SetScript("OnMouseDown", function(_, button)
+    self.sliding = true
+  end)
+
+  slider.button:SetScript("OnMouseUp", function(_, button)
+    self.sliding = false
+  end)
 
   slider:SetPoint("TOPLEFT", self, "TOPLEFT", 2, 0)
   slider:SetPoint("RIGHT", self, "RIGHT", -2, 0)

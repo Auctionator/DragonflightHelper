@@ -21,14 +21,14 @@ function factions:init(parent)
 end
 
 function factions:recalculate_height()
-  local selected_factions = theme:get_factions()
+  local selected_factions = theme:get_section(constants.SECTIONS.FACTIONS)
 
   self:SetHeight(self.title:GetStringHeight())
 
   local count = 0
 
-  for key, is_showing in pairs(selected_factions) do
-    if is_showing then
+  for key, spec in pairs(selected_factions.subsections) do
+    if spec.display then
       self:SetHeight(self:GetHeight() + self.faction_bars[key]:GetHeight() + 3)
       count = count + 1
     end

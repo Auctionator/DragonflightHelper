@@ -25,14 +25,14 @@ function friends:init(parent)
 end
 
 function friends:recalculate_height()
-  local selected_friends = theme:get_friends()
+  local selected_friends = theme:get_section(constants.SECTIONS.FRIENDS)
 
   self:SetHeight(self.title:GetStringHeight())
 
   local count = 0
 
-  for key, is_showing in pairs(selected_friends) do
-    if is_showing then
+  for key, spec in pairs(selected_friends.subsections) do
+    if spec.display then
       self:SetHeight(self:GetHeight() + self.friend_bars[key]:GetHeight() + 3)
       count = count + 1
     end

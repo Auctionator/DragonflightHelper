@@ -16,6 +16,7 @@ ns.panels = {}
 ns.factions = {}
 ns.timers = {}
 ns.professions = {}
+ns.professions.loader = {}
 ns.professions.setup = {}
 
 ns.debug = {}
