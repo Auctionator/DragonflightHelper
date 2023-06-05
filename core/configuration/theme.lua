@@ -4,6 +4,8 @@ local event_manager = ns.events.manager
 local custom_events = ns.events.custom
 local media = ns.media
 local log = ns.debug.log
+local SECTIONS = ns.constants.SECTIONS
+local SKILL_SUBSECTIONS = ns.constants.SKILL_SUBSECTIONS
 
 local theme = {}
 
@@ -40,7 +42,9 @@ function theme:notify(event_name, ...)
       DRAGONFLIGHT_HELPER_CONFIG = {}
     end
 
-    self.config = DRAGONFLIGHT_HELPER_CONFIG or ns.constants.DEFAULT_THEME
+    self.config = DRAGONFLIGHT_HELPER_CONFIG or { sections = ns.constants.DEFAULT_THEME }
+
+    self:upgrade_config()
 
     event_manager:handle(
       custom_events.THEME_LOADED,
@@ -87,6 +91,50 @@ function theme:notify(event_name, ...)
     self.config.background_opacity = math.floor(... * 100) / 100
   elseif event_name == custom_events.FRAME_LOCKED_CHANGED then
     self.config.locked = ...
+  end
+end
+
+function theme:upgrade_config()
+  if self.config.theme_version == nil then
+    self.config.theme_version = 0
+  end
+
+  -- v0.4 adding profession world drops and masters
+  if self.config.theme_version < 14 then
+    self.config.sections[SECTIONS.PROFESSIONS_ONE].subsections[SKILL_SUBSECTIONS.WorldDrops] = {
+      display = true, order = 1
+    }
+    self.config.sections[SECTIONS.PROFESSIONS_ONE].subsections[SKILL_SUBSECTIONS.ProfessionMaster] = {
+      display = true, order = 1
+    }
+    self.config.sections[SECTIONS.PROFESSIONS_TWO].subsections[SKILL_SUBSECTIONS.WorldDrops] = {
+      display = true, order = 1
+    }
+    self.config.sections[SECTIONS.PROFESSIONS_TWO].subsections[SKILL_SUBSECTIONS.ProfessionMaster] = {
+      display = true, order = 1
+    }
+
+    self.config.theme_version = 4
+  end
+
+  -- v0.5 adding ability to (eventually) order bars, enforcing consistency in current ordering
+  if self.config.theme_version < 5 then
+    local sections_to_update = {
+      SECTIONS.FACTIONS,
+      SECTIONS.FRIENDS,
+      SECTIONS.TIMERS,
+      SECTIONS.TODOS,
+      SECTIONS.PROFESSIONS_ONE,
+      SECTIONS.PROFESSIONS_TWO
+    }
+
+    for _, section in ipairs(sections_to_update) do
+      for index, subsection in ipairs(self.config.sections[section].subsections) do
+        subsection.order = index
+      end
+    end
+
+    self.config.theme_version = 5
   end
 end
 

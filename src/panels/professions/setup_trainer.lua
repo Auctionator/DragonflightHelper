@@ -54,7 +54,8 @@ local TRAINER_QUESTS = {
 local setup_trainer = function(profession_data)
   local config = TRAINER_QUESTS[profession_data.skill_id]
   local max = 1
-  local completed_count = profession_helpers.count_completed(config)
+  local completed_count = profession_helpers.count_completed(config,
+    string.format("%s, %s", "Trainer", profession_data.name))
 
   return {
     is_valid_subsection = true,
@@ -62,7 +63,8 @@ local setup_trainer = function(profession_data)
     max = max,
     completed_count = completed_count,
     events = { "QUEST_TURNED_IN", "QUEST_ACCEPTED", "QUEST_REMOVED", "QUEST_DATA_LOAD_RESULT" },
-    notify_function = profession_helpers.notify_update_description(config),
+    notify_function = profession_helpers.notify_update_description(config,
+      string.format("%s, %s", "Trainer", profession_data.name)),
     tooltip_function = profession_helpers.quest_tooltip(config),
     click_function = nil,
     currently_on_quest = profession_helpers.currently_on_quest(config)

@@ -39,9 +39,41 @@ local function create_profession_statusbar(parent, profession_data, subsection_i
     end)
   end
 
-  if setup_info.click_function then
-    statusbar.button:SetScript("OnClick", setup_info.click_function)
-  end
+  statusbar.button:RegisterForClicks("AnyUp")
+
+  -- local context_menu = CreateFrame("Frame", nil, statusbar.button, "UIDropDownMenuTemplate")
+
+  -- UIDropDownMenu_Initialize(context_menu, function()
+  --   local info = UIDropDownMenu_CreateInfo()
+  --   info.text = "Select color"
+
+  --   info.hasColorSwatch = true
+  --   info.r = 1
+  --   info.g = 0
+  --   info.b = 0
+  --   info.opacity = 0.4
+  --   info.hasOpacity = true
+
+  --   info.swatchFunc = function(...)
+  --     local r, g, b = ColorPickerFrame:GetColorRGB()
+  --     local a = OpacitySliderFrame:GetValue()
+  --     print(..., r, g, b, a)
+  --   end
+
+  --   UIDropDownMenu_AddButton(info)
+  -- end)
+
+  statusbar.button:SetScript("OnClick", function(...)
+    local _, button = ...
+
+    -- if button == "RightButton" then
+    --   ToggleDropDownMenu(1, nil, context_menu, statusbar.button, 0, 0)
+    -- end
+
+    if setup_info.click_function and button ~= "RightButton" then
+      setup_info.click_function(...)
+    end
+  end)
 
   return statusbar
 end

@@ -62,6 +62,8 @@ ns.constants.DEFAULT_THEME = {
       [SKILL_SUBSECTIONS.MobDrops] = { display = true, order = 1 },
       [SKILL_SUBSECTIONS.Azley] = { display = true, order = 1 },
       [SKILL_SUBSECTIONS.Weekly] = { display = true, order = 1 },
+      [SKILL_SUBSECTIONS.WorldDrops] = { display = true, order = 1 },
+      [SKILL_SUBSECTIONS.ProfessionMaster] = { display = true, order = 1 }
     }
   },
   [SECTIONS.PROFESSIONS_TWO] = {
@@ -75,6 +77,8 @@ ns.constants.DEFAULT_THEME = {
       [SKILL_SUBSECTIONS.MobDrops] = { display = true, order = 1 },
       [SKILL_SUBSECTIONS.Azley] = { display = true, order = 1 },
       [SKILL_SUBSECTIONS.Weekly] = { display = true, order = 1 },
+      [SKILL_SUBSECTIONS.WorldDrops] = { display = true, order = 1 },
+      [SKILL_SUBSECTIONS.ProfessionMaster] = { display = true, order = 1 }
     }
   }
 }

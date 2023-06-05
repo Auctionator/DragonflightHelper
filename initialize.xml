@@ -7,6 +7,7 @@
   <Script file="core\constants\panel_sections.lua" />
   <Script file="core\constants\skills.lua" />
   <Script file="core\constants\theme_defaults.lua" />
+  <Script file="core\constants\todos.lua" />
 
   <!-- Event manager must be loaded first -->
   <Script file="core\events\custom.lua" />
@@ -45,6 +46,8 @@
   <Script file="src\panels\professions\setup_trainer.lua" />
   <Script file="src\panels\professions\setup_treatises.lua" />
   <Script file="src\panels\professions\setup_weekly.lua" />
+  <Script file="src\panels\professions\setup_world_drops.lua" />
+  <Script file="src\panels\professions\setup_profession_masters.lua" />
   <Script file="src\panels\professions\create_profession_statusbar.lua" />
   <Script file="src\panels\professions.lua" />
   <Script file="src\panels\timers\info.lua" />

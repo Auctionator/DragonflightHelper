@@ -208,7 +208,8 @@ local setup_mob_drops = function(profession_data)
   local max = #config
 
   local function tooltip(parent)
-    local completion_count, items = profession_helpers.count_completed(config)
+    local completion_count, items = profession_helpers.count_completed(config,
+      string.format("%s, %s", "Mob drops tooltip", profession_data.name))
 
     GameTooltip:SetOwner(parent, "ANCHOR_RIGHT")
 
@@ -242,10 +243,12 @@ local setup_mob_drops = function(profession_data)
     GameTooltip:Show()
   end
 
-  local initial_count_completed, _, _, is_on_quest = profession_helpers.count_completed(config)
+  local initial_count_completed, _, _, is_on_quest = profession_helpers.count_completed(config,
+    string.format("%s, %s", "Mob drops", profession_data.name))
 
   local function click_handler()
-    local _, _, remaining_waypoints = profession_helpers.count_completed(config)
+    local _, _, remaining_waypoints = profession_helpers.count_completed(config,
+      string.format("%s, %s", "Mob drops click", profession_data.name))
 
     if #remaining_waypoints > 0 then
       for _, waypoint in ipairs(remaining_waypoints) do
@@ -260,7 +263,7 @@ local setup_mob_drops = function(profession_data)
     max = max,
     completed_count = initial_count_completed,
     events = { "QUEST_TURNED_IN" },
-    notify_function = profession_helpers.notify_update_description(config),
+    notify_function = profession_helpers.notify_update_description(config, "Mob drops"),
     tooltip_function = tooltip,
     click_function = click_handler,
     currently_on_quest = function() return false end

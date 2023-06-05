@@ -97,7 +97,7 @@ function main:theme_loaded()
 
   self:create_config_button(font_object, theme:get_background_opacity())
 
-  self:initialize_panels(font_object)
+  self:initialize_panels()
   self:recalculate_height()
 end
 
@@ -249,6 +249,7 @@ function main:recalculate_height()
         log(nil, "main", 1, "h", "Height after recalc: " .. panel:GetHeight())
 
         self:SetHeight(self:GetHeight() + panel:GetHeight())
+        log(nil, "main", 1, "h", "Resulting main height: " .. self:GetHeight())
         panel:Show()
       else
         panel:SetHeight(0.01)
@@ -261,11 +262,7 @@ function main:recalculate_height()
   self.texture:SetAllPoints()
 end
 
-function main:initialize_panels(font_object)
-  local previous = self.title
-
-  self.panels = {}
-
+function main:initialize_factions(previous)
   local faction_settings = theme:get_section(constants.SECTIONS.FACTIONS)
   self.factions = panels.factions:init(self)
   self.factions:Hide()
@@ -277,12 +274,18 @@ function main:initialize_panels(font_object)
 
     self.factions:SetPoint("TOPLEFT", previous, "BOTTOMLEFT")
     self.factions:SetPoint("RIGHT")
-
-    previous = self.factions
   end
 
   self.panels[constants.SECTIONS.FACTIONS] = self.factions
 
+  if faction_settings.display then
+    return self.factions
+  else
+    return previous
+  end
+end
+
+function main:initialize_friends(previous)
   local friend_settings = theme:get_section(constants.SECTIONS.FRIENDS)
   self.friends = panels.friends:init(self)
   self.friends:Hide()
@@ -294,12 +297,18 @@ function main:initialize_panels(font_object)
 
     self.friends:SetPoint("TOPLEFT", previous, "BOTTOMLEFT")
     self.friends:SetPoint("RIGHT", self, "RIGHT", -3)
-
-    previous = self.friends
   end
 
   self.panels[constants.SECTIONS.FRIENDS] = self.friends
 
+  if friend_settings.display then
+    return self.friends
+  else
+    return previous
+  end
+end
+
+function main:initialize_timers(previous)
   local timer_settings = theme:get_section(constants.SECTIONS.TIMERS)
   self.timers = panels.timers:init(self)
   self.timers:Hide()
@@ -311,43 +320,72 @@ function main:initialize_panels(font_object)
 
     self.timers:SetPoint("TOPLEFT", previous, "BOTTOMLEFT")
     self.timers:SetPoint("RIGHT")
-
-    previous = self.timers
   end
 
   self.panels[constants.SECTIONS.TIMERS] = self.timers
 
-  local profession_one_settings = theme:get_section(constants.SECTIONS.PROFESSIONS_ONE)
-  self.profession_one_settings = panels.professions:init(self, constants.SECTIONS.PROFESSIONS_ONE)
+  if timer_settings.display then
+    return self.timers
+  else
+    return previous
+  end
+end
 
-  if profession_one_settings.display then
-    self.profession_one_settings:Show()
-    self:SetHeight(self:GetHeight() + self.profession_one_settings:GetHeight())
+function main:initialize_todos(previous)
+  local todo_settings = theme:get_section(constants.SECTIONS.TODOS)
+  self.todos = panels.todos:init(self)
+  self.todos:Hide()
+
+  if todo_settings.display then
+    self.todos:Show()
+    self:SetHeight(self:GetHeight() + self.todos:GetHeight())
     self.texture:SetAllPoints()
 
-    self.profession_one_settings:SetPoint("TOPLEFT", previous, "BOTTOMLEFT")
-    self.profession_one_settings:SetPoint("RIGHT")
-
-    previous = self.profession_one_settings
+    self.todos:SetPoint("TOPLEFT", previous, "BOTTOMLEFT")
+    self.todos:SetPoint("RIGHT")
   end
 
-  self.panels[constants.SECTIONS.PROFESSIONS_ONE] = self.profession_one_settings
+  self.panels[constants.SECTIONS.TODOS] = self.todos
 
-  local profession_two_settings = theme:get_section(constants.SECTIONS.PROFESSIONS_TWO)
-  self.profession_two_settings = panels.professions:init(self, constants.SECTIONS.PROFESSIONS_TWO)
+  if todo_settings.display then
+    return self.todos
+  else
+    return previous
+  end
+end
 
-  if profession_two_settings.display then
-    self.profession_two_settings:Show()
-    self:SetHeight(self:GetHeight() + self.profession_two_settings:GetHeight())
+function main:initialize_profession(previous, section_id)
+  local profession_settings = theme:get_section(section_id)
+  local panel = panels.professions:init(self, section_id)
+
+  if profession_settings.display then
+    panel:Show()
+    self:SetHeight(self:GetHeight() + panel:GetHeight())
     self.texture:SetAllPoints()
 
-    self.profession_two_settings:SetPoint("TOPLEFT", previous, "BOTTOMLEFT")
-    self.profession_two_settings:SetPoint("RIGHT")
-
-    previous = self.profession_two_settings
+    panel:SetPoint("TOPLEFT", previous, "BOTTOMLEFT")
+    panel:SetPoint("RIGHT")
   end
 
-  self.panels[constants.SECTIONS.PROFESSIONS_TWO] = self.profession_two_settings
+  self.panels[section_id] = panel
+
+  if profession_settings.display then
+    return panel
+  else
+    return previous
+  end
+end
+
+function main:initialize_panels()
+  local previous = self.title
+
+  self.panels = {}
+  previous = self:initialize_factions(previous)
+  previous = self:initialize_friends(previous)
+  previous = self:initialize_timers(previous)
+  previous = self:initialize_todos(previous)
+  previous = self:initialize_profession(previous, constants.SECTIONS.PROFESSIONS_ONE)
+  previous = self:initialize_profession(previous, constants.SECTIONS.PROFESSIONS_TWO)
 end
 
 ns.main = main:init()

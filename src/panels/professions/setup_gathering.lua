@@ -1,6 +1,5 @@
 local _, ns = ...
 
-local constants = ns.constants.professions
 local count_completed = ns.constants.professions.helpers.count_completed
 local notify_update_description = ns.constants.professions.helpers.notify_update_description
 local SKILL_SUBSECTIONS = ns.constants.SKILL_SUBSECTIONS
@@ -61,7 +60,8 @@ local setup_gathering = function(profession_data)
       return
     end
 
-    local completion_count, items = count_completed(config)
+    local completion_count, items = count_completed(config,
+      string.format("%s, %s", "Gathering tooltip", profession_data.name))
 
     GameTooltip:SetOwner(parent, "ANCHOR_RIGHT")
 
@@ -91,7 +91,8 @@ local setup_gathering = function(profession_data)
     GameTooltip:Show()
   end
 
-  local initial_count_completed, _, _, _ = count_completed(config)
+  local initial_count_completed, _, _, _ = count_completed(config,
+    string.format("%s, %s", "Gathering", profession_data.name))
 
   return {
     is_valid_subsection = true,
@@ -99,7 +100,7 @@ local setup_gathering = function(profession_data)
     max = max,
     completed_count = initial_count_completed,
     events = { "QUEST_TURNED_IN", "ENCOUNTER_LOOT_RECEIVED" },
-    notify_function = notify_update_description(config),
+    notify_function = notify_update_description(config, "Gathering"),
     tooltip_function = tooltip,
     click_function = nil,
     currently_on_quest = function() return false end

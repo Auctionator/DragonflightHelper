@@ -106,7 +106,9 @@
     "GetCursorPosition",
     "DLAPI",
     "GetQuestLogQuestText",
-    "GameTooltip_AddQuest"
+    "GameTooltip_AddQuest",
+    "ColorPickerFrame",
+    "OpacitySliderFrame"
   ],
   "Lua.diagnostics.disable": ["deprecated"]
 }

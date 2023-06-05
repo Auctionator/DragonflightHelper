@@ -16,4 +16,17 @@ ns.constants.SKILL_SUBSECTIONS = {
   MobDrops = "MobDrops",
   Azley = "Azley",
   Weekly = "Weekly",
+  WorldDrops = "WorldDrops",
+  ProfessionMaster = "ProfessionMaster"
+}
+
+ns.constants.TODO_SECTIONS = {
+  Aiding = "Aiding",
+  Catalyst = "Catalyst",
+  Feast = "Feast",
+  Siege = "Siege",
+  Hunts = "Hunts",
+  Flood = "Flood",
+  Elements = "Elements",
+  Bosses = "Bosses",
 }
