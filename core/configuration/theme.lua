@@ -100,19 +100,13 @@ function theme:upgrade_config()
   end
 
   -- v0.4 adding profession world drops and masters
-  if self.config.theme_version < 14 then
-    self.config.sections[SECTIONS.PROFESSIONS_ONE].subsections[SKILL_SUBSECTIONS.WorldDrops] = {
-      display = true, order = 1
-    }
-    self.config.sections[SECTIONS.PROFESSIONS_ONE].subsections[SKILL_SUBSECTIONS.ProfessionMaster] = {
-      display = true, order = 1
-    }
-    self.config.sections[SECTIONS.PROFESSIONS_TWO].subsections[SKILL_SUBSECTIONS.WorldDrops] = {
-      display = true, order = 1
-    }
-    self.config.sections[SECTIONS.PROFESSIONS_TWO].subsections[SKILL_SUBSECTIONS.ProfessionMaster] = {
-      display = true, order = 1
-    }
+  if self.config.theme_version < 4 then
+    if self.config.sections == nil then
+      self.config.sections = ns.constants.DEFAULT_THEME
+    end
+
+    self.config.sections[SECTIONS.PROFESSIONS_ONE] = ns.constants.DEFAULT_THEME[SECTIONS.PROFESSIONS_ONE]
+    self.config.sections[SECTIONS.PROFESSIONS_TWO] = ns.constants.DEFAULT_THEME[SECTIONS.PROFESSIONS_TWO]
 
     self.config.theme_version = 4
   end
@@ -129,6 +123,10 @@ function theme:upgrade_config()
     }
 
     for _, section in ipairs(sections_to_update) do
+      if self.config.sections[section] == nil then
+        self.config.sections[section] = { subsections = {} }
+      end
+
       for index, subsection in ipairs(self.config.sections[section].subsections) do
         subsection.order = index
       end
