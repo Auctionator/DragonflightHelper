@@ -17,8 +17,9 @@ function helpers:create_auto_sizing_frame(parent, title_text, frame_enabled)
   function frame:recalculate_height()
     self:SetHeight(0.1)
 
-    for _, child in ipairs(frame.children) do
+    for index, child in ipairs(frame.children) do
       -- not sure if font string's get height method will return correctly here...
+      log(nil, "recalculate_height", 1, "h", frame_name .. " " .. title_text .. " " .. self:GetHeight())
       self:SetHeight(self:GetHeight() + (child.visible and (child.initial_height + ELEMENT_PADDING_Y) or 0))
     end
   end

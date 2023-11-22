@@ -4,7 +4,7 @@ local theme = ns.theme
 local constants = ns.constants
 local media = ns.media
 
-local frame_name = addon .. "_faction_frame"
+local frame_name = addon .. "_friend_frame"
 local friends = CreateFrame("Frame", frame_name)
 
 function friends:init(parent)

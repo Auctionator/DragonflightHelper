@@ -69,14 +69,80 @@ local WORLD_DROPS = {
       },
     },
     {
-      quest_id = 70301,
-      item = 198697,
+      quest_id = 75649,
+      item = 205212,
       waypoint = {
         map = ns.constants.map_ids.Thaldraszus,
 
         x = 59.5 / 100,
         y = 38.4 / 100,
         options = { title = "Contraband Concoction" }
+      },
+    },
+    {
+      quest_id = 70301,
+      item = 205212,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+
+        x = 62.1 / 100,
+        y = 41.12 / 100,
+        options = { title = "Marrow-Ripened Slime" }
+      }
+    },
+    {
+      quest_id = 75646,
+      item = 205211,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+
+        x = 52.68 / 100,
+        y = 18.30 / 100,
+        options = { title = "Nutrient Diluted Protofluid" }
+      },
+    },
+    {
+      quest_id = 75651,
+      item = 205213,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+
+        x = 40.48 / 100,
+        y = 59.18 / 100,
+        options = { title = "Suspicious Mold" }
+      }
+    },
+    {
+      quest_id = 78269,
+      item = 210185,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+
+        x = 50.91 / 100,
+        y = 49.43 / 100,
+        options = { title = "Splash Potion of Narcolepsy" }
+      }
+    },
+    {
+      quest_id = 78264,
+      item = 210184,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+
+        x = 54.05 / 100,
+        y = 32.64 / 100,
+        options = { title = "Half-Filled Dreamless Sleep Potion" }
+      },
+    },
+    {
+      quest_id = 78275,
+      item = 210190,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+
+        x = 36.21 / 100,
+        y = 46.63 / 100,
+        options = { title = "Blazeroot" }
       },
     },
   },
@@ -170,11 +236,69 @@ local WORLD_DROPS = {
         y = 80.5 / 100,
         options = { title = "Draconic Flux" }
       },
+    },
+    {
+      quest_id = 76079,
+      item = 205987,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 48.30 / 100,
+        y = 21.95 / 100,
+        options = { title = "Brimstone Rescue Ring" }
+      },
+    },
+    {
+      quest_id = 76078,
+      item = 205986,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 57.15 / 100,
+        y = 54.64 / 100,
+        options = { title = "Well-Worn Kiln" }
+      },
+    },
+    {
+      quest_id = 76080,
+      item = 205988,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 27.53 / 100,
+        y = 42.87 / 100,
+        options = { title = "Zaqali Elder Spear" }
+      },
+    },
+    {
+      quest_id = 78418,
+      item = 210465,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 36.34 / 100,
+        y = 46.79 / 100,
+        options = { title = "Deathstalker Chassis" }
+      },
+    },
+    {
+      quest_id = 78419,
+      item = 210466,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 37.29 / 100,
+        y = 22.94 / 100,
+        options = { title = "Flamesworn Render" }
+      },
+    },
+    {
+      quest_id = 78417,
+      item = 210464,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 49.83 / 100,
+        y = 62.99 / 100,
+        options = { title = "Amirdrassil Defender's Shield" }
+      },
     }
   },
   [SKILL_IDS.Enchanting] = {
-    -- TODO There is a bug that prevents this from being looted,
-    -- commenting out for now
     {
       quest_id = 0,
       item = 198798,
@@ -182,7 +306,7 @@ local WORLD_DROPS = {
         map = ns.constants.map_ids.WakingShore,
         x = 57.5 / 100,
         y = 83.6 / 100,
-        options = { title = "Flashfrozen Scroll" }
+        options = { title = "Flashfrozen Scroll (Please verify hidden quest id)" }
       }
     },
     {
@@ -255,6 +379,66 @@ local WORLD_DROPS = {
         options = { title = "Fractured Titanic Sphere" }
       }
     },
+    {
+      quest_id = 0, -- TODO: Not on wowhead
+      item = 204990,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 48.00 / 100,
+        y = 17.00 / 100,
+        options = { title = "Lava-Drenched Shadow Crystal (Please verify hidden quest id)" }
+      }
+    },
+    {
+      quest_id = 75510,
+      item = 205001,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 36.66 / 100,
+        y = 69.33 / 100,
+        options = { title = "Resonating Arcane Crystal" }
+      }
+    },
+    {
+      quest_id = 75509,
+      item = 204999,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 62.39 / 100,
+        y = 53.80 / 100,
+        options = { title = "Shimmering Aqueous Orb" }
+      }
+    },
+    {
+      quest_id = 78309,
+      item = 210231,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 46.16 / 100,
+        y = 20.51 / 100,
+        options = { title = "Everburning Core" }
+      }
+    },
+    {
+      quest_id = 78308,
+      item = 210228,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 38.37 / 100,
+        y = 30.20 / 100,
+        options = { title = "Pure Dream Water" }
+      }
+    },
+    {
+      quest_id = 78310,
+      item = 210234,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 66.36 / 100,
+        y = 74.20 / 100,
+        options = { title = "Essence of Dreams" }
+      }
+    },
   },
   [SKILL_IDS.Engineering] = {
     {
@@ -277,8 +461,118 @@ local WORLD_DROPS = {
         options = { title = "Intact Coil Capacitor" }
       },
     },
+    {
+      quest_id = 75186,
+      item = 204475,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 37.82 / 100,
+        y = 58.83 / 100,
+        options = { title = "Busted Wyrmhole Generator" }
+      }
+    },
+    {
+      quest_id = 75184,
+      item = 204471,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 50.51 / 100,
+        y = 47.85 / 100,
+        options = { title = "Defective Survival Pack" }
+      }
+    },
+    {
+      quest_id = 75431,
+      item = 204853,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 49.44 / 100,
+        y = 78.99 / 100,
+        options = { title = "Discarded Dracothyst Drill " }
+      }
+    },
+    {
+      quest_id = 75430,
+      item = 204850,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 57.65 / 100,
+        y = 73.94 / 100,
+        options = { title = "Handful of Khaz'gorite Bolts " }
+      }
+    },
+    {
+      quest_id = 75183,
+      item = 204470,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 48.15 / 100,
+        y = 27.99 / 100,
+        options = { title = "Haphazardly Discarded Bomb" }
+      }
+    },
+    {
+      quest_id = 75188,
+      item = 204480,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 49.87 / 100,
+        y = 59.25 / 100,
+        options = { title = "Inconspicuous Data Miner" }
+      }
+    },
+    {
+      quest_id = 75180,
+      item = 204469,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 48.47 / 100,
+        y = 48.61 / 100,
+        options = { title = "Misplaced Aberrus Outflow Blueprints" }
+      }
+    },
+    {
+      quest_id = 75433,
+      item = 204855,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 48.10 / 100,
+        y = 16.59 / 100,
+        options = { title = "Overclocked Determination Core " }
+      }
+    },
+    {
+      quest_id = 78279,
+      item = 210194,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 40.49 / 100,
+        y = 89.42 / 100,
+        options = { title = "Insomniotron" }
+      }
+    },
+    {
+      quest_id = 78278,
+      item = 210193,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 39.55 / 100,
+        y = 52.28 / 100,
+        options = { title = "Experimental Dreamcatcher" }
+      }
+    },
+    {
+      quest_id = 78281,
+      item = 210197,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 62.66 / 100,
+        y = 36.27 / 100,
+        options = { title = "Unhatched Battery" }
+      }
+    },
+
   },
-  -- [SKILL_IDS.Herbalism] = { },
   [SKILL_IDS.Inscription] = {
     {
       quest_id = 70306,
@@ -300,17 +594,16 @@ local WORLD_DROPS = {
         options = { title = "Sign Language Reference Sheet" }
       },
     },
-    -- {
-    --   -- maybe: 70297
-    --   quest_id = 0,
-    --   item = 198693,
-    --   waypoint = {
-    --     map = ns.constants.map_ids.AzureSpan,
-    --     x = 46.2 / 100,
-    --     y = 23.9 / 100,
-    --     options = { title = "Dusty Darkmoon Card" }
-    --   },
-    -- },
+    {
+      quest_id = 70297,
+      item = 198693,
+      waypoint = {
+        map = ns.constants.map_ids.AzureSpan,
+        x = 46.2 / 100,
+        y = 23.9 / 100,
+        options = { title = "Dusty Darkmoon Card (Please verify hidden quest id)" }
+      },
+    },
     {
       quest_id = 70293,
       item = 198686,
@@ -360,6 +653,66 @@ local WORLD_DROPS = {
         y = 40.9 / 100,
         options = { title = "Counterfeit Darkmoon Deck" }
       },
+    },
+    {
+      quest_id = 76120,
+      item = 206034,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 53.01 / 100,
+        y = 74.27 / 100,
+        options = { title = "Hissing Rune Draft" }
+      }
+    },
+    {
+      quest_id = 76121,
+      item = 206035,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 54.57 / 100,
+        y = 20.21 / 100,
+        options = { title = "Ancient Research" }
+      }
+    },
+    {
+      quest_id = 76117,
+      item = 206031,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 36.73 / 100,
+        y = 46.32 / 100,
+        options = { title = "Intricate Zaqali Runes" }
+      }
+    },
+    {
+      quest_id = 78411,
+      item = 210458,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 55.64 / 100,
+        y = 27.49 / 100,
+        options = { title = "Winnie's Notes on Flora and Fauna" }
+      }
+    },
+    {
+      quest_id = 78413,
+      item = 210460,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 36.04 / 100,
+        y = 46.64 / 100,
+        options = { title = "Primalist Shadowbinding Rune" }
+      }
+    },
+    {
+      quest_id = 78412,
+      item = 210459,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 63.50 / 100,
+        y = 71.52 / 100,
+        options = { title = "Grove Keeper's Pillar" }
+      }
     },
   },
   [SKILL_IDS.Jewelcrafting] = {
@@ -443,6 +796,67 @@ local WORLD_DROPS = {
         options = { title = "Painter's Pretty Jewel" }
       },
     },
+    {
+      quest_id = 75654,
+      item = 205219,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 54.41 / 100,
+        y = 32.47 / 100,
+        options = { title = "Broken Barter Boulder" }
+      }
+    },
+    {
+      quest_id = 75653,
+      item = 205216,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 34.47 / 100,
+        y = 45.43 / 100,
+        options = { title = "Gently Jostled Jewels" }
+      }
+    },
+    {
+      quest_id = 75652,
+      item = 205214,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 40.37 / 100,
+        y = 80.66 / 100,
+        options = { title = "Snubbed Snail Shells" }
+      }
+    },
+    {
+      quest_id = 78282,
+      item = 210200,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 33.23 / 100,
+        y = 46.57 / 100,
+        options = { title = "Petrified Hope" }
+      }
+    },
+    {
+      quest_id = 78283,
+      item = 210201,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 43.51 / 100,
+        y = 33.36 / 100,
+        options = { title = "Handful of Pebbles" }
+      }
+    },
+    {
+      quest_id = 78285,
+      item = 210202,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 58.95 / 100,
+        y = 53.89 / 100,
+        options = { title = "Coalesced Dreamstone" }
+      }
+    },
+
   },
   [SKILL_IDS.Leatherworking] = {
     {
@@ -515,9 +929,67 @@ local WORLD_DROPS = {
         options = { title = "Decayed Scales" }
       },
     },
+    {
+      quest_id = 75495,
+      item = 204986,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 41.16 / 100,
+        y = 48.81 / 100,
+        options = { title = "Flame-Infused Scale Oil" }
+      }
+    },
+    {
+      quest_id = 75496,
+      item = 204987,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 45.25 / 100,
+        y = 21.12 / 100,
+        options = { title = "Lava-Forged Leatherworker's Knife" }
+      }
+    },
+    {
+      quest_id = 75502,
+      item = 204988,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 49.56 / 100,
+        y = 54.80 / 100,
+        options = { title = "Sulfur-Soaked Skins" }
+      }
+    },
+    {
+      quest_id = 78305,
+      item = 210215,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 34.04 / 100,
+        y = 29.65 / 100,
+        options = { title = "Dreamtalon Claw" }
+      }
+    },
+    {
+      quest_id = 78298,
+      item = 210208,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 41.75 / 100,
+        y = 66.49 / 100,
+        options = { title = "Tuft of Dreamsaber Fur" }
+      }
+    },
+    {
+      quest_id = 78299,
+      item = 210211,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 37.45 / 100,
+        y = 71.02 / 100,
+        options = { title = "Molted Faerie Dragon Scales" }
+      }
+    },
   },
-  -- [SKILL_IDS.Mining] = { },
-  -- [SKILL_IDS.Skinning] = { },
   [SKILL_IDS.Tailoring] = {
     {
       quest_id = 70302,
@@ -560,15 +1032,13 @@ local WORLD_DROPS = {
       },
     },
     {
-      -- Two quests completed at the same time, so not sure if this is the right
-      -- quest id or not (the other was 70525)
       quest_id = 70284,
       item = 198680,
       waypoint = {
         map = ns.constants.map_ids.AzureSpan,
         x = 16.2 / 100,
         y = 38.8 / 100,
-        options = { title = "Decaying Brackenhide Blanket" }
+        options = { title = "Decaying Brackenhide Blanket (Please verify hidden quest id)" }
       },
     },
     {
@@ -601,6 +1071,66 @@ local WORLD_DROPS = {
         options = { title = "Ancient Dragonweave Bolt" }
       },
     },
+    {
+      quest_id = 76102,
+      item = 206019,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 47.21 / 100,
+        y = 48.55 / 100,
+        options = { title = "Abandoned Reserve Chute" }
+      }
+    },
+    {
+      quest_id = 76116,
+      item = 206030,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 44.52 / 100,
+        y = 15.65 / 100,
+        options = { title = "Exquisitely Embroidered Banner" }
+      }
+    },
+    {
+      quest_id = 76110,
+      item = 206025,
+      waypoint = {
+        map = ns.constants.map_ids.ZaralekCavern,
+        x = 59.11 / 100,
+        y = 73.14 / 100,
+        options = { title = "Used Medical Wrap Kit" }
+      }
+    },
+    {
+      quest_id = 78414,
+      item = 210461,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 53.27 / 100,
+        y = 27.92 / 100,
+        options = { title = "Exceedingly Soft Wildercloth" }
+      }
+    },
+    {
+      quest_id = 78416,
+      item = 210463,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 40.70 / 100,
+        y = 86.16 / 100,
+        options = { title = "Snuggle Buddy" }
+      }
+    },
+    {
+      quest_id = 78415,
+      item = 210462,
+      waypoint = {
+        map = ns.constants.map_ids.EmeraldDream,
+        x = 49.83 / 100,
+        y = 61.48 / 100,
+        options = { title = "Plush Pillow" }
+      }
+    },
   },
 }
 
@@ -628,9 +1158,47 @@ local setup_world_drops = function(profession_data)
 
     if #remaining_waypoints > 0 then
       for _, waypoint in ipairs(remaining_waypoints) do
+        log(nil, "world_drops", 1, "waypoint", string.format("%d (%f, %f)", waypoint.map, waypoint.x, waypoint.y))
         TomTom:AddWaypoint(waypoint.map, waypoint.x, waypoint.y, waypoint.options)
       end
+
+      TomTom:ShowWaypoint()
     end
+  end
+
+  local function tooltip(parent)
+    log(nil, "world_drops", 1, "tooltip", "show")
+
+    local completion_count, items = profession_helpers.count_completed(config,
+      string.format("%s, %s", "Gathering tooltip", profession_data.name))
+
+    GameTooltip:SetOwner(parent, "ANCHOR_RIGHT")
+
+    GameTooltip_SetTitle(GameTooltip,
+      "World Drops (" .. profession_data.name .. ")",
+      HIGHLIGHT_FONT_COLOR)
+
+    GameTooltip_AddBlankLineToTooltip(GameTooltip)
+
+    for _, item_id in ipairs(items) do
+      local item = Item:CreateFromItemID(item_id)
+
+      item:ContinueOnItemLoad(function()
+        local itemName = item:GetItemName();
+
+        GameTooltip:AddLine(
+          CreateSimpleTextureMarkup(item:GetItemIcon(), 25, 25) .. "  " .. itemName
+        )
+        GameTooltip:Show()
+      end)
+    end
+
+    if TomTom ~= nil then
+      GameTooltip_AddBlankLineToTooltip(GameTooltip)
+      GameTooltip_AddNormalLine(GameTooltip, "Click for tomtom waypoints")
+    end
+
+    GameTooltip:Show()
   end
 
   return {
@@ -641,6 +1209,7 @@ local setup_world_drops = function(profession_data)
     events = { "QUEST_TURNED_IN" },
     notify_function = profession_helpers.notify_update_description(config, "World drops"),
     click_function = click_handler,
+    tooltip_function = tooltip,
     currently_on_quest = function() return false end
   }
 end

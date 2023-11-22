@@ -20,7 +20,9 @@ ns.constants.map_ids = {
   OhnAhranPlains = 2023,
   AzureSpan = 2024,
   Thaldraszus = 2025,
-  Valdrakken = 2112 -- Need to verify this
+  Valdrakken = 2112,
+  ZaralekCavern = 2175,
+  EmeraldDream = 2200
 }
 
 ns.constants.professions.SKILL_CURRENCIES = {

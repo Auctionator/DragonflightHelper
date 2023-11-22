@@ -3,6 +3,7 @@ local _, ns = ...
 local profession_helpers = ns.constants.professions.helpers
 local SKILL_SUBSECTIONS = ns.constants.SKILL_SUBSECTIONS
 local SKILL_IDS = ns.constants.professions.SKILL_IDS
+local log = ns.debug.log
 
 local MOB_DROPS = {
   title = "Weekly Mob Drops",
@@ -252,6 +253,8 @@ local setup_mob_drops = function(profession_data)
 
     if #remaining_waypoints > 0 then
       for _, waypoint in ipairs(remaining_waypoints) do
+        log(nil, "mob_drops", 1, "waypoint", string.format("%d (%f, %f)", waypoint.map, waypoint.x, waypoint.y))
+
         TomTom:AddWaypoint(waypoint.map, waypoint.x, waypoint.y, waypoint.options)
       end
     end
