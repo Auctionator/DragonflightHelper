@@ -134,6 +134,12 @@ function theme:upgrade_config()
 
     self.config.theme_version = 5
   end
+
+  if self.config.theme_version < 6 then
+    self.config.sections[SECTIONS.FACTIONS].subsections[2574] = { display = true }
+
+    self.config.theme_version = 6
+  end
 end
 
 function theme:to_message()
