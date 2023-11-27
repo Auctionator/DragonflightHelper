@@ -14,14 +14,18 @@ local WEEKLIES = {
     -- Dothenos <Trade Coordinator>
     { quest_id = 66937 },
     -- Kayann <Ambassador of Craft>
-    { quest_id = 75363 }, { quest_id = 75371 }
+    { quest_id = 75363 }, { quest_id = 75371 },
+    -- Magnolia Oaken <Trader of the Dream>
+    { quest_id = 77933 }, { quest_id = 77932 }
   },
   [SKILL_IDS.Blacksmithing] = {
     max = 1,
     -- Dhurrel <Trade Liaison>
     { quest_id = 66517 }, { quest_id = 66897 }, { quest_id = 66941 },
     -- Kayann <Ambassador of Craft>
-    { quest_id = 75148 }, { quest_id = 75569 }
+    { quest_id = 75148 }, { quest_id = 75569 },
+    -- Magnolia Oaken <Trader of the Dream>
+    { quest_id = 77936 }, { quest_id = 77935 }
   },
   [SKILL_IDS.Enchanting] = {
     max = 1,
@@ -31,6 +35,8 @@ local WEEKLIES = {
     { quest_id = 66935 },
     -- Kayann <Ambassador of Craft>
     { quest_id = 75150 }, { quest_id = 75865 },
+    -- Magnolia Oaken <Trader of the Dream>
+    { quest_id = 77910 }, { quest_id = 77937 }
   },
   [SKILL_IDS.Engineering] = {
     max = 1,
@@ -39,7 +45,9 @@ local WEEKLIES = {
     -- Gnoklin Quirkcoil <Requisitions Officer>
     { quest_id = 66942 }, { quest_id = 66891 },
     -- Kayann <Ambassador of Craft>
-    { quest_id = 75575 }, { quest_id = 75608 }
+    { quest_id = 75575 }, { quest_id = 75608 },
+    -- Magnolia Oaken <Trader of the Dream>
+    { quest_id = 77938 }, { quest_id = 77891 }
   },
   [SKILL_IDS.Inscription] = {
     max = 1,
@@ -49,6 +57,8 @@ local WEEKLIES = {
     { quest_id = 66944 },
     -- Kayann <Ambassador of Craft>
     { quest_id = 75149 }, { quest_id = 75573 },
+    -- Magnolia Oaken <Trader of the Dream>
+    { quest_id = 77889 }, { quest_id = 77914 }
   },
   [SKILL_IDS.Jewelcrafting] = {
     max = 1,
@@ -60,6 +70,8 @@ local WEEKLIES = {
     { quest_id = 72428 }, { quest_id = 66516 },
     -- Kayann <Ambassador of Craft>
     { quest_id = 75362 }, { quest_id = 75602 },
+    -- Magnolia Oaken <Trader of the Dream>
+    { quest_id = 77892 }, { quest_id = 77912 }
   },
   [SKILL_IDS.Leatherworking] = {
     max = 1,
@@ -68,7 +80,9 @@ local WEEKLIES = {
     -- Temnaayu <Trade Negotiator>
     { quest_id = 66951 }, { quest_id = 72407 }, { quest_id = 66364 },
     -- Kayann <Ambassador of Craft>
-    { quest_id = 75354 }, { quest_id = 75368 }
+    { quest_id = 75354 }, { quest_id = 75368 },
+    -- Magnolia Oaken <Trader of the Dream>
+    { quest_id = 77945 }, { quest_id = 77946 }
   },
   [SKILL_IDS.Tailoring] = {
     max = 1,
@@ -78,6 +92,8 @@ local WEEKLIES = {
     { quest_id = 72410 },
     -- Kayann <Ambassador of Craft>
     { quest_id = 75407 }, { quest_id = 75600 },
+    -- Magnolia Oaken <Trader of the Dream>
+    { quest_id = 77949 }, { quest_id = 77947 }
   },
 }
 

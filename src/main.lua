@@ -242,7 +242,7 @@ function main:recalculate_height()
     if panel ~= nil then
       local spec = theme:get_section(section)
 
-      log(nil, "main", 1, "section", spec.display)
+      log(nil, "main", 3, "section", spec or "nil")
 
       if spec.display and self.is_maximized then
         panel:recalculate_height()
@@ -252,6 +252,8 @@ function main:recalculate_height()
         log(nil, "main", 1, "h", "Resulting main height: " .. self:GetHeight())
         panel:Show()
       else
+        log(nil, "main", 2, ">", "Should be hiding")
+        log(nil, "main", 2, ">", section)
         panel:SetHeight(0.01)
         self:SetHeight(self:GetHeight() - panel:GetHeight())
         panel:Hide()

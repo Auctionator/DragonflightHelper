@@ -7,7 +7,7 @@ local log = ns.debug.log
 
 local font_dropdown = ns.config.font_dropdown
 local statusbar_dropdown = ns.config.statusbar_dropdown
--- local section_selector = ns.config.section_selector
+local section_selector = ns.config.section_selector
 local opacity_slider = ns.config.opacity_slider
 
 local frame_name = addon .. "_configuration_panel"
@@ -40,6 +40,7 @@ function addon_configuration:init()
 end
 
 function addon_configuration:initialize_frames(theme)
+  log("OK", "addon_configuration", 3, "initialize_frames", "frames initing")
   self.texture:SetAlpha(theme.background_opacity)
 
   self.font_dropdown = font_dropdown:init(self, theme.font_name)
@@ -63,10 +64,10 @@ function addon_configuration:initialize_frames(theme)
   self.opacity_slider:SetPoint("RIGHT", self, "RIGHT")
   self:SetHeight(self:GetHeight() + self.opacity_slider:GetHeight() + 5)
 
-  -- self.section_selector = section_selector:init(self)
-  -- self.section_selector:SetPoint("TOPLEFT", self.opacity_slider, "BOTTOMLEFT", 0, -5)
-  -- self.section_selector:SetPoint("RIGHT", self, "RIGHT")
-  -- self:SetHeight(self:GetHeight() + self.section_selector:GetHeight() + 5)
+  self.section_selector = section_selector:init(self)
+  self.section_selector:SetPoint("TOPLEFT", self.opacity_slider, "BOTTOMLEFT", 0, -5)
+  self.section_selector:SetPoint("RIGHT", self, "RIGHT")
+  self:SetHeight(self:GetHeight() + self.section_selector:GetHeight() + 5)
 end
 
 function addon_configuration:notify(event_name, ...)

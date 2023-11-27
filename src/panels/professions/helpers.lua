@@ -79,6 +79,9 @@ local function notify_update_description(config, debug_message)
 
     local color = theme:get_incomplete_quest_color()
 
+    log(nil, "helpers", 1, "notify_update_description", event_name)
+
+
     if is_on_quest then
       color = theme:get_accepted_quest_color()
     end

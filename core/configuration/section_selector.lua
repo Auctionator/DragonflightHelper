@@ -12,17 +12,7 @@ local section_selector = CreateFrame(
   addon .. "_section_selector_frame"
 )
 
--- For some reason this occasionally loads twice; adding this as a hack
--- until I figure that out
-local initialized = false
-
 function section_selector:init(parent)
-  if initialized then
-    return self
-  else
-    initialized = true
-  end
-
   log("OK", "section_selector", 1, "init", "Loading")
   self:SetParent(parent)
 
@@ -31,11 +21,10 @@ function section_selector:init(parent)
   title:SetPoint("RIGHT")
 
   self:SetHeight(math.ceil(title:GetStringHeight()) + 3)
-  log(nil, "section_selector", 2, "height w/ title", self:GetHeight())
 
   local previous = title
 
-  for _, section in ipairs(theme:get_sections()) do
+  for k, section in pairs(theme:get_sections()) do
     local new_section = self:add_section(section)
 
     new_section:ClearAllPoints()
@@ -45,7 +34,6 @@ function section_selector:init(parent)
 
     previous = new_section
     self:SetHeight(self:GetHeight() + new_section:GetHeight() + 5)
-    log(nil, "section_selector", 2, "height w/ section", self:GetHeight())
   end
 
   return self
@@ -88,8 +76,8 @@ function section_selector:add_section(section)
   local subsections_frame = self:add_subsections(section, section_container)
   section_count = section_count + 1
 
-  section_container:SetHeight(subsections_frame:GetHeight())
-  log(nil, "section_selector", 2, "section height w/ subs", section_container:GetHeight())
+  -- section_container:SetHeight(subsections_frame:GetHeight())
+  log(nil, "section_selector", 2, "section height w/ subs", section_container:GetHeight() or "?")
 
   return section_container
 end
@@ -107,34 +95,37 @@ function section_selector:add_subsections(section, parent)
   frame:SetPoint("RIGHT")
   frame:SetHeight(0)
 
-  local previous = frame
+  -- local previous = frame
 
-  for id, subsection in pairs(section.subsections) do
-    local subsection_selector = helpers:create_checkbox({
-      parent = frame,
-      text = id,
-      checked = subsection.display,
-      handler = function(checked)
-        event_manager:handle(custom_events.SUBSECTION_SELECTION_CHANGED, section, id, checked)
-      end
-    })
+  -- for id, subsection in pairs(section.subsections) do
+  --   log(nil, "section_selector", 3, "sub", subsection)
+  --   log(nil, "section_selector", 3, "sub", subsection.display)
 
-    subsection_selector:ClearAllPoints()
+  --   local subsection_selector = helpers:create_checkbox({
+  --     parent = frame,
+  --     text = id,
+  --     checked = subsection.display,
+  --     handler = function(checked)
+  --       event_manager:handle(custom_events.SUBSECTION_SELECTION_CHANGED, section, id, checked)
+  --     end
+  --   })
 
-    if previous ~= frame then
-      subsection_selector:SetPoint("TOP", previous, "BOTTOM", 0, -5)
-    else
-      subsection_selector:SetPoint("TOP", frame, "TOP", 0)
-    end
+  --   subsection_selector:ClearAllPoints()
 
-    subsection_selector:SetPoint("LEFT", frame, "LEFT", 10)
-    subsection_selector:SetPoint("RIGHT", frame, "RIGHT")
+  --   -- if previous ~= frame then
+  --     subsection_selector:SetPoint("TOP", previous, "BOTTOM", 0, -5)
+  --   -- else
+  --   --   subsection_selector:SetPoint("TOP", frame, "TOP", 0)
+  --   -- end
 
-    frame:SetHeight(subsection_selector:GetHeight() + frame:GetHeight() + 5)
-    log(nil, "section_selector", 2, "sub section", frame:GetHeight())
+  --   subsection_selector:SetPoint("LEFT", frame, "LEFT", 10)
+  --   subsection_selector:SetPoint("RIGHT", frame, "RIGHT")
 
-    previous = subsection_selector
-  end
+  --   frame:SetHeight(subsection_selector:GetHeight() + frame:GetHeight() + 5)
+  --   log(nil, "section_selector", 2, "sub section", frame:GetHeight())
+
+  --   previous = subsection_selector
+  -- end
 
   return frame
 end
