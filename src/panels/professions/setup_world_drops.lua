@@ -386,7 +386,7 @@ local WORLD_DROPS = {
         map = ns.constants.map_ids.ZaralekCavern,
         x = 48.00 / 100,
         y = 17.00 / 100,
-        options = { title = "Lava-Drenched Shadow Crystal (Please verify hidden quest id)" }
+        options = { title = "Lava-Drenched Shadow Crystal" }
       }
     },
     {
@@ -1160,9 +1160,11 @@ local setup_world_drops = function(profession_data)
       for _, waypoint in ipairs(remaining_waypoints) do
         log(nil, "world_drops", 1, "waypoint", string.format("%d (%f, %f)", waypoint.map, waypoint.x, waypoint.y))
         TomTom:AddWaypoint(waypoint.map, waypoint.x, waypoint.y, waypoint.options)
+        -- log(nil, "world_drops", 2, "waypoint", uid)
+        -- TomTom:ShowWaypoint(uid)
       end
 
-      TomTom:ShowWaypoint()
+      TomTom:SetClosestWaypoint(true)
     end
   end
 

@@ -76,6 +76,7 @@ local function log(status, from, verbosity, category, message, ...)
     table.insert(debug_message, (message and "true" or "false"))
   elseif type(message) == "table" then
     table.insert(debug_message, dump(message))
+    -- dump_chat(message)
   else
     table.insert(debug_message, message or "")
   end

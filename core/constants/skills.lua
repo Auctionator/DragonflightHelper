@@ -21,7 +21,7 @@ ns.constants.map_ids = {
   AzureSpan = 2024,
   Thaldraszus = 2025,
   Valdrakken = 2112,
-  ZaralekCavern = 2175,
+  ZaralekCavern = 2133,
   EmeraldDream = 2200
 }
 
