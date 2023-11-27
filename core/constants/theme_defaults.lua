@@ -50,6 +50,7 @@ ns.constants.DEFAULT_THEME = {
       Flood = { display = true },
       Elements = { display = true },
       Bosses = { display = true },
+      ShowYourMettle = { display = true }
     }
   },
   [SECTIONS.PROFESSIONS_ONE] = {

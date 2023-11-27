@@ -27,6 +27,7 @@ ns.constants.todos = {
   [TODO_SECTIONS.Hunts] = { title = "Grand Hunts", { quest_id = 70906 }, { quest_id = 71136 }, { quest_id = 71137 } },
   [TODO_SECTIONS.Flood] = { title = "Trial of Flood - Raging Torrent", { quest_id = 71033 } },
   [TODO_SECTIONS.Elements] = { title = "Trial of Elements - Therrocite", { quest_id = 71995 } },
+  [TODO_SECTIONS.ShowYourMettle] = { title = "Show Your Mettle", { quest_id = 70221 } },
   -- https://www.wowhead.com/guide/world-bosses-dragonflight
   [TODO_SECTIONS.Bosses] = {
     title = "World Bosses",

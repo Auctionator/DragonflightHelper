@@ -29,4 +29,5 @@ ns.constants.TODO_SECTIONS = {
   Flood = "Flood",
   Elements = "Elements",
   Bosses = "Bosses",
+  ShowYourMettle = "ShowYourMettle"
 }

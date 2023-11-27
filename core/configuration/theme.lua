@@ -6,6 +6,7 @@ local media = ns.media
 local log = ns.debug.log
 local SECTIONS = ns.constants.SECTIONS
 local SKILL_SUBSECTIONS = ns.constants.SKILL_SUBSECTIONS
+local TODO_SECTIONS = ns.constants.TODO_SECTIONS
 
 local theme = {}
 
@@ -137,6 +138,12 @@ function theme:upgrade_config()
     self.config.sections[SECTIONS.FACTIONS].subsections[2574] = { display = true }
 
     self.config.theme_version = 6
+  end
+
+  if self.config.theme_version < 7 then
+    self.config.sections[SECTIONS.TODOS].subsections[TODO_SECTIONS.ShowYourMettle] = { display = true }
+
+    self.config.theme_version = 7
   end
 end
 
