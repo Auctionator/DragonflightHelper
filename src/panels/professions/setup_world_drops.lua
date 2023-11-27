@@ -300,13 +300,13 @@ local WORLD_DROPS = {
   },
   [SKILL_IDS.Enchanting] = {
     {
-      quest_id = 0,
+      quest_id = 70320,
       item = 198798,
       waypoint = {
         map = ns.constants.map_ids.WakingShore,
         x = 57.5 / 100,
         y = 83.6 / 100,
-        options = { title = "Flashfrozen Scroll (Please verify hidden quest id)" }
+        options = { title = "Flashfrozen Scroll" }
       }
     },
     {
@@ -380,7 +380,7 @@ local WORLD_DROPS = {
       }
     },
     {
-      quest_id = 0, -- TODO: Not on wowhead
+      quest_id = 75508,
       item = 204990,
       waypoint = {
         map = ns.constants.map_ids.ZaralekCavern,
@@ -1206,7 +1206,7 @@ local setup_world_drops = function(profession_data)
     title = WORLD_DROPS.title,
     max = #config,
     completed_count = completed_count,
-    events = { "QUEST_TURNED_IN" },
+    events = { "QUEST_TURNED_IN", "ENCOUNTER_LOOT_RECEIVED" },
     notify_function = profession_helpers.notify_update_description(config, "World drops"),
     click_function = click_handler,
     tooltip_function = tooltip,

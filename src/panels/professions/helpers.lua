@@ -79,8 +79,7 @@ local function notify_update_description(config, debug_message)
 
     local color = theme:get_incomplete_quest_color()
 
-    log(nil, "helpers", 1, "notify_update_description", event_name)
-
+    log(nil, "helpers", 1, "notify_update_description", "Event: " .. event_name)
 
     if is_on_quest then
       color = theme:get_accepted_quest_color()
@@ -89,7 +88,7 @@ local function notify_update_description(config, debug_message)
     statusbar_frame.foreground:SetValue(completion_count)
     statusbar_frame.description:SetText(("%d/%d"):format(math.min(completion_count, max), max))
 
-    if completion_count <= max then
+    if completion_count >= max then
       event_manager:unsubscribe(statusbar_frame, event_name)
     end
   end
